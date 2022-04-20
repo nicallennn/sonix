@@ -55,6 +55,7 @@ const getUserProfile = async (req, res) => {
   const { userHandle } = req.params;
   try {
     // check the user exists
+    //todo - refactor this line to use .select() to only get required bits
     const { _id, handle, bio, ownRecipes, likedRecipes } = await User.findOne({ handle: userHandle });
     if (!_id) throw new Error('User profile not found');
 
