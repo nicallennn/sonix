@@ -14,6 +14,13 @@ const port = process.env.PORT || 3001;
 // init the app
 const app = express();
 
+const corsConfig = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+
 // add the middleware
 app.use(cors());
 app.use(morgan('short'));
