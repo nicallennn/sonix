@@ -2,4 +2,6 @@ design
 client/node_modules
 server/node_modules
 server/.env
+server/mock-data-script.js
+server/mock-data.json
 node_modules
