@@ -19,7 +19,7 @@ const getDashBoardRecipes = async (req, res) => {
         .sort({ rating: -1 })
         .limit(10)
         .select('_id creator title description rating category originalSynth preview');
-    };
+    }
 
     // return the result to the user
     res.status(200).send(result);
