@@ -6,7 +6,6 @@ const cors = require('cors');
 const router = require('./router');
 const { mongoose, dbUrl } = require('./models/connection');
 
-console.log(process.env.PORT);
 // init the hostname and port
 const hostname = 'http://localhost';
 const port = process.env.PORT || 3001;
