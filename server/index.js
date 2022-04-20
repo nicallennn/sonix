@@ -19,10 +19,12 @@ const corsConfig = {
   credentials: true,
 };
 
-app.use(cors(corsConfig));
+//hide the x-powered-by express in response header
+app.disable('x-powered-by');
+
 
 // add the middleware
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(morgan('short'));
 app.use(express.json());
 app.use(router);

@@ -8,7 +8,7 @@ const User = require('../models/user.model');
 // import the token secret
 const SECRET = process.env.SECRET;
 
-//user controller methods 
+//! user controller methods 
 const createUser = async (req, res) => {
   // get the info from the request body
   const { firstName, lastName, password, email, handle, bio } = req.body;
