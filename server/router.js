@@ -3,24 +3,44 @@ const express = require('express');
 const router = express.Router();
 
 //import the controller methods
-// const { *methods } = require('./controllers/*');
+const {
+  createUser,
+  loginUser,
+  getUserProfile,
+  editUserProfile
+} = require('./controllers/user.controller');
 
-//unauthenticated routes
-router.get('/dashboard', (req, res) => console.log('dash'))
-router.get('/recipe/:id', (req, res) => console.log('recipe/id'))
-router.get('/category/:id', (req, res) => console.log('cat/id'))
-router.get('/profile/:id', (req, res) => console.log('profile/id'))
-router.post('/register', (req, res) => console.log('register'))
-router.post('/login', (req, res) => console.log('login'))
+const {
+  getDashBoardRecipes,
+  getCategoryRecipes,
+  getRecipe,
+  createRecipe,
+  rateRecipe,
+  likeRecipe,
+  deleteRecipe
+} = require('./controllers/recipe.controller');
 
-//authenticated routes
-router.post('/recipe/create', (req, res) => console.log('recipe/create'))
-router.patch('/recipe/rate', (req, res) => console.log('recipe/rate'))
-router.patch('/recipe/like', (req, res) => console.log('recipe/like'))
-router.patch('/profile/edit', (req, res) => console.log('profile/edit'))
-router.delete('/recipe/delete', (req, res) => console.log('recipe/delete'))
+//! unauthenticated routes
+// recipes
+router.get('/dashboard', getDashBoardRecipes);
+router.get('/category/:id', getCategoryRecipes);
+router.get('/recipe/:id', getRecipe);
 
+// users
+router.get('/profile/:id', getUserProfile);
+router.post('/register', createUser);
+router.post('/login', loginUser);
 
+//! authenticated routes
+// recipes
+router.post('/recipe/create', createRecipe);
+router.patch('/recipe/rate', rateRecipe);
+router.patch('/recipe/like', likeRecipe);
+router.delete('/recipe/delete', deleteRecipe);
+
+// users
+router.patch('/profile/edit', editUserProfile);
 
 //export the router
 module.exports = router;
+
