@@ -26,6 +26,6 @@
         "semi": "error",
         "space-before-blocks": "error",
         "no-undef": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "warn"
       }
 }
