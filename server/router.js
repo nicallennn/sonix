@@ -27,7 +27,7 @@ router.get('/category/:id', getCategoryRecipes);
 router.get('/recipe/:id', getRecipe);
 
 // users
-router.get('/profile/:id', getUserProfile);
+router.get('/profile/:userHandle', getUserProfile);
 router.post('/register', createUser);
 router.post('/login', loginUser);
 

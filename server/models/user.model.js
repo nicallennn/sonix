@@ -13,7 +13,13 @@ const UserSchema = new mongoose.Schema({
   },
   handle: {
     type: String,
-    required: true
+    required: true,
+    unique: true
+  },
+  bio: {
+    type: String,
+    required: false,
+    default: ''
   },
   email: {
     type: String,
@@ -24,6 +30,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  ownRecipes: Array,
+  likedRecipes: Array,
 }, {
   timestamps: { createdAt: 'joined' }
 });

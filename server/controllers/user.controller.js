@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 
 // import models
 const User = require('../models/user.model')
-const UserProfile = require('../models/userProfile.model')
 
 // import the token secret
 const SECRET = process.env.SECRET;
@@ -12,16 +11,16 @@ const SECRET = process.env.SECRET;
 //user controller methods 
 const createUser = async (req, res) => {
   // get the info from the request body
-  const { firstName, lastName, password, email, handle } = req.body;
+  const { firstName, lastName, password, email, handle, bio } = req.body;
 
   try {
-    //check the password is not empty
+    // check the password is not empty
     if (password === "") throw new Error('password is empty')
-    //hash the password
+    // hash the password
     const hash = await bcrypt.hash(password, 10);
-    //create the new user
-    const { _id } = await User.create({ firstName, lastName, password: hash, email, handle });
-    //create a new token and send to the user
+    // create the new user
+    const { _id } = await User.create({ firstName, lastName, password: hash, email, handle, bio });
+    // create a new token and send to the user
     const token = jwt.sign({ _id }, SECRET);
     res.status(201).send({ token });
   } catch (error) {
@@ -29,17 +28,46 @@ const createUser = async (req, res) => {
   }
 };
 
-const loginUser = (req, res) => {
-  console.log('loginUser');
-  res.send('loginUser');
+const loginUser = async (req, res) => {
+  // get the email and password
+  const { email, password } = req.body;
+
+  try {
+    //get the user from db
+    const user = await User.findOne({ email });
+    //check user exists
+    if (!user) throw new Error('Invalid credentials');
+    //compare passwords
+    const authorized = await bcrypt.compare(password, user.password);
+    console.log('authorized', authorized);
+    if (!authorized) throw new Error('Invalid credentials')
+    // create a new token and send to the user
+    const token = jwt.sign({ _id: user._id }, SECRET);
+    res.status(200).send({ token });
+  } catch (error) {
+    res.status(401).send({ error, message: 'Invalid credentials!' })
+  }
 };
 
-const getUserProfile = (req, res) => {
-  console.log('getUserProfile');
-  res.send('getUserProfile');
+const getUserProfile = async (req, res) => {
+  // get the user profile id
+  const { userHandle } = req.params;
+  try {
+    // check the user exists
+    const { _id, handle, bio, ownRecipes, likedRecipes } = await User.findOne({ handle: userHandle });
+    if (!_id) throw new Error('User profile not found')
+    // create the user profile
+    const profile = { handle, bio, ownRecipes, likedRecipes };
+    // return the user profile
+    res.status(200).send(profile);
+
+  } catch (error) {
+    res.status(404).send({ error, message: 'Profile not found' });
+  }
 };
 
-const editUserProfile = (req, res) => {
+// todo - do this later 
+const editUserProfile = async (req, res) => {
   console.log('editUserProfile');
   res.send('editUserProfile');
 };
