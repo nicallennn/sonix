@@ -1,3 +1,6 @@
+// import models
+const Recipe = require('../models/recipe.model')
+
 //recipe controller methods
 const getDashBoardRecipes = (req, res) => {
   console.log('getDashBoardRecipes');
