@@ -1,0 +1,32 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": [
+        "json"
+      ],
+      "rules": {
+        "indent": [
+          "error",
+          2
+        ],
+        "keyword-spacing": "error",
+        "linebreak-style": "error",
+        "quotes": [
+          "error",
+          "single"
+        ],
+        "semi": "error",
+        "space-before-blocks": "error",
+        "space-before-function-paren": "error",
+        "no-undef": "off",
+        "no-unused-vars": "off"
+      }
+}
