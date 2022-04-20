@@ -23,7 +23,7 @@ const {
 //! unauthenticated routes
 // recipes
 router.get('/dashboard', getDashBoardRecipes);
-router.get('/category/:id', getCategoryRecipes);
+router.get('/category/:categoryName', getCategoryRecipes);
 router.get('/recipe/:id', getRecipe);
 
 // users

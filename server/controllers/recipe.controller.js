@@ -2,10 +2,10 @@
 const Recipe = require('../models/recipe.model');
 const { categories } = require('../models/category.model');
 
-//! recipe controller methods
+//! get recipes for dashboard
 const getDashBoardRecipes = async (req, res) => {
-
-  const result = {};
+  //create an object ot store the results
+  const results = {};
   try {
     // get popular recipes - sort by rating
     result.popular = await Recipe.find({})
@@ -22,20 +22,46 @@ const getDashBoardRecipes = async (req, res) => {
     }
 
     // return the result to the user
-    res.status(200).send(result);
+    res.status(200).send(results);
   } catch (error) {
     res.status(500).send({ error, message: 'Failed to get recipes' });
   }
 };
 
+//! get recipes by category
 const getCategoryRecipes = async (req, res) => {
-  console.log('getCategoryRecipes');
-  res.send('getCategoryRecipes');
+  //get the category name
+  const { categoryName } = req.params;
+  //check the category exists
+  if (!categories.includes(categoryName)) {
+    res.status(404).send({ message: 'Invalid category selected!' });
+  }
+
+  try {
+    //get category recipes - ordered by rating
+    const results = await Recipe.find({ category: categoryName }).sort({ rating: -1 });
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Could not fetch category recipes' });
+  }
 };
 
+//! get a single recipe
 const getRecipe = async (req, res) => {
-  console.log('getRecipe');
-  res.send('getRecipe');
+  //get the recipe id from the req params
+  const { id } = req.params;
+
+  //get the recipe
+  try {
+    const recipe = await Recipe.findById(id);
+    if (!recipe) {
+      res.status(404).send({ message: 'Invalid recipe ID!' });
+    }
+    res.status(200).send(recipe);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Could not fetch recipe' });
+  }
+
 };
 
 const createRecipe = async (req, res) => {
