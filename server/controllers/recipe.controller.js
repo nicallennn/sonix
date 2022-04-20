@@ -1,10 +1,17 @@
 // import models
-const Recipe = require('../models/recipe.model')
+const Recipe = require('../models/recipe.model');
+const { categories } = require('../models/category.model');
 
 //recipe controller methods
 const getDashBoardRecipes = (req, res) => {
-  console.log('getDashBoardRecipes');
-  res.send('getDashBoardRecipes');
+  //todo get all recipes - sort by rating
+
+  //todo filter popular recipes
+
+  //todo filter category recipes - loop through each category
+
+  //todo return results
+
 };
 
 const getCategoryRecipes = (req, res) => {
