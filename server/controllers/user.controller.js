@@ -41,8 +41,9 @@ const loginUser = async (req, res) => {
     const authorized = await bcrypt.compare(password, user.password);
     console.log('authorized', authorized);
     if (!authorized) throw new Error('Invalid credentials')
-    // create a new token and send to the user
+    // create a new token
     const token = jwt.sign({ _id: user._id }, SECRET);
+    //send the user the token
     res.status(200).send({ token });
   } catch (error) {
     res.status(401).send({ error, message: 'Invalid credentials!' })
@@ -56,8 +57,15 @@ const getUserProfile = async (req, res) => {
     // check the user exists
     const { _id, handle, bio, ownRecipes, likedRecipes } = await User.findOne({ handle: userHandle });
     if (!_id) throw new Error('User profile not found')
+
+    //turn the liked recipes array into an object to speed up checking if recipes are in favorites in frontend
+    const likedObject = {};
+    likedRecipes.forEach(id => {
+      likedObject[id] = true;
+    })
+
     // create the user profile
-    const profile = { handle, bio, ownRecipes, likedRecipes };
+    const profile = { handle, bio, ownRecipes, likedRecipes: likedObject };
     // return the user profile
     res.status(200).send(profile);
 
