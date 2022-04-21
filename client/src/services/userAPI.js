@@ -12,9 +12,7 @@ const createUser = async (newUser) => {
   })
     .then(async (res) => {
       const data = await res.json();
-      if (res.status === 201) {
-        return { fetched: true, data };
-      }
+      if (res.status === 201) return { fetched: true, data };
       else return { fetched: false, error: data };
     })
     .catch((error) => console.error(error));
@@ -28,10 +26,8 @@ const loginUser = (user) => {
     body: JSON.stringify(user),
   })
     .then(async (res) => {
-      if (res.status === 200) {
-        const data = await res.json();
-        return { fetched: true, data };
-      }
+      const data = await res.json();
+      if (res.status === 200) return { fetched: true, data };
       else return { fetched: false, error: data };
     })
     .catch((error) => console.error(error));
