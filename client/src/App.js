@@ -22,11 +22,6 @@ function App() {
     }
   });
 
-  //! test to tryout the store, logs user out
-  const handleClick = (e) => {
-    dispatch(logout());
-  }
-
   return (
     <div className="App">
       {loggedIn ? <AuthenticatedApp /> : <UnauthenticatedApp />}
