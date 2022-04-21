@@ -5,7 +5,7 @@ const Landing = () => {
 
   const dispatch = useDispatch();
 
-  const handle = (e) => {
+  const handle = () => {
     dispatch(login());
   };
 

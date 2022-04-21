@@ -5,7 +5,6 @@ const authenticated = (loggedIn = false, action) => {
 
   if (action.type === 'LOGIN') {
     const newLoggedIn = true;
-    console.log('login ran');
     return newLoggedIn;
   }
 

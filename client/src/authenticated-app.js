@@ -10,6 +10,7 @@ import Profile from './views/profile';
 import NotFound from './views/not-found';
 
 const AuthenticatedApp = () => {
+
   return (
     <BrowserRouter>
       <Routes>
