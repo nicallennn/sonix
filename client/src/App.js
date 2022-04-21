@@ -12,6 +12,7 @@ function App() {
   const userProfile = useSelector(state => state.profile);
   const dispatch = useDispatch();
 
+  //! check if the user is logged in or not, dispatch login action to store if true
   useEffect(() => {
     // localStorage.setItem('accessToken', 'test');
     // check if user is logged in and set store state
