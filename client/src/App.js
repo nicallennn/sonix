@@ -21,7 +21,7 @@ function App() {
       //set store state as logged in
       dispatch(login());
     }
-  });
+  }, []);
 
   return (
     <div className="App">

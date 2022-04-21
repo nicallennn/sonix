@@ -5,6 +5,7 @@ const authenticated = (loggedIn = false, action) => {
 
   if (action.type === 'LOGIN') {
     const newLoggedIn = true;
+    console.log('login ran');
     return newLoggedIn;
   }
 
@@ -13,11 +14,11 @@ const authenticated = (loggedIn = false, action) => {
     localStorage.removeItem('accessToken');
     return newLoggedIn;
   }
-
   return loggedIn;
 };
 
 const profile = (userProfile = {}, action) => {
+
   if (action.type === 'SET_USER_PROFILE') {
     const newProfile = action.profile;
     return newProfile;
@@ -26,12 +27,11 @@ const profile = (userProfile = {}, action) => {
 };
 
 const dashboardRecipes = (recipes = {}, action) => {
+
   if (action.type === 'SET_DASHBOARD_RECIPES') {
     const newDashboardRecipes = action.recipes;
     return newDashboardRecipes;
   }
-
-
   return recipes;
 };
 
