@@ -66,7 +66,7 @@ const getUserProfile = async (req, res) => {
     });
 
     // create the user profile
-    const profile = { handle, bio, ownRecipes, likedRecipes: likedObject };
+    const profile = { _id, handle, bio, ownRecipes, likedRecipes: likedObject };
     // return the user profile
     res.status(200).send(profile);
 

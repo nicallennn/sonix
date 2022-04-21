@@ -3,7 +3,11 @@ const { mongoose } = require('./connection');
 
 //define the schema
 const RecipeSchema = new mongoose.Schema({
-  creator: {
+  creatorHandle: {
+    type: String,
+    required: true
+  },
+  creatorId: {
     type: String,
     required: true
   },
@@ -15,10 +19,12 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  rating: {
+  numberOfLikes: {
     type: Number,
-    required: true
+    required: false,
+    default: 0
   },
+  likedBy: Array,
   category: {
     type: String,
     enum: ['Bass', 'Pad', 'String', 'Lead', 'Pluck', 'FX', 'Keys'],

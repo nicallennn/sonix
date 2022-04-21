@@ -15,8 +15,8 @@ const {
   getCategoryRecipes,
   getRecipe,
   createRecipe,
-  rateRecipe,
   likeRecipe,
+  unLikeRecipe,
   deleteRecipe
 } = require('./controllers/recipe.controller');
 
@@ -34,8 +34,8 @@ router.post('/login', loginUser);
 //! authenticated routes
 // recipes
 router.post('/recipe/create', createRecipe);
-router.patch('/recipe/rate', rateRecipe);
 router.patch('/recipe/like', likeRecipe);
+router.patch('/recipe/unlike', unLikeRecipe);
 router.delete('/recipe/delete', deleteRecipe);
 
 // users
