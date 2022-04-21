@@ -4,6 +4,23 @@ const Recipe = require('../models/recipe.model');
 const User = require('../models/user.model');
 const { categories } = require('../models/category.model');
 
+
+//! search all recipes
+const searchAllRecipes = async (req, res) => {
+  // get the search term 
+  const { searchTerm } = req.params;
+  console.log(searchTerm);
+
+  //todo - search on term - for now returns all recipes
+  try {
+    const results = await Recipe.find({});
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Failed to search recipes' });
+  }
+
+};
+
 //! get recipes for dashboard
 const getDashBoardRecipes = async (req, res) => {
   //create an object ot store the results
@@ -95,7 +112,7 @@ const createRecipe = async (req, res) => {
   }
 };
 
-
+//! like a recipe
 const likeRecipe = async (req, res) => {
   // get the id of the recipe and the user
   //todo - get user id from the token auth middleware later
@@ -135,6 +152,7 @@ const likeRecipe = async (req, res) => {
   }
 };
 
+//! unlike a recipe
 const unLikeRecipe = async (req, res) => {
   // get the id of the recipe and the user
   //todo - get user id from the token auth middleware later
@@ -175,8 +193,8 @@ const unLikeRecipe = async (req, res) => {
   }
 };
 
+//! delete a recipe
 const deleteRecipe = async (req, res) => {
-
   //todo - get the userId from the auth middleware
   // get the recipe id and user id from the req body
   const { recipeId, userId } = req.body;
@@ -224,6 +242,7 @@ const deleteRecipe = async (req, res) => {
 };
 
 module.exports = {
+  searchAllRecipes,
   getDashBoardRecipes,
   getCategoryRecipes,
   getRecipe,

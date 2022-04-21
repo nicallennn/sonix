@@ -1,6 +1,9 @@
+const { createDiffieHellman } = require('crypto');
 const fs = require('fs');
 
 const creators = ['Tim', 'Jim', 'Slim', 'John'];
+const creatorsId = ['62614e1b7376e350dd94d4d9', '62614e4f7376e350dd94d4db', '62614e737376e350dd94d4dd', '62614e8e7376e350dd94d4df'];
+const creatorsHandle = ['timmy232', 'jimmy_doe', 'slim slimmest', 'johnny doe'];
 const categories = ['Bass', 'Pad', 'String', 'Lead', 'Pluck', 'FX', 'Keys'];
 const descriptions = [
   'Quidem et reprehenderit nostrum saepe, consequatur odio?',
@@ -33,11 +36,12 @@ const randomNumber = (end, precision = 0) => {
 };
 
 const createRecipe = () => {
-  const create = creators[randomNumber(3)];
+  const userNo = randomNumber(3);
+  const create = creatorsHandle[userNo];
+  const createId = creatorsId[userNo];
   const category = categories[randomNumber(6)];
   const title = category + ' ' + randomNumber(18);
   const description = descriptions[randomNumber(2)];
-  const rating = randomNumber(5, 2);
   const originalSynth = originalSynths[randomNumber(5)];
   const preview = previews;
   const tags = [];
@@ -63,10 +67,12 @@ const createRecipe = () => {
   }
 
   const recipe = {
-    creator: create,
+    creatorHandle: create,
+    creatorId: createId,
     title: title,
     description: description,
-    rating: rating,
+    numberOfLikes: 0,
+    likedBy: [],
     category: category,
     originalSynth: originalSynth,
     preview: preview,

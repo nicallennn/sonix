@@ -11,6 +11,7 @@ const {
 } = require('./controllers/user.controller');
 
 const {
+  searchAllRecipes,
   getDashBoardRecipes,
   getCategoryRecipes,
   getRecipe,
@@ -22,6 +23,7 @@ const {
 
 //! unauthenticated routes
 // recipes
+router.get('/searchAll/:searchTerm', searchAllRecipes);
 router.get('/dashboard', getDashBoardRecipes);
 router.get('/category/:categoryName', getCategoryRecipes);
 router.get('/recipe/:id', getRecipe);
