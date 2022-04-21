@@ -15,15 +15,25 @@ const authenticated = (loggedIn = false, action) => {
   }
 
   return loggedIn;
-}
+};
 
 const profile = (userProfile = {}, action) => {
+  if (action.type === 'SET_USER_PROFILE') {
+    const newProfile = action.profile;
+    return newProfile;
+  }
   return userProfile;
-}
+};
 
-const dashboardRecipes = (recipes = { dash: [1, 2, 3] }, action) => {
+const dashboardRecipes = (recipes = {}, action) => {
+  if (action.type === 'SET_DASHBOARD_RECIPES') {
+    const newDashboardRecipes = action.recipes;
+    return newDashboardRecipes;
+  }
+
+
   return recipes;
-}
+};
 
 // Combining both reducers
 const reducers = combineReducers({

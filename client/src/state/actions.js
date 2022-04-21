@@ -1,3 +1,4 @@
+//! user actions
 export const login = () => ({
   type: 'LOGIN'
 });
@@ -6,22 +7,35 @@ export const logout = () => ({
   type: 'LOGOUT'
 });
 
-export const setUserProfile = () => ({
-  type: 'SET_USER_PROFILE'
+export const setUserProfile = (profile) => ({
+  type: 'SET_USER_PROFILE',
+  profile
 });
 
-export const likeRecipe = () => ({
-  type: 'LIKE_RECIPE'
+//! user recipe actions
+export const likeRecipe = (recipeId) => ({
+  type: 'LIKE_RECIPE',
+  recipeId
 });
 
-export const unlikeRecipe = () => ({
-  type: 'UNLIKE_RECIPE'
+export const unlikeRecipe = (recipeId) => ({
+  type: 'UNLIKE_RECIPE',
+  recipeId
 });
 
-export const createRecipe = () => ({
-  type: 'CREATE_RECIPE'
+export const createRecipe = (newRecipe) => ({
+  type: 'CREATE_RECIPE',
+  newRecipe
 });
 
-export const deleteRecipe = () => ({
-  type: 'DELETE_RECIPE'
+export const deleteRecipe = (recipeId) => ({
+  type: 'DELETE_RECIPE',
+  recipeId
 });
+
+//! recipe actions
+export const setDashboardRecipes = (recipes) => ({
+  type: 'SET_DASHBOARD_RECIPES',
+  recipes
+});
+
