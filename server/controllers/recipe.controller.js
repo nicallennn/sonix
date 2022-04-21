@@ -34,17 +34,21 @@ const getDashBoardRecipes = async (req, res) => {
 const getCategoryRecipes = async (req, res) => {
   //get the category name
   const { categoryName } = req.params;
-  //check the category exists
-  if (!categories.includes(categoryName)) {
-    res.status(404).send({ message: 'Invalid category selected!' });
-  }
 
   try {
+    //check the category exists
+    if (!categories.includes(categoryName)) throw new Error(1);
     //get category recipes - ordered by rating
     const results = await Recipe.find({ category: categoryName }).sort({ rating: -1 });
     res.status(200).send(results);
   } catch (error) {
-    res.status(500).send({ error, message: 'Could not fetch category recipes' });
+    switch (`${error}`) {
+      case 'Error: 1':
+        res.status(404).send({ message: 'Invalid category selected!' });
+        break;
+      default:
+        res.status(500).send({ error, message: 'Could not fetch category recipes' });
+    }
   }
 };
 
@@ -53,15 +57,20 @@ const getRecipe = async (req, res) => {
   // get the recipe id from the req params
   const { id } = req.params;
 
-  // get the recipe
   try {
+    //check the recipe exists
     const recipe = await Recipe.findById(id);
-    if (!recipe) {
-      res.status(404).send({ message: 'Invalid recipe ID!' });
-    }
+    if (!recipe) throw new Error(1);
+
     res.status(200).send(recipe);
   } catch (error) {
-    res.status(500).send({ error, message: 'Could not fetch recipe' });
+    switch (`${error}`) {
+      case 'Error: 1':
+        res.status(404).send({ message: 'Invalid recipe ID!' });
+        break;
+      default:
+        res.status(500).send({ error, message: 'Could not fetch recipe' });
+    }
   }
 };
 
@@ -70,8 +79,8 @@ const createRecipe = async (req, res) => {
   //todo - get the user id from the auth middleware
   // get the recipe from the request body
   const recipe = req.body;
-  // save the new recipe
   try {
+    // save the new recipe
     const result = await Recipe.create(recipe);
     if (!result) throw new Error('Could not add recipe to database');
 
@@ -96,13 +105,11 @@ const likeRecipe = async (req, res) => {
     // check the user and recipe exists
     const recipeToUpdate = await Recipe.findById(recipeId);
     const userToUpdate = await User.findById(userId);
-    if (!recipeToUpdate || !userToUpdate) {
-      res.status(404).send({ message: 'Recipe or user not found!' });
-    }
+    if (!recipeToUpdate || !userToUpdate) throw new Error(1);
+
     // check use has not already liked this recipe
-    if (userToUpdate.likedRecipes.includes(recipeId)) {
-      return res.status(400).send({ message: 'User already liked this recipe!' });
-    }
+    if (userToUpdate.likedRecipes.includes(recipeId)) throw new Error(2);
+
     // add the recipe to the users likedRecipes
     userToUpdate.likedRecipes.push(recipeId);
     await userToUpdate.save();
@@ -115,7 +122,16 @@ const likeRecipe = async (req, res) => {
     res.status(200).send(result);
 
   } catch (error) {
-    res.status(500).send({ error, message: 'Failed to like recipe' });
+    switch (`${error}`) {
+      case 'Error: 1':
+        res.status(404).send({ message: 'Recipe or user not found!' });
+        break;
+      case 'Error: 2':
+        res.status(400).send({ message: 'User already liked this recipe!' });
+        break;
+      default:
+        res.status(500).send({ error, message: 'Failed to like recipe' });
+    }
   }
 };
 
@@ -128,13 +144,11 @@ const unLikeRecipe = async (req, res) => {
     // check the user and recipe exists
     const recipeToUpdate = await Recipe.findById(recipeId);
     const userToUpdate = await User.findById(userId);
-    if (!recipeToUpdate || !userToUpdate) {
-      res.status(404).send({ message: 'Recipe or user not found!' });
-    }
+    if (!recipeToUpdate || !userToUpdate) throw new Error(1);
+
     // check use has already liked this recipe
-    if (!userToUpdate.likedRecipes.includes(recipeId)) {
-      return res.status(400).send({ message: 'User does not like this recipe' });
-    }
+    if (!userToUpdate.likedRecipes.includes(recipeId)) throw new Error(2);
+
     // remove the recipe from the users likedRecipes
     userToUpdate.likedRecipes = userToUpdate.likedRecipes
       .filter(id => id !== recipeId);
@@ -148,7 +162,16 @@ const unLikeRecipe = async (req, res) => {
     res.status(200).send(result);
 
   } catch (error) {
-    res.status(500).send({ error, message: 'Failed to unlike recipe' });
+    switch (`${error}`) {
+      case 'Error: 1':
+        res.status(404).send({ message: 'Recipe or user not found!' });
+        break;
+      case 'Error: 2':
+        res.status(400).send({ message: 'User already unliked this recipe!' });
+        break;
+      default:
+        res.status(500).send({ error, message: 'Failed to unlike recipe' });
+    }
   }
 };
 
@@ -161,20 +184,17 @@ const deleteRecipe = async (req, res) => {
   try {
     // check the recipe exists and the user id matches recipe creator id
     const recipeToDelete = await Recipe.findById(recipeId);
-    if (!recipeToDelete) {
-      res.status(404).send({ message: 'Recipe does not exist!' });
-    }
+    // if (!recipeToDelete) throw new Error(1);
 
     //check the recipe creatorId is the same as userId
-    if (recipeToDelete.creatorId !== userId) {
-      res.status(400).send({ message: 'Recipe is not owned by user!' });
-    }
+    // if (recipeToDelete.creatorId !== userId) throw new Error(2);
 
     // delete the recipe from the user ownRecipes array
     const recipeCreator = await User.findById(userId);
-    recipeCreator.ownRecipes = recipeCreator.ownRecipes.filter(recipe => recipe !== recipeId);
+    console.log(recipeCreator.ownRecipes);
+    recipeCreator.ownRecipes = recipeCreator.ownRecipes.filter(recipe => recipe.toString() !== recipeId);
+    console.log(recipeCreator.ownRecipes);
     await recipeCreator.save();
-
 
     // delete the recipe from all users in the recipe likedBy array
     for (const userId of recipeToDelete.likedBy) {
@@ -188,7 +208,16 @@ const deleteRecipe = async (req, res) => {
     res.status(200).send({ deletedRecipe: result, message: 'Recipe deleted!' });
 
   } catch (error) {
-    res.status(500).send({ error, message: 'Failed to delete recipe' });
+    switch (`${error}`) {
+      case 'Error: 1':
+        res.status(404).send({ message: 'Recipe does not exist!' });
+        break;
+      case 'Error: 2':
+        res.status(400).send({ message: 'Recipe is not owned by user!' });
+        break;
+      default:
+        res.status(500).send({ error, message: 'Failed to delete recipe' });
+    }
   }
 
 
