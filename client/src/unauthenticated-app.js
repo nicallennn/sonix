@@ -6,6 +6,7 @@ import Recipe from './views/recipe';
 import Search from './views/search';
 import Category from './views/category';
 import Profile from './views/profile';
+import Login from './views/login';
 import NotFound from './views/not-found';
 
 const UnauthenticatedApp = () => {
@@ -19,6 +20,7 @@ const UnauthenticatedApp = () => {
           <Route path="search" element={<Search />} />
           <Route path="category/:categoryId" element={<Category />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
