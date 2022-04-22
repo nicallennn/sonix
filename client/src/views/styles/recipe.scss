@@ -4,7 +4,10 @@
 .recipe-wrapper {
   width: spacing.$desktop-container-width - 20;
   margin-bottom: spacing.$desktop-general-margin;
-  
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 }
 
 .ingredients-container {
@@ -19,7 +22,8 @@
   align-items: center;
   padding: spacing.$desktop-inner-padding;
   background-color: colors.$primary-container-color;
-
+  width: 80%;
+  // margin: 0 auto;
 
   .title {
     margin-top: spacing.$desktop-medium-margin;
