@@ -1,0 +1,121 @@
+@use '../../sass-variables/colors.scss' as colors;
+@use '../../sass-variables/widths-spacing.scss' as spacing;
+
+.recipe-wrapper {
+  width: spacing.$desktop-container-width - 20;
+  margin-bottom: spacing.$desktop-general-margin;
+  box-shadow: colors.$container-shadow;
+  border-radius: colors.$general-border-radius;
+  overflow: hidden;
+
+  .preview-container {
+      display: flex;
+      min-height: 120px;
+      
+      .player {
+        min-width: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .player-button {
+          display: flex;
+          align-items: center;
+          justify-items: center;
+          background-color: white;
+          border: none;
+          border-radius: 50%;
+          padding: 5px;
+          cursor: pointer;
+    
+          .playing-icon {
+            width: 40px;
+          }
+
+      }
+
+    }
+  
+    .recipe-information {
+      flex: 1;
+      border: 1px solid rgb(240, 237, 237);
+      padding: spacing.$desktop-inner-padding;
+      
+    
+      .title {
+        font-size: 1.4em;
+      }
+      
+      .synth-name {
+        font-size: 0.1.2em;
+        
+        margin-bottom: spacing.$desktop-small-margin;
+        color: colors.$text-primary-color;
+      }
+
+      .tags {
+        display: flex;
+        margin-bottom: spacing.$desktop-medium-margin;
+      }
+
+      .tag {
+        margin-right: spacing.$desktop-small-margin;
+        font-size: 0.7em;
+        background-color: rgb(224, 222, 222);
+        padding: 3px 5px;
+        border-radius: 3px;
+      }
+
+      .creator {
+        font-size: 0.9em;
+        margin-bottom: spacing.$desktop-medium-margin;
+        color: colors.$text-primary-color;
+      }
+  
+      .likes {
+        font-size: 0.9em;
+        margin-bottom: spacing.$desktop-medium-margin;
+        color: colors.$text-secondary-color;
+      }
+  
+      .description {
+        font-size: 0.8em;
+        color: colors.$text-secondary-color;
+      }
+    }
+}
+
+
+
+.Bass {
+  background-color: colors.$bass-color;
+}
+
+.Pad {
+  background-color: colors.$pad-color;
+}
+
+.Lead {
+  background-color: colors.$lead-color;
+}
+.FX {
+  background-color: colors.$fx-color;
+}
+
+.Keys {
+  background-color: colors.$keys-color;
+}
+
+.Other {
+  background-color: colors.$other-color;  
+}
+
+.Pluck {
+  background-color: colors.$pluck-color;  
+}
+
+.String {
+  background-color: colors.$string-color;  
+}
+
+}
