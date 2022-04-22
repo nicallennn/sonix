@@ -21,11 +21,12 @@ const UnauthenticatedApp = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //todo - display error message to the user
+
     //! get the dashboard recipes
     getDashboardRecipes().then(
       res => {
         if (res.fetched) dispatch(setDashboardRecipes(res.data));
-        else console.error(res.message);
       }
     ).catch((error) => {
       console.log('Error:', error);
@@ -38,7 +39,7 @@ const UnauthenticatedApp = () => {
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Landing />} /> */}
           <Route index element={<Dashboard />} />
-          <Route path="recipe/:recipeId" element={<Recipe />} />
+          <Route path="recipe" element={<Recipe />} />
           <Route path="search" element={<Search />} />
           <Route path="category/:categoryId" element={<Category />} />
           <Route path="profile" element={<Profile />} />

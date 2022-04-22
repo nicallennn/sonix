@@ -26,12 +26,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .player-button {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      background-color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 5px;
+
+      .playing-icon {
+        width: 30px;
+      }
+    }
+
+    
   }
 
   .recipe-details {
     flex: 1;
     border: 1px solid rgb(240, 237, 237);
     padding: spacing.$desktop-inner-padding;
+    cursor: pointer;
 
     .title {
       font-size: 1.2em;

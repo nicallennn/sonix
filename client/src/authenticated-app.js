@@ -22,13 +22,13 @@ const AuthenticatedApp = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //todo - check user token is valid & fetch user profile
+
     //! get the dashboard recipes
     getDashboardRecipes().then(
       res => {
         if (res.fetched) dispatch(setDashboardRecipes(res.data));
-        else console.error(res.message);
-
-        //todo - check user token is valid & fetch user profile
+        //todo - show error message to user
       }
     ).catch((error) => {
       console.log('Error:', error);
@@ -41,7 +41,7 @@ const AuthenticatedApp = () => {
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Landing />} /> */}
           <Route index element={<Dashboard />} />
-          <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="recipe" element={<Recipe />} />
           <Route path="create" element={<CreateRecipe />} />
           <Route path="search" element={<Search />} />
           <Route path="category/:id" element={<Category />} />

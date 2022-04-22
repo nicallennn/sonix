@@ -17,12 +17,24 @@
   }
 
   .nav-links{
+    // display: flex;
+    // align-items: center;
+    // min-height: 100%;
+    // background-color: blue;
   }
+  
 
   .nav-link {
     text-decoration: none;
     display: inline;
     margin-left: 40px;
+    padding: 5px 10px;
+    border: 1px solid white;
+
+    &:hover {
+      border: 1px solid colors.$text-primary-color;
+      border-radius: 3px;
+    }
   }
 
    .link {
