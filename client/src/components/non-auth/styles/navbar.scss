@@ -2,14 +2,13 @@
 @use '../../../sass-variables/widths-spacing.scss' as spacing;
 
 .navbar {
-  padding: 20px;
+  padding: 25px;
   box-shadow: colors.$bottom-shadow;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .nav-inner-wrapper {
-    // background-color: blue;
     width: spacing.$desktop-container-width;
     display: flex;
     align-items: center;
@@ -17,12 +16,8 @@
   }
 
   .nav-links{
-    // display: flex;
-    // align-items: center;
-    // min-height: 100%;
-    // background-color: blue;
+
   }
-  
 
   .nav-link {
     text-decoration: none;

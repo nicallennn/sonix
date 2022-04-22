@@ -6,11 +6,14 @@
   padding: spacing.$desktop-general-padding;
   box-shadow: colors.$container-shadow;
   margin-bottom: 50px;
+  background-color: colors.$primary-container-color;
+  border-radius: colors.$general-border-radius;
 
   .scroll-container {
     margin-top: spacing.$desktop-medium-margin;
     display: flex;
     overflow: auto;
+    border-radius: colors.$general-border-radius;
   }
 
 }

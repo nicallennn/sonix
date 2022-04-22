@@ -9,7 +9,7 @@
   margin-right: spacing.$desktop-general-margin;
   margin-bottom: spacing.$desktop-general-margin;
   box-shadow: colors.$container-shadow;
-  border-radius: 5px;
+  border-radius: colors.$general-border-radius;
   overflow: hidden;
 
   .player {
