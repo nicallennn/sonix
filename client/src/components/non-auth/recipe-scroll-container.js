@@ -1,4 +1,5 @@
 import styles from './styles/recipe-scroll-container.scss';
+import RecipePreview from './recipe-preview';
 
 const RecipeScrollContainer = ({ title, data }) => {
   return (
@@ -8,12 +9,9 @@ const RecipeScrollContainer = ({ title, data }) => {
 
         <div className="scroll-container">
           {data && data.map(recipe => (
-            <div className="preview" key={recipe.title}>
-              {recipe.title}
-            </div>
+            <RecipePreview recipe={recipe} key={recipe.title} />
           ))
           }
-
         </div>
       </div>
 

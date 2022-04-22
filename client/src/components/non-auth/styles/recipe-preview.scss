@@ -1,0 +1,54 @@
+@use '../../../sass-variables/colors.scss' as colors;
+@use '../../../sass-variables/fonts.scss' as fonts;
+@use '../../../sass-variables/widths-spacing.scss' as spacing;
+
+// .recipe-preview-container {
+//   min-width: 300px;
+//   min-height: 100px;
+//   padding: 20px;
+//   background-color: lightblue;
+//   margin-right: 10px;
+// }
+
+.recipe-preview-container {
+  display: flex;
+  min-width: 32%;
+  min-height: 120px;
+  margin-right: spacing.$desktop-general-margin;
+  margin-bottom: spacing.$desktop-general-margin;
+  box-shadow: colors.$container-shadow;
+  
+
+
+  .player {
+    min-width: 100px;
+    background-color: rgb(142, 142, 202);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .recipe-details {
+    flex: 1;
+    border: 1px solid rgb(240, 237, 237);
+    padding: spacing.$desktop-inner-padding;
+
+    .title {
+      font-size: 1.2em;
+    }
+
+    .synth-name {
+      font-size: 0.8em;
+      margin-bottom: spacing.$desktop-small-margin;
+    }
+
+    .likes {
+      font-size: 0.7em;
+      margin-bottom: spacing.$desktop-small-margin;
+    }
+
+    .description {
+      font-size: 0.7em;
+    }
+  }
+}

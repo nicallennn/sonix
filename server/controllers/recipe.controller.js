@@ -27,17 +27,17 @@ const getDashBoardRecipes = async (req, res) => {
   const results = {};
   try {
     // get popular recipes - sort by rating
-    results.popular = await Recipe.find({})
-      .sort({ rating: -1 })
+    results.Popular = await Recipe.find({})
+      .sort({ numberOfLikes: -1 })
       .limit(10)
-      .select('_id creator title description rating category originalSynth preview');
+      .select('_id creator title numberOfLikes description rating category originalSynth preview');
 
     // get category recipes
     for (const cat of categories) {
       results[cat] = await Recipe.find({ category: cat })
         .sort({ rating: -1 })
         .limit(10)
-        .select('_id creator title description rating category originalSynth preview');
+        .select('_id creator title numberOfLikes description rating category originalSynth preview');
     }
 
     // return the result to the user
