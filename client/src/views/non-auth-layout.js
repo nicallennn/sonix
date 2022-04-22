@@ -1,10 +1,14 @@
 import { Outlet } from 'react-router-dom';
+import Navbar from '../components/non-auth/navbar';
+import styles from './styles/layout.scss';
 
 const Layout = () => {
   return (
     <>
-      <h1>non auth layout</h1>
-      <Outlet />
+      <Navbar />
+      <div className="main-container">
+        <Outlet />
+      </div>
     </>
   );
 };

@@ -1,4 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setDashboardRecipes } from './state/actions';
+import { useEffect } from 'react';
+
+//! custom functions/data
+import { getDashboardRecipes } from './services/recipeAPI';
+
+//! views/components/data
 import Layout from './views/non-auth-layout';
 import Landing from './views/landing';
 import Dashboard from './views/dashboard';
@@ -10,12 +18,26 @@ import Login from './views/login';
 import NotFound from './views/not-found';
 
 const UnauthenticatedApp = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //! get the dashboard recipes
+    getDashboardRecipes().then(
+      res => {
+        if (res.fetched) dispatch(setDashboardRecipes(res.data));
+        else console.error(res.message);
+      }
+    ).catch((error) => {
+      console.log('Error:', error);
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Landing />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          {/* <Route index element={<Landing />} /> */}
+          <Route index element={<Dashboard />} />
           <Route path="recipe/:recipeId" element={<Recipe />} />
           <Route path="search" element={<Search />} />
           <Route path="category/:categoryId" element={<Category />} />

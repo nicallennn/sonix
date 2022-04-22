@@ -1,0 +1,23 @@
+@use '../../../sass-variables/colors.scss' as colors;
+@use '../../../sass-variables/fonts.scss' as fonts;
+@use '../../../sass-variables/widths-spacing.scss' as spacing;
+
+.outer-container {
+  padding: spacing.$desktop-general-padding;
+  box-shadow: colors.$container-shadow;
+  margin-bottom: 50px;
+
+  .scroll-container {
+    margin-top: spacing.$desktop-general-margin;
+    display: flex;
+    overflow: auto;
+  }
+
+  .preview {
+    min-width: 300px;
+    min-height: 100px;
+    padding: 20px;
+    background-color: lightblue;
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assests/fonts/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Maven';
+  src: url('../assests/fonts/MavenPro-VariableFont_wght.ttf');
+}
+
+
+$primary-font: Montserrat;
+$secondary-font: Maven;

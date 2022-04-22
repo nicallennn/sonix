@@ -1,0 +1,5 @@
+@use '../../sass-variables/widths-spacing.scss' as spacing;
+
+.dashboard-wrapper {
+  width: spacing.$desktop-container-width;
+}

@@ -1,0 +1,37 @@
+@use '../../../sass-variables/colors.scss' as colors;
+@use '../../../sass-variables/widths-spacing.scss' as spacing;
+
+.navbar {
+  padding: 20px;
+  box-shadow: colors.$bottom-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .nav-inner-wrapper {
+    // background-color: blue;
+    width: spacing.$desktop-container-width;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-links{
+  }
+
+  .nav-link {
+    text-decoration: none;
+    display: inline;
+    margin-left: 40px;
+  }
+
+   .link {
+    text-decoration: none;
+    color: colors.$text-primary-color;
+  }
+
+  .logo {
+    font-size: 1.6em;
+  }
+
+}
