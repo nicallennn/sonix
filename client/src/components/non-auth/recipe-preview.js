@@ -39,13 +39,15 @@ const RecipePreview = ({ recipe, category }) => {
 
   return (
     <div className="recipe-preview-container">
-      <div className={recipe.category + ' player'}>
-        <button className="player-button" onClick={handlePlayAudio}>
-          <img className="playing-icon" src={playing ? PauseIcon : PlayIcon}></img>
-        </button>
-        <audio crossOrigin="anonymous" id={`${category}-${recipe._id}-player`} src={sample} onEnded={trackEnded}>
-          Your browser does not support the audio element.
-        </audio>
+      <div className="player-outer">
+        <div className={recipe.category + ' player'}>
+          <button className="player-button" onClick={handlePlayAudio}>
+            <img className="playing-icon" src={playing ? PauseIcon : PlayIcon}></img>
+          </button>
+          <audio crossOrigin="anonymous" id={`${category}-${recipe._id}-player`} src={sample} onEnded={trackEnded}>
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
       <div className='recipe-details' id={recipe._id} onClick={routeToRecipe}>
         <h3 className="title">{recipe.title}</h3>

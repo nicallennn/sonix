@@ -4,7 +4,55 @@
 .recipe-wrapper {
   width: spacing.$desktop-container-width - 20;
   margin-bottom: spacing.$desktop-general-margin;
+  
+}
+
+.ingredients-container {
+  border-radius: colors.$general-border-radius;
+  box-shadow: colors.$container-shadow;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: spacing.$desktop-general-margin + 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: spacing.$desktop-inner-padding;
+  background-color: colors.$primary-container-color;
 
 
+  .title {
+    margin-top: spacing.$desktop-medium-margin;
+    margin-bottom: spacing.$desktop-medium-margin;
+  }
 
+  .scroll-container {
+    display: flex;
+    overflow: auto;
+    border-radius: colors.$general-border-radius;
+  }
+
+  .ingredient {
+    border: 1px solid lightgrey;
+    padding: spacing.$desktop-inner-padding;
+    width: 50%;
+    text-align: center;
+    margin-bottom: spacing.$desktop-medium-margin;
+    border-radius: colors.$general-border-radius;
+    box-shadow: colors.$container-shadow;
+    margin-right: spacing.$desktop-medium-margin;
+
+    .ingredient-title {
+      font-size: 0.8em;
+    }
+  }
+}
+
+.method-container {
+  border-radius: colors.$general-border-radius;
+  box-shadow: colors.$container-shadow;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: spacing.$desktop-general-margin;
+  background-color: colors.$primary-container-color;
 }

@@ -4,12 +4,13 @@
 
   .preview-container {
     width: spacing.$desktop-container-width - 20;
-    margin-bottom: spacing.$desktop-general-margin;
+    margin-bottom: spacing.$desktop-general-margin + 10;
     border-radius: colors.$general-border-radius;
     box-shadow: colors.$container-shadow;
     overflow: hidden;
     display: flex;
     min-height: 120px;
+    background-color: colors.$primary-container-color;
       
       .player {
         min-width: 180px;
@@ -37,9 +38,8 @@
   
     .recipe-information {
       flex: 1;
-      border: 1px solid rgb(240, 237, 237);
+      border: colors.$general-border;
       padding: spacing.$desktop-inner-padding;
-      
     
       .title {
         font-size: 1.4em;
