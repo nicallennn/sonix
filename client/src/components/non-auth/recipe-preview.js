@@ -50,6 +50,7 @@ const RecipePreview = ({ recipe, category }) => {
       <div className='recipe-details' id={recipe._id} onClick={routeToRecipe}>
         <h3 className="title">{recipe.title}</h3>
         <p className="synth-name">{recipe.originalSynth}</p>
+        <p className="likes">{recipe.creatorHandle}</p>
         <p className="likes">Likes: {recipe.numberOfLikes}</p>
         <p className="description">{recipe.description.substring(0, 50)}...</p>
 
