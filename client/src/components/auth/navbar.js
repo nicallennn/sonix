@@ -20,6 +20,10 @@ const Navbar = () => {
 
         <ul className="nav-links">
           <li className='nav-link' >
+            <Link to="/create" className='link' >Create</Link>
+          </li>
+
+          <li className='nav-link' >
             <Link to="/search" className='link' >Search</Link>
           </li>
 

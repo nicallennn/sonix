@@ -9,7 +9,7 @@ const RecipeScrollContainer = ({ title, data }) => {
 
         <div className="scroll-container">
           {data && data.map(recipe => (
-            <RecipePreview recipe={recipe} key={recipe.title} />
+            <RecipePreview recipe={recipe} category={title} key={recipe.title} />
           ))
           }
         </div>

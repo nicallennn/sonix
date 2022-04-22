@@ -2,14 +2,6 @@
 @use '../../../sass-variables/fonts.scss' as fonts;
 @use '../../../sass-variables/widths-spacing.scss' as spacing;
 
-// .recipe-preview-container {
-//   min-width: 300px;
-//   min-height: 100px;
-//   padding: 20px;
-//   background-color: lightblue;
-//   margin-right: 10px;
-// }
-
 .recipe-preview-container {
   display: flex;
   min-width: 32%;
@@ -17,12 +9,11 @@
   margin-right: spacing.$desktop-general-margin;
   margin-bottom: spacing.$desktop-general-margin;
   box-shadow: colors.$container-shadow;
-  
-
+  border-radius: 5px;
+  overflow: hidden;
 
   .player {
     min-width: 100px;
-    background-color: rgb(142, 142, 202);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,6 +26,7 @@
       border: none;
       border-radius: 50%;
       padding: 5px;
+      cursor: pointer;
 
       .playing-icon {
         width: 30px;
@@ -43,6 +35,39 @@
 
     
   }
+
+  .Bass {
+    background-color: colors.$bass-color;
+  }
+  
+  .Pad {
+    background-color: colors.$pad-color;
+  }
+  
+  .Lead {
+    background-color: colors.$lead-color;
+  }
+  .FX {
+    background-color: colors.$fx-color;
+  }
+
+  .Keys {
+    background-color: colors.$keys-color;
+  }
+
+  .Other {
+    background-color: colors.$other-color;  
+  }
+
+  .Pluck {
+    background-color: colors.$pluck-color;  
+  }
+
+  .String {
+    background-color: colors.$string-color;  
+  }
+
+
 
   .recipe-details {
     flex: 1;
