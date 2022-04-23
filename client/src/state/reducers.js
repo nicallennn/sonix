@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-
 const authenticated = (loggedIn = false, action) => {
 
   if (action.type === 'LOGIN') {
@@ -31,6 +30,14 @@ const dashboardRecipes = (recipes = {}, action) => {
     const newDashboardRecipes = action.recipes;
     return newDashboardRecipes;
   }
+
+  if (action.type === 'STORE_RECIPE') {
+    console.log('create recipe called in reducer');
+    const newDashboardRecipes = JSON.parse(JSON.stringify(recipes));
+    newDashboardRecipes[action.category].push(action.newRecipe);
+    return newDashboardRecipes;
+  }
+
   return recipes;
 };
 

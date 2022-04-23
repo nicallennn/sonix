@@ -27,7 +27,7 @@ const RecipeSchema = new mongoose.Schema({
   likedBy: Array,
   category: {
     type: String,
-    enum: ['Bass', 'Pad', 'String', 'Lead', 'Pluck', 'FX', 'Keys'],
+    enum: ['Bass', 'Pad', 'String', 'Lead', 'Pluck', 'FX', 'Keys', 'Other'],
     required: true
   },
   originalSynth: {

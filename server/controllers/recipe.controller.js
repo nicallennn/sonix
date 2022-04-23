@@ -30,14 +30,14 @@ const getDashBoardRecipes = async (req, res) => {
     results.Popular = await Recipe.find({})
       .sort({ numberOfLikes: -1 })
       .limit(10)
-      .select('_id creatorHandle title numberOfLikes description rating category originalSynth preview');
+      .select('_id creatorHandle title numberOfLikes description category originalSynth preview');
 
     // get category recipes
     for (const cat of categories) {
       results[cat] = await Recipe.find({ category: cat })
         .sort({ rating: -1 })
         .limit(10)
-        .select('_id creatorHandle title numberOfLikes description rating category originalSynth preview');
+        .select('_id creatorHandle title numberOfLikes description category originalSynth preview');
     }
 
     // return the result to the user
@@ -99,10 +99,14 @@ const createRecipe = async (req, res) => {
   try {
     // save the new recipe
     const result = await Recipe.create(recipe);
+    // .select('_id creatorHandle title numberOfLikes description rating category originalSynth preview');
     if (!result) {
       throw new Error('Could not add recipe to database');
     }
-    console.log('added recipe');
+
+    // todo - need to get required values out of result
+    const { _id, creatorHandle, title, numberOfLikes, description, category, originalSynth, preview } = result;
+    const returnRecipe = { _id, creatorHandle, title, numberOfLikes, description, category, originalSynth, preview };
 
     // add the recipe to the user profile
     const recipeCreator = await User.findById(recipe.creatorId);
@@ -110,7 +114,7 @@ const createRecipe = async (req, res) => {
     recipeCreator.ownRecipes.push(result._id);
     await recipeCreator.save();
 
-    res.status(201).send(result);
+    res.status(201).send(returnRecipe);
   } catch (error) {
     res.status(500).send({ error, message: 'Failed to create recipe!' });
   }

@@ -23,9 +23,10 @@ export const unlikeRecipe = (recipeId) => ({
   recipeId
 });
 
-export const createRecipe = (newRecipe) => ({
-  type: 'CREATE_RECIPE',
-  newRecipe
+export const storeRecipe = (newRecipe, category) => ({
+  type: 'STORE_RECIPE',
+  newRecipe,
+  category
 });
 
 export const deleteRecipe = (recipeId) => ({

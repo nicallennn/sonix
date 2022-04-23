@@ -1,13 +1,19 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { storage } from '../services/firebase';
 import { uploadBytes, ref, getDownloadURL, listAll } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { createRecipe } from '../services/recipeAPI';
+import { storeRecipe } from '../state/actions';
 import styles from './styles/create-recipe.scss';
-import { useState } from 'react';
+
 
 const CreateRecipe = () => {
-  // state
+  //store / state / navigation
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [uploadMessage, setUploadMessage] = useState(null);
   const [resultMessage, setResultMessage] = useState(null);
 
@@ -65,11 +71,11 @@ const CreateRecipe = () => {
     // try to upload the audio to firebase
     try {
       //create the reference
-      const storageRef = ref(storage, `samples/one/${filename}`);
+      const storageRef = ref(storage, `samples/${filename}`);
       //store the data
       await uploadBytes(storageRef, file);
       //get the download link to display on the page
-      filepath = await getDownloadURL(ref(storage, `samples/one/${filename}`));
+      filepath = await getDownloadURL(ref(storage, `samples/${filename}`));
       setUploadMessage('Uploaded audio preview.');
     } catch (error) {
       setUploadMessage('Failed to upload audio!');
@@ -97,11 +103,15 @@ const CreateRecipe = () => {
       //if added to db - add to local storage
       if (result.created) setResultMessage('Uploaded recipe to database.');
       else throw new Error();
+      dispatch(storeRecipe(result.data, data.category));
+      //!navigate to dashboard for testing
+      //todo - navigate to new recipe
+      navigate('/');
     } catch (error) {
       setResultMessage('Failed to upload recipe to database!');
     }
 
-    //todo - add the recipe to the redux store
+
   };
 
   return (
