@@ -4,10 +4,10 @@
 .recipe-wrapper {
   width: spacing.$desktop-container-width - 20;
   margin-bottom: spacing.$desktop-general-margin;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .ingredients-container {

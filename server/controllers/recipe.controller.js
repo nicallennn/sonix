@@ -99,10 +99,14 @@ const createRecipe = async (req, res) => {
   try {
     // save the new recipe
     const result = await Recipe.create(recipe);
-    if (!result) throw new Error('Could not add recipe to database');
+    if (!result) {
+      throw new Error('Could not add recipe to database');
+    }
+    console.log('added recipe');
 
     // add the recipe to the user profile
     const recipeCreator = await User.findById(recipe.creatorId);
+    if (!recipeCreator) console.error('could not find user to store');
     recipeCreator.ownRecipes.push(result._id);
     await recipeCreator.save();
 

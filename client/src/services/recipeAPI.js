@@ -41,5 +41,17 @@ const getRecipe = (id) => {
 };
 
 //! post requests
+const createRecipe = (recipe) => {
+  return fetch(`${rootUrl}/recipe/create`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(recipe),
+  }).then(async res => {
+    const data = await res.json();
+    if (res.status === 201) return { created: true, data };
+    else return { created: false, error: data };
+  }).catch(error => console.error('Failed to create recipe: ', error));
+};
 
-export { getDashboardRecipes, getCategoryRecipes, getRecipe };
+export { getDashboardRecipes, getCategoryRecipes, getRecipe, createRecipe };
