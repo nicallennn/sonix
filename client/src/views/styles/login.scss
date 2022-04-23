@@ -1,0 +1,53 @@
+@use '../../sass-variables/colors.scss' as colors;
+@use '../../sass-variables/widths-spacing.scss' as spacing;
+@use '../../sass-variables/fonts.scss' as fonts;
+
+.auth-wrapper {
+  width: spacing.$desktop-container-width;
+  margin-bottom: spacing.$desktop-general-margin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: colors.$primary-container-color;
+    margin-bottom: spacing.$desktop-general-margin;
+    padding: spacing.$desktop-inner-padding;
+    border-radius: colors.$general-border-radius;
+    box-shadow: colors.$container-shadow;
+
+    h2 {
+      margin-top: spacing.$desktop-medium-margin;
+      margin-bottom: spacing.$desktop-medium-margin;
+      font-size: 1.5em;
+    }
+
+    input, select, textarea {
+      width: 40%;
+      margin-bottom: spacing.$desktop-medium-margin;
+      border-radius: colors.$general-border-radius;
+      box-shadow: colors.$container-shadow;
+      border: 1px solid lightgrey;
+      padding: spacing.$desktop-inner-padding;
+      -webkit-box-sizing: content-box; 
+      -moz-box-sizing: content-box;  
+      box-sizing: content-box; 
+      font-family: fonts.$primary-font;
+    }
+
+    .submit-btn {
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 0.9em;
+      padding: 10px;
+    
+      &:hover {
+        box-shadow: colors.$input-shadow;
+      }
+    }
+  }
+}

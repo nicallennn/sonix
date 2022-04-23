@@ -56,7 +56,7 @@ const CreateRecipe = () => {
   });
 
 
-  //! get form data, save file to firebase, create recipe object, add to local recipies, store inbox
+  //! submit the form to firebase/server
   const onSubmit = async data => {
     //make the document to store
     const file = data.sampleFile[0];
@@ -125,8 +125,8 @@ const CreateRecipe = () => {
           <input type="text" {...register('description')} placeholder="description" />
           <input type="text" {...register('originalSynth')} placeholder="synth" />
 
-          <select {...register('category')}>
-            <option value="" disabled selected hidden>Category</option>
+          <select {...register('category')} defaultValue="Bass">
+            {/* <option value="" disabled selected hidden>category</option> */}
             <option value="Bass">Bass</option>
             <option value="Pad">Pad</option>
             <option value="Lead">Lead</option>
