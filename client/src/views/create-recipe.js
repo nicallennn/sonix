@@ -62,7 +62,7 @@ const CreateRecipe = () => {
     const file = data.sampleFile[0];
 
     console.log(file.type);
-    //todo - check the file is type mp3 or wave
+    // check the file is type mp3 or wav
     if (file.type !== 'audio/wav' && file.type !== 'audio/mpeg') {
       setUploadMessage('Audio preview must be of type wav or mp3!');
       console.log('not audio');
@@ -72,7 +72,8 @@ const CreateRecipe = () => {
     //get the filename
     const filename = data.sampleFile[0].name;
 
-    //todo check if the file exists already or create unique filename for each file?
+    //todo - check if the file exists already or create unique filename for each file?
+    //todo - could hash the filename + date???
     let filepath;
     // try to upload the audio to firebase
     try {
@@ -123,7 +124,7 @@ const CreateRecipe = () => {
 
         {/* details */}
         <div className="recipe-section recipe-details">
-          <label htmlFor="recipe-details">Recipe Details</label>
+          <h2>Recipe Details</h2>
           <input type="text" {...register('title')} placeholder="title" />
           <input type="text" {...register('description')} placeholder="description" />
           <input type="text" {...register('originalSynth')} placeholder="synth" />
@@ -156,13 +157,16 @@ const CreateRecipe = () => {
           >
             +
           </button>
+          <label className="file-upload">
+            <input type="file" {...register('sampleFile')} />
+            Click to upload audio sample (wav or mp3)
+          </label>
 
-          <input type="file" {...register('sampleFile')} />
         </div>
 
         {/* ingredients */}
         <div className="recipe-section recipe-ingredients">
-          <label htmlFor="ingredients">Ingredients</label>
+          <h2>Ingredients</h2>
           {ingredients.map((field, index) => (
             <input
               key={field.id} // important to include key with field's id
@@ -181,7 +185,7 @@ const CreateRecipe = () => {
         </div>
         {/* method */}
         <div className="recipe-section recipe-method">
-          <label htmlFor="steps">Method</label>
+          <h2>Method</h2>
           {steps.map((field, index) => (
             <textarea rows="3" key={field.id} {...register(`steps.${index}.step`)} ></textarea>
           ))}
