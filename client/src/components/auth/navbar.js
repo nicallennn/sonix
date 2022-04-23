@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-inner-wrapper">
-        <Link to="/dashboard" className='link'>
+        <Link to="/" className='link'>
           <h1 className='logo'>sonix</h1>
         </Link>
 

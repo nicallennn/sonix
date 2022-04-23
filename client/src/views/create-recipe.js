@@ -1,6 +1,6 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { storage } from '../services/firebase';
-import { uploadBytes, ref, getDownloadURL, listAll } from 'firebase/storage';
+import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -18,7 +18,7 @@ const CreateRecipe = () => {
   const [resultMessage, setResultMessage] = useState(null);
 
   // react hook forms
-  const { register, control, handleSubmit, reset, watch } = useForm({
+  const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
       tags: [{ value: '' }],
       ingredients: [{ value: '' }],
@@ -58,13 +58,19 @@ const CreateRecipe = () => {
 
   //! get form data, save file to firebase, create recipe object, add to local recipies, store inbox
   const onSubmit = async data => {
-    // console.log('submit data', data);
     //make the document to store
     const file = data.sampleFile[0];
 
+    console.log(file.type);
+    //todo - check the file is type mp3 or wave
+    if (file.type !== 'audio/wav' && file.type !== 'audio/mpeg') {
+      setUploadMessage('Audio preview must be of type wav or mp3!');
+      console.log('not audio');
+      return;
+    }
+
     //get the filename
     const filename = data.sampleFile[0].name;
-    // console.log(filename);
 
     //todo check if the file exists already or create unique filename for each file?
     let filepath;
@@ -104,14 +110,11 @@ const CreateRecipe = () => {
       if (result.created) setResultMessage('Uploaded recipe to database.');
       else throw new Error();
       dispatch(storeRecipe(result.data, data.category));
-      //!navigate to dashboard for testing
-      //todo - navigate to new recipe
-      navigate('/');
+      // navigate to new recipe / reset form
+      navigate('/recipe', { state: { recipeId: result.data._id } });
     } catch (error) {
       setResultMessage('Failed to upload recipe to database!');
     }
-
-
   };
 
   return (
