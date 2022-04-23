@@ -93,9 +93,12 @@ const getRecipe = async (req, res) => {
 
 //! create a new recipe
 const createRecipe = async (req, res) => {
-  //todo - get the user id from the auth middleware
-  // get the recipe from the request body
+  // get the recipe from the request body, creator details from req.user
+  const user = req.user;
   const recipe = req.body;
+  recipe.creatorId = user._id;
+  recipe.creatorHandle = user.handle;
+
   try {
     // save the new recipe
     const result = await Recipe.create(recipe);
@@ -104,7 +107,7 @@ const createRecipe = async (req, res) => {
       throw new Error('Could not add recipe to database');
     }
 
-    // todo - need to get required values out of result
+    // todo - need to get required values out of result - do this better!!!
     const { _id, creatorHandle, title, numberOfLikes, description, category, originalSynth, preview } = result;
     const returnRecipe = { _id, creatorHandle, title, numberOfLikes, description, category, originalSynth, preview };
 

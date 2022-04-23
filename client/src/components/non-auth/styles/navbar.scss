@@ -23,18 +23,20 @@
     text-decoration: none;
     display: inline;
     margin-left: 20px;
-    padding: 5px 10px;
-    border: 1px solid white;
+    
 
-    &:hover {
-      border: 1px solid colors.$text-primary-color;
-      border-radius: 3px;
-    }
   }
-
-   .link {
+  
+  .link {
     text-decoration: none;
     color: colors.$text-primary-color;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 3px;
+    
+    &:hover {
+      color: colors.$text-secondary-color;
+    }
   }
 
   .logo {

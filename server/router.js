@@ -1,6 +1,7 @@
 //imports
 const express = require('express');
 const router = express.Router();
+const validateUser = require('./middlewares/validate-user');
 
 //import the controller methods
 const {
@@ -35,13 +36,13 @@ router.post('/login', loginUser);
 
 //! authenticated routes
 // recipes
-router.post('/recipe/create', createRecipe);
-router.patch('/recipe/like', likeRecipe);
-router.patch('/recipe/unlike', unLikeRecipe);
-router.delete('/recipe/delete', deleteRecipe);
+router.post('/recipe/create', validateUser, createRecipe);
+router.patch('/recipe/like', validateUser, likeRecipe);
+router.patch('/recipe/unlike', validateUser, unLikeRecipe);
+router.delete('/recipe/delete', validateUser, deleteRecipe);
 
 // users
-router.patch('/profile/edit', editUserProfile);
+router.patch('/profile/edit', validateUser, editUserProfile);
 
 //export the router
 module.exports = router;

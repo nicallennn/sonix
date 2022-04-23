@@ -42,10 +42,15 @@ const getRecipe = (id) => {
 
 //! post requests
 const createRecipe = (recipe) => {
+  const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/create`, {
     method: 'POST',
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
     body: JSON.stringify(recipe),
   }).then(async res => {
     const data = await res.json();

@@ -61,11 +61,9 @@ const CreateRecipe = () => {
     //make the document to store
     const file = data.sampleFile[0];
 
-    console.log(file.type);
     // check the file is type mp3 or wav
     if (file.type !== 'audio/wav' && file.type !== 'audio/mpeg') {
       setUploadMessage('Audio preview must be of type wav or mp3!');
-      console.log('not audio');
       return;
     }
 
@@ -92,8 +90,6 @@ const CreateRecipe = () => {
     //build the recipe object
     const recipe = {
       //get creator handle and id on server from token middleware
-      creatorHandle: 'timmy232',
-      creatorId: '62614e1b7376e350dd94d4d9',
       title: data.title,
       description: data.description,
       category: data.category,

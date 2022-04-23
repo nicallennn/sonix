@@ -1,5 +1,4 @@
 const Method = ({ steps }) => {
-  console.log(steps);
   return (
     <div className="ingredients-container">
       <h2 className="title">Method</h2>

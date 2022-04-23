@@ -32,7 +32,6 @@ const dashboardRecipes = (recipes = {}, action) => {
   }
 
   if (action.type === 'STORE_RECIPE') {
-    console.log('create recipe called in reducer');
     const newDashboardRecipes = JSON.parse(JSON.stringify(recipes));
     newDashboardRecipes[action.category].push(action.newRecipe);
     return newDashboardRecipes;

@@ -10,7 +10,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const testUser = {
-    email: 'nicaba@123.com',
+    email: 'tim322@123.com',
     password: '1234'
   };
 
