@@ -18,7 +18,7 @@ const createUser = async (newUser) => {
     .catch((error) => console.error(error));
 };
 
-const loginUser = (user) => {
+const loginUser = async (user) => {
   return fetch(`${rootUrl}/login`, {
     method: 'POST',
     credentials: 'include',

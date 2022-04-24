@@ -4,6 +4,7 @@ import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import { createRecipe } from '../services/recipeAPI';
 import { storeRecipe } from '../state/actions';
@@ -68,12 +69,16 @@ const CreateRecipe = () => {
     }
 
     //get the filename
-    const filename = data.sampleFile[0].name;
+    let filename = data.sampleFile[0].name;
+    //create a unique filename
+    const fileId = uuidv4();
+    filename += fileId;
+    filename += new Date().toLocaleTimeString();
 
     //todo - check if the file exists already or create unique filename for each file?
     //todo - could hash the filename + date???
+    //! try to upload the audio to firebase
     let filepath;
-    // try to upload the audio to firebase
     try {
       //create the reference
       const storageRef = ref(storage, `samples/${filename}`);
@@ -81,6 +86,7 @@ const CreateRecipe = () => {
       await uploadBytes(storageRef, file);
       //get the download link to display on the page
       filepath = await getDownloadURL(ref(storage, `samples/${filename}`));
+      console.log('firebase filepath: ', filepath);
       setUploadMessage('Uploaded audio preview.');
     } catch (error) {
       setUploadMessage('Failed to upload audio!');

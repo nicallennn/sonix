@@ -14,6 +14,10 @@ const Navbar = () => {
             <Link to="/login" className='link' >Login</Link>
           </li>
 
+          <li className='nav-link' >
+            <Link to="/signup" className='link' >Signup</Link>
+          </li>
+
           <li className='nav-link'>
             <Link to="/search" className='link' >Search</Link>
           </li>

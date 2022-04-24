@@ -15,6 +15,7 @@ import Search from './views/search';
 import Category from './views/category';
 import Profile from './views/profile';
 import Login from './views/login';
+import Signup from './views/signup';
 import NotFound from './views/not-found';
 
 const UnauthenticatedApp = () => {
@@ -44,6 +45,7 @@ const UnauthenticatedApp = () => {
           <Route path="category/:categoryId" element={<Category />} />
           <Route path="profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

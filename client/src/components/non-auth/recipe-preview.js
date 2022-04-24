@@ -10,16 +10,15 @@ const RecipePreview = ({ recipe, category }) => {
   const navigate = useNavigate();
   const [playing, setPlaying] = useState(false);
   const [player, setPlayer] = useState(null);
-  const sample = 'https://firebasestorage.googleapis.com/v0/b/sonix-test.appspot.com/o/samples%2Frising_pad.wav?alt=media&token=2694cf74-1f10-4779-ae93-ed470af6e974';
 
-  const handlePlayAudio = () => {
+  const handlePlayAudio = async () => {
     if (playing) {
       // pause the player
-      player.pause();
+      await player.pause();
       setPlaying(false);
     } else {
       //play the player
-      player.play();
+      await player.play();
       setPlaying(true);
     }
   };
@@ -44,7 +43,7 @@ const RecipePreview = ({ recipe, category }) => {
           <button className="player-button" onClick={handlePlayAudio}>
             <img className="playing-icon" src={playing ? PauseIcon : PlayIcon}></img>
           </button>
-          <audio crossOrigin="anonymous" id={`${category}-${recipe._id}-player`} src={sample} onEnded={trackEnded}>
+          <audio crossOrigin="anonymous" id={`${category}-${recipe._id}-player`} src={recipe.preview} onEnded={trackEnded}>
             Your browser does not support the audio element.
           </audio>
         </div>
