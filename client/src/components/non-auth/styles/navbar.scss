@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: colors.$header-color;
 
   .nav-inner-wrapper {
     width: spacing.$desktop-container-width;

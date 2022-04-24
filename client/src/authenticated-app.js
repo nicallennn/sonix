@@ -31,6 +31,7 @@ const AuthenticatedApp = () => {
         if (res.fetched) {
           //store my profile in store
           dispatch(setUserProfile(res.data));
+          console.log('profile: ', res.data);
         } else {
           //logout user
           dispatch(logout());

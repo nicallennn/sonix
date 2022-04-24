@@ -5,6 +5,7 @@
 .outer-container {
   padding: spacing.$desktop-general-padding;
   box-shadow: colors.$container-shadow;
+  // border: 1px solid colors.$general-border;
   margin-bottom: 30px;
   background-color: colors.$primary-container-color;
   border-radius: colors.$general-border-radius;

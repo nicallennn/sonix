@@ -95,11 +95,26 @@ const createRecipe = (recipe) => {
   }).catch(error => console.error('Failed to create recipe: ', error));
 };
 
+const getProfileRecipes = (recipeIds) => {
+  return fetch(`${rootUrl}/recipe/user`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(recipeIds),
+  }).then(async res => {
+    const data = await res.json();
+    if (res.status === 200) return { fetched: true, data };
+    else return { fetched: false, error: data };
+  }).catch(error => console.error('Failed to create recipe: ', error));
+};
+
 export {
   getDashboardRecipes,
   getCategoryRecipes,
   getRecipe,
   createRecipe,
   likeRecipe,
-  unlikeRecipe
+  unlikeRecipe,
+  getProfileRecipes
 };

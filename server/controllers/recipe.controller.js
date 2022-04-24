@@ -21,16 +21,23 @@ const searchAllRecipes = async (req, res) => {
 
 };
 
-//! get a users recipes
+// get a users recipes
 const getUserRecipes = async (req, res) => {
-  const { _id } = req.body;
+  const { own, liked } = req.body;
+
   try {
-    let results = await Recipe.find({ creatorId: _id })
-      .select('_id');
-    results = results.map(res => res._id);
-    res.status(200).send(results);
+    //get own recipes
+    const ownRecipes = await Recipe.find({
+      _id: { $in: own }
+    }).select('_id creatorHandle title numberOfLikes description category originalSynth preview');
+    //get liked recipes
+    const likedRecipes = await Recipe.find({
+      _id: { $in: liked }
+    }).select('_id creatorHandle title numberOfLikes description category originalSynth preview');
+
+    res.status(200).json({ ownRecipes, likedRecipes });
   } catch (error) {
-    res.status(500).send({ error, message: 'Failed to search recipes' });
+    res.status(500).send({ error, message: 'Failed to get user recipes' });
   }
 };
 

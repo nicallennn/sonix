@@ -1,0 +1,20 @@
+@use '../../sass-variables/colors.scss' as colors;
+@use '../../sass-variables/widths-spacing.scss' as spacing;
+
+
+.profile-wrapper {
+  width: spacing.$desktop-container-width;
+  
+  .title {
+    font-size: 1.7em;
+  }
+  .bio {
+    margin-bottom: spacing.$desktop-general-margin;
+    color: colors.$text-secondary-color;
+  }
+
+  .no-content {
+    margin-bottom: spacing.$desktop-general-margin;
+    font-size: 1em;;
+  }
+}

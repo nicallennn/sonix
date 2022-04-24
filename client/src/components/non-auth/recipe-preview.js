@@ -11,7 +11,7 @@ import PlayIcon from './../../assests/icons/play.svg';
 import PauseIcon from './../../assests/icons/pause.svg';
 
 const RecipePreview = ({ recipe, category }) => {
-  const likedRecipes = useSelector(state => state.profile.likedRecipes);
+  const { likedRecipes, handle } = useSelector(state => state.profile);
   const authenticated = useSelector(state => state.authenticated);
 
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const RecipePreview = ({ recipe, category }) => {
         </div>
       </div>
       <div className='recipe-details' id={recipe._id}>
-        {(authenticated && likedRecipes) &&
+        {(authenticated && likedRecipes && recipe.creatorHandle !== handle) &&
           <>
             {likedRecipes[recipe._id] ?
               <button onClick={() => handleLike(false)} className='like-button'>unlike</button>
