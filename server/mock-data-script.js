@@ -67,8 +67,8 @@ const fb = {
 };
 
 const creators = ['Tim', 'Jim', 'Slim', 'John'];
-const creatorsId = ['62614e1b7376e350dd94d4d9', '62614e4f7376e350dd94d4db', '62614e737376e350dd94d4dd', '62614e8e7376e350dd94d4df'];
-const creatorsHandle = ['timmy232', 'jimmy_doe', 'slim slimmest', 'johnny doe'];
+const creatorsId = ['6265353ea1d54bd59acc4ae3', '62653558a1d54bd59acc4af7', '62653588a1d54bd59acc4b0b', '626535a2a1d54bd59acc4b1f'];
+const creatorsHandle = ['timmy232', 'jimmy_dow', 'slimslim', 'johnny-doe'];
 const categories = ['Bass', 'Pad', 'String', 'Lead', 'Pluck', 'FX', 'Keys'];
 const descriptions = [
   'Quidem et reprehenderit nostrum saepe, consequatur odio?',

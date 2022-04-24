@@ -50,23 +50,42 @@ const loginUser = async (req, res) => {
   }
 };
 
+//! get user profile of logged in user
+const getMyProfile = async (req, res) => {
+  const { _id } = req.user;
+
+  try {
+    const profile = await User.findById({ _id }).lean().select('_id handle bio ownRecipes likedRecipes joined');
+
+    if (profile) {
+      const likedObject = {};
+      profile.likedRecipes.forEach(id => {
+        likedObject[id] = true;
+      });
+      console.log(likedObject);
+      profile.likedRecipes = likedObject;
+      return res.status(200).json(profile);
+    } else {
+      return res.status(404).send({ message: 'No profile attached to user!' });
+    }
+  } catch (error) {
+    res.status(404).send({ error, message: 'Profile not found' });
+  }
+};
+
 const getUserProfile = async (req, res) => {
   // get the user profile id
   const { userHandle } = req.params;
+
   try {
     // check the user exists
     //todo - refactor this line to use .select() to only get required bits
     const { _id, handle, bio, ownRecipes, likedRecipes } = await User.findOne({ handle: userHandle });
     if (!_id) throw new Error('User profile not found');
-
-    //turn the liked recipes array into an object to speed up checking if recipes are in favorites in frontend
-    const likedObject = {};
-    likedRecipes.forEach(id => {
-      likedObject[id] = true;
-    });
+    console.log('user: ', handle, _id);
 
     // create the user profile
-    const profile = { _id, handle, bio, ownRecipes, likedRecipes: likedObject };
+    const profile = { _id, handle, bio, ownRecipes, likedRecipes };
     // return the user profile
     res.status(200).send(profile);
 
@@ -81,4 +100,4 @@ const editUserProfile = async (req, res) => {
   res.send('editUserProfile');
 };
 
-module.exports = { createUser, loginUser, getUserProfile, editUserProfile };
+module.exports = { createUser, loginUser, getUserProfile, editUserProfile, getMyProfile };

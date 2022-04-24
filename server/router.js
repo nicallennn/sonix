@@ -8,7 +8,8 @@ const {
   createUser,
   loginUser,
   getUserProfile,
-  editUserProfile
+  editUserProfile,
+  getMyProfile
 } = require('./controllers/user.controller');
 
 const {
@@ -19,7 +20,8 @@ const {
   createRecipe,
   likeRecipe,
   unLikeRecipe,
-  deleteRecipe
+  deleteRecipe,
+  getUserRecipes
 } = require('./controllers/recipe.controller');
 
 //! unauthenticated routes
@@ -28,14 +30,16 @@ router.get('/searchAll/:searchTerm', searchAllRecipes);
 router.get('/dashboard', getDashBoardRecipes);
 router.get('/category/:categoryName', getCategoryRecipes);
 router.get('/recipe/:id', getRecipe);
+router.post('/recipe/user', getUserRecipes);
 
 // users
-router.get('/profile/:userHandle', getUserProfile);
+router.get('/user/:userHandle', getUserProfile);
 router.post('/register', createUser);
 router.post('/login', loginUser);
 
 //! authenticated routes
 // recipes
+router.get('/profile/myProfile', validateUser, getMyProfile);
 router.post('/recipe/create', validateUser, createRecipe);
 router.patch('/recipe/like', validateUser, likeRecipe);
 router.patch('/recipe/unlike', validateUser, unLikeRecipe);

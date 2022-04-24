@@ -2,6 +2,8 @@ import styles from './styles/recipe-scroll-container.scss';
 import RecipePreview from './recipe-preview';
 
 const RecipeScrollContainer = ({ title, data }) => {
+
+
   return (
     <>
       <div className="outer-container">

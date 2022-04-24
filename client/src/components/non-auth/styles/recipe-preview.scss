@@ -77,10 +77,24 @@
     flex: 1;
     border: colors.$general-border;
     padding: spacing.$desktop-inner-padding;
-    cursor: pointer;
+    position: relative;
+
+    .like-button {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
 
     .title {
       font-size: 1.2em;
+      cursor: pointer;
+      padding-bottom: 2px;
+      width: fit-content;
+
+      &:hover {
+        text-underline-offset: 1px;
+        text-decoration: underline;
+      }
     }
 
     .synth-name {
@@ -91,6 +105,18 @@
     .likes {
       font-size: 0.7em;
       margin-bottom: spacing.$desktop-small-margin;
+    }
+
+    .user {
+      font-size: 0.7em;
+      margin-bottom: spacing.$desktop-small-margin;
+      cursor: pointer;
+      width: fit-content;
+
+      &:hover {
+        text-underline-offset: 1px;
+        text-decoration: underline;
+      }
     }
 
     .description {

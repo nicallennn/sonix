@@ -34,5 +34,32 @@ const loginUser = async (user) => {
     .catch((error) => console.error(error));
 };
 
+const getMyProfile = async () => {
+  const token = localStorage.getItem('accessToken');
+  return fetch(`${rootUrl}/profile/myProfile`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  }).then(async res => {
+    const data = await res.json();
+    if (res.status === 200) return { fetched: true, data };
+    else return { fetched: false, error: data };
+  }).catch(error => console.error('Failed to create recipe: ', error));
+};
 
-export { createUser, loginUser };
+const getUserProfile = async (userHandle) => {
+  return fetch(`${rootUrl}/user/${userHandle}`, {
+    method: 'GET'
+  }).then(async res => {
+    const data = await res.json();
+    if (res.status === 200) return { fetched: true, data };
+    else return { fetched: false, error: data };
+  }).catch(error => console.error('Failed to create recipe: ', error));
+};
+
+
+export { createUser, loginUser, getMyProfile, getUserProfile };

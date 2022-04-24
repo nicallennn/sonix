@@ -21,6 +21,19 @@ const searchAllRecipes = async (req, res) => {
 
 };
 
+//! get a users recipes
+const getUserRecipes = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    let results = await Recipe.find({ creatorId: _id })
+      .select('_id');
+    results = results.map(res => res._id);
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ error, message: 'Failed to search recipes' });
+  }
+};
+
 //! get recipes for dashboard
 const getDashBoardRecipes = async (req, res) => {
   //create an object ot store the results
@@ -35,7 +48,7 @@ const getDashBoardRecipes = async (req, res) => {
     // get category recipes
     for (const cat of categories) {
       results[cat] = await Recipe.find({ category: cat })
-        .sort({ rating: -1 })
+        .sort({ numberOfLikes: -1 })
         .limit(10)
         .select('_id creatorHandle title numberOfLikes description category originalSynth preview');
     }
@@ -260,5 +273,6 @@ module.exports = {
   createRecipe,
   likeRecipe,
   unLikeRecipe,
-  deleteRecipe
+  deleteRecipe,
+  getUserRecipes
 };

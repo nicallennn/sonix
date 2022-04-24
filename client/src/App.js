@@ -13,7 +13,6 @@ function App() {
 
   //! check if the user is logged in or not, dispatch login action to store if true
   useEffect(() => {
-    // localStorage.setItem('accessToken', 'test');
     // check if user is logged in and set store state
     const token = localStorage.getItem('accessToken');
     if (token) {

@@ -10,13 +10,11 @@ const validateUser = async (req, res, next) => {
     return res.status(403).send({ message: 'No token found!' });
   }
   const token = authHeaders.split(' ')[1];
-  console.log(token);
   try {
     // verify & decode token payload,
     const { _id } = jwt.verify(token, SECRET);
     // attempt to find user object and set to req
     const user = await User.findById({ _id });
-    console.log('user: ', user);
     if (!user) return res.status(401).send({ message: 'User not found' });
     req.user = user;
     next();

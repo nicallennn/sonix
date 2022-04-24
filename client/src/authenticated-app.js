@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 
 //! custom functions/data
 import { getDashboardRecipes } from './services/recipeAPI';
+import { getMyProfile } from './services/userAPI';
+import { setUserProfile, logout } from './state/actions';
 
 //! views/components/data
 import Layout from './views/auth-layout';
@@ -15,6 +17,7 @@ import CreateRecipe from './views/create-recipe';
 import Search from './views/search';
 import Category from './views/category';
 import Profile from './views/profile';
+import MyProfile from './views/my-profile';
 import NotFound from './views/not-found';
 
 const AuthenticatedApp = () => {
@@ -22,7 +25,18 @@ const AuthenticatedApp = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //todo - check user token is valid & fetch user profile
+    //! check user token is valid and fetch profile
+    getMyProfile()
+      .then(res => {
+        if (res.fetched) {
+          //store my profile in store
+          dispatch(setUserProfile(res.data));
+        } else {
+          //logout user
+          dispatch(logout());
+        }
+      })
+      .catch(error => console.error('Failed to get user profile: ', error));
 
     //! get the dashboard recipes
     getDashboardRecipes().then(
@@ -46,6 +60,7 @@ const AuthenticatedApp = () => {
           <Route path="search" element={<Search />} />
           <Route path="category/:id" element={<Category />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="me" element={<MyProfile />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

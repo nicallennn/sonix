@@ -1,6 +1,5 @@
 import styles from '../non-auth/styles/navbar.scss';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../../services/userAPI';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../state/actions';
 
@@ -28,7 +27,7 @@ const Navbar = () => {
           </li>
 
           <li className='nav-link'>
-            <Link to="/profile" className='link' >Profile</Link>
+            <Link to="/me" className='link' >My Profile</Link>
           </li>
 
           <li className='nav-link' onClick={handleLogout}>
