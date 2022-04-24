@@ -6,6 +6,7 @@ import styles from './styles/dashboard.scss';
 
 const Dashboard = () => {
   const dashboardRecipes = useSelector(state => state.dashboardRecipes);
+  const userProfile = useSelector(state => state.profile);
 
   return (
     <div className="dashboard-wrapper">

@@ -13,12 +13,12 @@ export const setUserProfile = (profile) => ({
 });
 
 //! user recipe actions
-export const likeRecipe = (recipeId) => ({
+export const setLikeRecipe = (recipeId) => ({
   type: 'LIKE_RECIPE',
   recipeId
 });
 
-export const unlikeRecipe = (recipeId) => ({
+export const setUnlikeRecipe = (recipeId) => ({
   type: 'UNLIKE_RECIPE',
   recipeId
 });
@@ -39,4 +39,19 @@ export const setDashboardRecipes = (recipes) => ({
   type: 'SET_DASHBOARD_RECIPES',
   recipes
 });
+
+export const likeDashboardRecipes = (recipeId, category) => ({
+  type: 'LIKE_DASHBOARD_RECIPE',
+  recipeId,
+  category
+});
+
+export const unlikeDashboardRecipes = (recipeId, category) => ({
+  type: 'UNLIKE_DASHBOARD_RECIPE',
+  recipeId,
+  category
+});
+
+
+
 

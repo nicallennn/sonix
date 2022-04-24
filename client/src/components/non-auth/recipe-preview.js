@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
+import { setLikeRecipe, setUnlikeRecipe, likeDashboardRecipes, unlikeDashboardRecipes } from '../../state/actions';
 
 //! styles and assets
 import styles from './styles/recipe-preview.scss';
@@ -13,18 +14,14 @@ const RecipePreview = ({ recipe, category }) => {
   const likedRecipes = useSelector(state => state.profile.likedRecipes);
   const authenticated = useSelector(state => state.authenticated);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [playing, setPlaying] = useState(false);
   const [player, setPlayer] = useState(null);
-  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     //set the player
     setPlayer(document.getElementById(`${category}-${recipe._id}-player`));
-    //set if user likes liked
-    if (likedRecipes[recipe._id] === true) {
-      setLiked(true);
-    }
   }, []);
 
   const handlePlayAudio = async () => {
@@ -51,11 +48,19 @@ const RecipePreview = ({ recipe, category }) => {
     navigate('/profile', { state: { userHandle: recipe.creatorHandle } });
   };
 
-  const handleLike = (like) => {
+  const handleLike = async (like) => {
     if (like) {
-      likeRecipe(recipe._id);
+      const res = await likeRecipe(recipe._id);
+      if (res.liked) {
+        dispatch(setLikeRecipe(recipe._id));
+        dispatch(likeDashboardRecipes(recipe._id, category));
+      }
     } else {
-      unlikeRecipe(recipe._id);
+      const res = await unlikeRecipe(recipe._id);
+      if (res.unliked) {
+        dispatch(setUnlikeRecipe(recipe._id));
+        dispatch(unlikeDashboardRecipes(recipe._id, category));
+      }
     }
   };
 
@@ -73,9 +78,9 @@ const RecipePreview = ({ recipe, category }) => {
         </div>
       </div>
       <div className='recipe-details' id={recipe._id}>
-        {authenticated &&
+        {(authenticated && likedRecipes) &&
           <>
-            {liked ?
+            {likedRecipes[recipe._id] ?
               <button onClick={() => handleLike(false)} className='like-button'>unlike</button>
               :
               <button onClick={() => handleLike(true)} className='like-button'>like</button>
