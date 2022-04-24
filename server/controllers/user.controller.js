@@ -62,7 +62,6 @@ const getMyProfile = async (req, res) => {
       profile.likedRecipes.forEach(id => {
         likedObject[id] = true;
       });
-      console.log(likedObject);
       profile.likedRecipes = likedObject;
       return res.status(200).json(profile);
     } else {

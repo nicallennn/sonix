@@ -118,7 +118,6 @@ const createRecipe = () => {
   const description = descriptions[randomNumber(2)];
   const originalSynth = originalSynths[randomNumber(5)];
   const preview = fb[category][randomNumber(4)];
-  console.log('prev: ', preview);
   const noOflikes = randomNumber(4);
 
   for (let i = 0; i < randomNumber(3) + 1; i++) {
@@ -146,7 +145,7 @@ const createRecipe = () => {
     creatorId: createId,
     title: title,
     description: description,
-    numberOfLikes: noOflikes,
+    numberOfLikes: Number(noOflikes),
     likedBy: [],
     category: category,
     originalSynth: originalSynth,

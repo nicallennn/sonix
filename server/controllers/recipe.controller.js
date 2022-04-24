@@ -34,7 +34,7 @@ const getUserRecipes = async (req, res) => {
   }
 };
 
-//! get recipes for dashboard
+// get recipes for dashboard
 const getDashBoardRecipes = async (req, res) => {
   //create an object ot store the results
   const results = {};
@@ -82,7 +82,7 @@ const getCategoryRecipes = async (req, res) => {
   }
 };
 
-//! get a single recipe
+// get a single recipe
 const getRecipe = async (req, res) => {
   // get the recipe id from the req params
   const { id } = req.params;
@@ -104,7 +104,7 @@ const getRecipe = async (req, res) => {
   }
 };
 
-//! create a new recipe
+// create a new recipe
 const createRecipe = async (req, res) => {
   // get the recipe from the request body, creator details from req.user
   const user = req.user;
@@ -138,9 +138,9 @@ const createRecipe = async (req, res) => {
 
 //! like a recipe
 const likeRecipe = async (req, res) => {
-  // get the id of the recipe and the user
-  //todo - get user id from the token auth middleware later
-  const { recipeId, userId } = req.body;
+  // get user and recipe ids
+  const userId = req.user._id;
+  const { recipeId } = req.params;
   // adjust the number of likes 
   try {
     // check the user and recipe exists
@@ -178,9 +178,11 @@ const likeRecipe = async (req, res) => {
 
 //! unlike a recipe
 const unLikeRecipe = async (req, res) => {
-  // get the id of the recipe and the user
-  //todo - get user id from the token auth middleware later
-  const { recipeId, userId } = req.body;
+  // get user and recipe ids
+  const userId = req.user._id;
+  const { recipeId } = req.params;
+  console.log('user: ', userId, 'recipeId: ', recipeId);
+
   // adjust the number of likes 
   try {
     // check the user and recipe exists
@@ -233,9 +235,7 @@ const deleteRecipe = async (req, res) => {
 
     // delete the recipe from the user ownRecipes array
     const recipeCreator = await User.findById(userId);
-    console.log(recipeCreator.ownRecipes);
     recipeCreator.ownRecipes = recipeCreator.ownRecipes.filter(recipe => recipe.toString() !== recipeId);
-    console.log(recipeCreator.ownRecipes);
     await recipeCreator.save();
 
     // delete the recipe from all users in the recipe likedBy array

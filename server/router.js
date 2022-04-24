@@ -41,8 +41,8 @@ router.post('/login', loginUser);
 // recipes
 router.get('/profile/myProfile', validateUser, getMyProfile);
 router.post('/recipe/create', validateUser, createRecipe);
-router.patch('/recipe/like', validateUser, likeRecipe);
-router.patch('/recipe/unlike', validateUser, unLikeRecipe);
+router.patch('/recipe/like/:recipeId', validateUser, likeRecipe);
+router.patch('/recipe/unlike/:recipeId', validateUser, unLikeRecipe);
 router.delete('/recipe/delete', validateUser, deleteRecipe);
 
 // users

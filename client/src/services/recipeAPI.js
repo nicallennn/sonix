@@ -40,6 +40,42 @@ const getRecipe = (id) => {
     });
 };
 
+const likeRecipe = (recipeId) => {
+  const token = localStorage.getItem('accessToken');
+  return fetch(`${rootUrl}/recipe/like/${recipeId}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+    .then(async (res) => {
+      if (res.status === 200) return { liked: true, };
+      else return { liked: false };
+    }).catch(error => {
+      console.error('Failed to like recipe: ', error);
+    });
+};
+
+const unlikeRecipe = (recipeId) => {
+  const token = localStorage.getItem('accessToken');
+  return fetch(`${rootUrl}/recipe/unlike/${recipeId}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+    .then(async (res) => {
+      if (res.status === 200) return { unliked: true, };
+      else return { unliked: false };
+    }).catch(error => {
+      console.error('Failed to unlike recipe: ', error);
+    });
+};
+
 //! post requests
 const createRecipe = (recipe) => {
   const token = localStorage.getItem('accessToken');
@@ -59,4 +95,11 @@ const createRecipe = (recipe) => {
   }).catch(error => console.error('Failed to create recipe: ', error));
 };
 
-export { getDashboardRecipes, getCategoryRecipes, getRecipe, createRecipe };
+export {
+  getDashboardRecipes,
+  getCategoryRecipes,
+  getRecipe,
+  createRecipe,
+  likeRecipe,
+  unlikeRecipe
+};

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
 
 //! styles and assets
 import styles from './styles/recipe-preview.scss';
@@ -52,9 +53,9 @@ const RecipePreview = ({ recipe, category }) => {
 
   const handleLike = (like) => {
     if (like) {
-      console.log('like this recipe');
+      likeRecipe(recipe._id);
     } else {
-      console.log('unlike this recipe');
+      unlikeRecipe(recipe._id);
     }
   };
 
