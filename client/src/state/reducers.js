@@ -54,12 +54,19 @@ const dashboardRecipes = (recipes = {}, action) => {
 
   if (action.type === 'LIKE_DASHBOARD_RECIPE') {
     const newDashboardRecipes = JSON.parse(JSON.stringify(recipes));
+    //handle category
     newDashboardRecipes[action.category].map(recipe => {
       if (recipe._id === action.recipeId) {
         recipe.numberOfLikes++;
       }
     }
-
+    );
+    //check if in popular also
+    newDashboardRecipes['Popular'].map(recipe => {
+      if (recipe._id === action.recipeId) {
+        recipe.numberOfLikes++;
+      }
+    }
     );
 
     newDashboardRecipes[action.category].sort((a, b) => b.numberOfLikes - a.numberOfLikes);
@@ -69,6 +76,12 @@ const dashboardRecipes = (recipes = {}, action) => {
   if (action.type === 'UNLIKE_DASHBOARD_RECIPE') {
     const newDashboardRecipes = JSON.parse(JSON.stringify(recipes));
     newDashboardRecipes[action.category].map(recipe => {
+      if (recipe._id === action.recipeId) {
+        recipe.numberOfLikes--;
+      }
+    });
+
+    newDashboardRecipes['Popular'].map(recipe => {
       if (recipe._id === action.recipeId) {
         recipe.numberOfLikes--;
       }

@@ -5,17 +5,12 @@
 .recipe-preview-container {
   display: flex;
   min-width: 32%;
-  min-height: 120px;
+  height: 135px;
   margin-right: spacing.$desktop-general-margin;
   margin-bottom: spacing.$desktop-general-margin;
   box-shadow: colors.$container-shadow;
   border-radius: colors.$general-border-radius;
   overflow: hidden;
-
-  .player-outer {
-    // background-image: url('../../../assests/backgrounds/bg-keys.png');
-    // background-size:cover;
-  }
 
   .player {
     min-width: 120px;

@@ -16,7 +16,7 @@ const RecipeScrollContainer = ({ title, data }) => {
 
         <div className="scroll-container">
           {data && data.map(recipe => (
-            <RecipePreview recipe={recipe} category={title} key={recipe._id} />
+            <RecipePreview recipe={recipe} category={recipe.category} key={recipe._id} />
           ))
           }
         </div>

@@ -52,6 +52,7 @@ const RecipePreview = ({ recipe, category }) => {
     if (like) {
       const res = await likeRecipe(recipe._id);
       if (res.liked) {
+        console.log('liked');
         dispatch(setLikeRecipe(recipe._id));
         dispatch(likeDashboardRecipes(recipe._id, category));
       }

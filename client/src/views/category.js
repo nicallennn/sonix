@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getCategoryRecipes } from '../services/recipeAPI';
+import RecipePreview from '../components/non-auth/recipe-preview';
 
 import './styles/category.scss';
 
@@ -17,7 +18,6 @@ const Category = () => {
     getCategoryRecipes(category)
       .then(res => {
         if (res.fetched) {
-          console.log(res.data);
           setCategoryRecipes(res.data);
           setFilteredRecipes(res.data);
         } else {
@@ -58,7 +58,9 @@ const Category = () => {
 
       <div className="category-container">
         {filteredRecipes.length > 0 ?
-          filteredRecipes.map(recipe => (<p key={recipe._id}>{recipe.title}</p>))
+          filteredRecipes.map((recipe, i) => (
+            <RecipePreview key={`${recipe._id}-${i}`} recipe={recipe} category={recipe.category} />
+          ))
           :
           <h3 className="no-content">No matching recipes at current.</h3>
         }
