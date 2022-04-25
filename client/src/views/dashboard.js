@@ -12,7 +12,6 @@ const Dashboard = () => {
         dashboardRecipes[cat].length > 0 && <RecipeScrollContainer title={cat} data={dashboardRecipes[cat]} key={cat} />
       )
       )}
-
     </div>
   );
 };

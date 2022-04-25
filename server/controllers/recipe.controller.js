@@ -168,7 +168,7 @@ const createRecipe = async (req, res) => {
   }
 };
 
-//! like a recipe
+// like a recipe
 const likeRecipe = async (req, res) => {
   // get user and recipe ids
   const userId = req.user._id;

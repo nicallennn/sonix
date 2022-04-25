@@ -29,6 +29,11 @@ export const storeRecipe = (newRecipe, category) => ({
   category
 });
 
+export const storeRecipeProfile = (recipeId) => ({
+  type: 'STORE_PROFILE_RECIPE',
+  recipeId
+});
+
 export const deleteRecipe = (recipeId) => ({
   type: 'DELETE_RECIPE',
   recipeId

@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { createRecipe } from '../services/recipeAPI';
 import { storeRecipe } from '../state/actions';
+import { storeRecipeProfile } from '../state/actions';
 import styles from './styles/create-recipe.scss';
 
 
@@ -106,17 +107,24 @@ const CreateRecipe = () => {
       recipeMethod: data.steps.map(step => step.step)
     };
 
+    let result;
     // add to recipe to the database
     try {
-      const result = await createRecipe(recipe);
+      result = await createRecipe(recipe);
       //if added to db - add to local storage
       if (result.created) setResultMessage('Uploaded recipe to database.');
-      else throw new Error();
-      dispatch(storeRecipe(result.data, data.category));
+      else throw new Error(result.error.message);
       // navigate to new recipe / reset form
+    } catch (error) {
+      setResultMessage('Failed to upload recipe to database!', error);
+    }
+    // add the recipe to the local store
+    try {
+      dispatch(storeRecipe(result.data, data.category));
+      dispatch(storeRecipeProfile(result.data._id));
       navigate('/recipe', { state: { recipeId: result.data._id } });
     } catch (error) {
-      setResultMessage('Failed to upload recipe to database!');
+      setResultMessage('Failed to store recipe in local store!');
     }
   };
 

@@ -36,6 +36,12 @@ const profile = (userProfile = {}, action) => {
     return newProfile;
   }
 
+  if (action.type === 'STORE_PROFILE_RECIPE') {
+    const newProfile = JSON.parse(JSON.stringify(userProfile));
+    newProfile['ownRecipes'].push(action.recipeId);
+    return newProfile;
+  }
+
   return userProfile;
 };
 

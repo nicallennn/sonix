@@ -84,7 +84,7 @@
       top: 2px;
       cursor: pointer;
       border: none;
-      background-color: colors.$primary-container-color;;
+      background-color: colors.$primary-container-color;
       padding: 5px;
       border-radius: 50%;
     }
@@ -116,10 +116,7 @@
       margin-right: 3px;
     }
 
-    .recipe-details-icon-bigger {
-      width: 16px;
-      margin-right: 3px;
-    }
+
 
     .synth-name {
       font-size: 0.8em;
