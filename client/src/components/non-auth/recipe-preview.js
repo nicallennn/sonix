@@ -41,11 +41,12 @@ const RecipePreview = ({ recipe, category }) => {
   };
 
   const routeToRecipe = () => {
-    navigate('/recipe/', { state: { recipeId: recipe._id } });
+    navigate('/recipe', { state: { recipeId: recipe._id } });
   };
 
   const routeToUserProfile = () => {
-    navigate(`/profile/${recipe.creatorHandle}`);
+    if (recipe.creatorHandle === handle) navigate('/me');
+    else navigate(`/profile/${recipe.creatorHandle}`);
   };
 
   const handleLike = async (like) => {

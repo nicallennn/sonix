@@ -2,14 +2,12 @@
 @use '../../../sass-variables/widths-spacing.scss' as spacing;
 
 .navbar {
-  padding: 25px;
+  padding: 30px;
   box-shadow: colors.$bottom-shadow;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: colors.$header-color;
-  // background-color: colors.$text-headline-color;
-
 
   .nav-inner-wrapper {
     width: spacing.$desktop-container-width;
@@ -25,15 +23,12 @@
   .nav-link {
     text-decoration: none;
     display: inline;
-    margin-left: 20px;
-    
-
+    margin-left: 40px;
   }
   
   .link {
     text-decoration: none;
     color: colors.$text-primary-color;
-    padding: 5px 10px;
     border: 1px solid white;
     border-radius: 3px;
     

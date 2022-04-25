@@ -5,17 +5,19 @@ import { getUserProfile } from '../services/userAPI';
 import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
 import './styles/profile.scss';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+
   const params = useParams();
+  const myProfile = useSelector(state => state.profile);
   const [profile, setProfile] = useState(null);
   const [recipes, setRecipes] = useState(null);
 
   useEffect(() => {
     const { userHandle } = params;
-    console.log(userHandle);
-
     window.scrollTo(0, 0);
+
     //get the users profile info and recipe data
     getUserProfile(userHandle).then(res => {
       if (res.fetched) {
@@ -41,7 +43,7 @@ const Profile = () => {
 
     //get the users profile recipes
 
-  }, [params]);
+  }, [params, myProfile]);
 
 
   return (
