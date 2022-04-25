@@ -69,6 +69,7 @@ const dashboardRecipes = (recipes = {}, action) => {
         }
       }
       );
+      newDashboardRecipes['Popular'].sort((a, b) => b.numberOfLikes - a.numberOfLikes);
     }
 
     newDashboardRecipes[action.category].sort((a, b) => b.numberOfLikes - a.numberOfLikes);
@@ -89,6 +90,7 @@ const dashboardRecipes = (recipes = {}, action) => {
           recipe.numberOfLikes--;
         }
       });
+      newDashboardRecipes['Popular'].sort((a, b) => b.numberOfLikes - a.numberOfLikes);
     }
 
     newDashboardRecipes[action.category].sort((a, b) => b.numberOfLikes - a.numberOfLikes);
