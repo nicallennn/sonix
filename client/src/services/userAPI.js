@@ -41,7 +41,6 @@ const getMyProfile = async () => {
     credentials: 'include',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },
   }).then(async res => {
@@ -61,5 +60,26 @@ const getUserProfile = async (userHandle) => {
   }).catch(error => console.error('Failed to create recipe: ', error));
 };
 
+const updateMyProfile = (updated) => {
+  console.log(JSON.stringify(updated));
+  const token = localStorage.getItem('accessToken');
+  return fetch(`${rootUrl}/profile/edit`, {
+    method: 'PATCH',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(updated)
+  })
+    .then(async (res) => {
+      if (res.status === 200) return { updated: true, };
+      else return { updated: false };
+    }).catch(error => {
+      console.error('Failed to like recipe: ', error);
+    });
+};
 
-export { createUser, loginUser, getMyProfile, getUserProfile };
+
+export { createUser, loginUser, getMyProfile, getUserProfile, updateMyProfile };

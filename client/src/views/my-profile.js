@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { updateMyProfile } from '../services/userAPI';
 import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
 import './styles/profile.scss';
@@ -30,6 +30,21 @@ const MyProfile = () => {
       })
       .catch(error => console.log(error));
   }, [profile]);
+
+
+  const handleUpdate = async () => {
+    console.log(('update user bio'));
+    const bio = document.getElementById('update-bio').value;
+
+    if (bio.value === '') return;
+
+    const result = await updateMyProfile({
+      bio: bio
+    });
+    console.log(result);
+    // bio.value = '';
+  };
+
   return (
     <>
       {profile &&
@@ -37,6 +52,10 @@ const MyProfile = () => {
           <h2 className="title">{profile.handle}</h2>
           <p className="bio">{profile.bio}</p>
 
+          <>
+            <textarea id="update-bio" name="bio" cols="30" rows="3" placeholder='bio' />
+            <input onClick={handleUpdate} className="submit-btn" type="submit" value="Update" />
+          </>
           {recipes &&
             <>
               {recipes.ownRecipes.length > 0 ?

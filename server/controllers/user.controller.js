@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-//! get user profile of logged in user
+// get user profile of logged in user
 const getMyProfile = async (req, res) => {
   const { _id } = req.user;
 
@@ -95,8 +95,19 @@ const getUserProfile = async (req, res) => {
 
 // todo - do this later if time
 const editUserProfile = async (req, res) => {
-  console.log('editUserProfile');
-  res.send('editUserProfile');
+  //get ueer id and body
+  const { _id } = req.user;
+  const { bio } = req.body;
+  // console.log('updating: ', _id, bio);
+  // find one and update
+  try {
+    const result = await User.findOneAndUpdate({ _id: _id }, { bio: bio }, { new: true });
+    console.log(result);
+    return res.status(200).send(result);
+  } catch (error) {
+    // console.error('my error', error);
+    return res.status(400).send({ error, message: 'Profile not found' });
+  }
 };
 
 module.exports = { createUser, loginUser, getUserProfile, editUserProfile, getMyProfile };

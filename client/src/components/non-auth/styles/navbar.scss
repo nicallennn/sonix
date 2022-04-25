@@ -19,12 +19,14 @@
   .nav-links{
     display: flex;
     align-items: flex-end;
+    margin-top: 6px;
   }
 
   .nav-link {
     text-decoration: none;
     display: inline;
     margin-left: 40px;
+
 
     .nav-icon {
       width: 20px;
@@ -49,6 +51,7 @@
 
   .logo {
     font-size: 1.6em;
+    line-height: 20px;
   }
 
 }

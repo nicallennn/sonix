@@ -143,7 +143,6 @@ const createRecipe = async (req, res) => {
   const recipe = req.body;
   recipe.creatorId = user._id;
   recipe.creatorHandle = user.handle;
-
   try {
     // save the new recipe
     const result = await Recipe.create(recipe);
@@ -208,7 +207,7 @@ const likeRecipe = async (req, res) => {
   }
 };
 
-//! unlike a recipe
+// unlike a recipe
 const unLikeRecipe = async (req, res) => {
   // get user and recipe ids
   const userId = req.user._id;
