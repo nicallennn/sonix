@@ -31,7 +31,6 @@ const AuthenticatedApp = () => {
         if (res.fetched) {
           //store my profile in store
           dispatch(setUserProfile(res.data));
-          console.log('profile: ', res.data);
         } else {
           //logout user
           dispatch(logout());
@@ -59,7 +58,7 @@ const AuthenticatedApp = () => {
           <Route path="recipe" element={<Recipe />} />
           <Route path="create" element={<CreateRecipe />} />
           <Route path="search" element={<Search />} />
-          <Route path="category/:id" element={<Category />} />
+          <Route path="category" element={<Category />} />
           <Route path="profile" element={<Profile />} />
           <Route path="me" element={<MyProfile />} />
           <Route path="*" element={<NotFound />} />

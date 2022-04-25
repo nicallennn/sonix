@@ -1,0 +1,37 @@
+@use '../../sass-variables/colors.scss' as colors;
+@use '../../sass-variables/widths-spacing.scss' as spacing;
+@use '../../sass-variables/fonts.scss' as fonts;
+
+.category-wrapper {
+  width: spacing.$desktop-container-width;
+  
+  .title {
+    font-size: 1.7em;
+  }
+
+  .category-container {
+  padding: spacing.$desktop-general-padding;
+  box-shadow: colors.$container-shadow;
+  background-color: colors.$primary-container-color;
+  border-radius: colors.$general-border-radius;
+  }
+
+  .search-input {
+    width: 30%;
+        margin-top: spacing.$desktop-medium-margin;
+        margin-bottom: 30px;
+        border-radius: colors.$general-border-radius;
+        box-shadow: colors.$container-shadow;
+        border: 1px solid lightgrey;
+        padding: spacing.$desktop-inner-padding;
+        -webkit-box-sizing: content-box; 
+        -moz-box-sizing: content-box;  
+        box-sizing: content-box; 
+        font-family: fonts.$primary-font;
+  }
+
+  .no-content {
+    margin-bottom: spacing.$desktop-general-margin;
+    font-size: 1em;;
+  }
+}

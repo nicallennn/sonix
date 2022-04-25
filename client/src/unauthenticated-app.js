@@ -42,7 +42,7 @@ const UnauthenticatedApp = () => {
           <Route index element={<Dashboard />} />
           <Route path="recipe" element={<Recipe />} />
           <Route path="search" element={<Search />} />
-          <Route path="category/:categoryId" element={<Category />} />
+          <Route path="category" element={<Category />} />
           <Route path="profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />

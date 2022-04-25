@@ -73,10 +73,28 @@ const getCategoryRecipes = async (req, res) => {
   const { categoryName } = req.params;
 
   try {
-    //check the category exists
+    // check if asking for popular
+    if (categoryName === 'Popular') {
+      try {
+        //get top 50 recipes
+        const results = await Recipe.find({})
+          .sort({ numberOfLikes: -1 })
+          .limit(50)
+          .select('_id creatorHandle title numberOfLikes description category originalSynth preview tags');
+
+        return res.status(200).send(results);
+      } catch (error) {
+        return res.status(500).send({ error, message: 'Could not fetch popular recipes!' });
+      }
+    }
+
+    //if asking for anything else check the category exists
     if (!categories.includes(categoryName)) throw new Error(1);
     //get category recipes - ordered by rating
-    const results = await Recipe.find({ category: categoryName }).sort({ rating: -1 });
+    const results = await Recipe.find({ category: categoryName })
+      .sort({ numberOfLikes: -1 })
+      .limit(50)
+      .select('_id creatorHandle title numberOfLikes description category originalSynth preview tags');
     res.status(200).send(results);
   } catch (error) {
     switch (`${error}`) {
