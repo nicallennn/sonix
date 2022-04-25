@@ -27,6 +27,19 @@ const getCategoryRecipes = async (category) => {
     });
 };
 
+const searchAllRecipes = (searchTerm) => {
+  return fetch(`${rootUrl}/searchAll/${searchTerm}`, {
+    method: 'GET'
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      if (res.status === 200) return { fetched: true, data };
+      else return { fetched: false, error: data };
+    }).catch(error => {
+      console.error('Failed to fetch category recipes: ', error);
+    });
+};
+
 const getRecipe = (id) => {
   return fetch(`${rootUrl}/recipe/${id}`, {
     method: 'GET'
@@ -109,6 +122,8 @@ const getProfileRecipes = (recipeIds) => {
   }).catch(error => console.error('Failed to create recipe: ', error));
 };
 
+
+
 export {
   getDashboardRecipes,
   getCategoryRecipes,
@@ -116,5 +131,6 @@ export {
   createRecipe,
   likeRecipe,
   unlikeRecipe,
-  getProfileRecipes
+  getProfileRecipes,
+  searchAllRecipes
 };

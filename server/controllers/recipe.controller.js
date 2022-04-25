@@ -1,6 +1,5 @@
 // import models
 const Recipe = require('../models/recipe.model');
-//todo - create user controller method to add to likes
 const User = require('../models/user.model');
 const { categories } = require('../models/category.model');
 
@@ -9,11 +8,20 @@ const { categories } = require('../models/category.model');
 const searchAllRecipes = async (req, res) => {
   // get the search term 
   const { searchTerm } = req.params;
-  console.log(searchTerm);
+  const regex = new RegExp(searchTerm, 'i');
 
   //todo - search on term - for now returns all recipes
   try {
-    const results = await Recipe.find({});
+    const results = await Recipe.find({
+      $or: [
+        { title: { $regex: regex } },
+        { creatorHandle: { $regex: regex } },
+        { originalSynth: { $regex: regex } },
+        { description: { $regex: regex } },
+        { category: { $regex: regex } },
+        { tags: { $regex: regex } }
+      ]
+    });
     res.status(200).send(results);
   } catch (error) {
     res.status(500).send({ error, message: 'Failed to search recipes' });
@@ -67,7 +75,7 @@ const getDashBoardRecipes = async (req, res) => {
   }
 };
 
-//! get recipes by category
+// get recipes by category
 const getCategoryRecipes = async (req, res) => {
   //get the category name
   const { categoryName } = req.params;
