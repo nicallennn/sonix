@@ -56,7 +56,7 @@ const Category = () => {
       <h2 className="title">{state.category}</h2>
       <input className='search-input' type="text" onKeyUp={handleSearch} placeholder="search" />
 
-      <div className="category-container">
+      <>
         {filteredRecipes.length > 0 ?
           filteredRecipes.map((recipe, i) => (
             <RecipePreview key={`${recipe._id}-${i}`} recipe={recipe} category={recipe.category} />
@@ -64,7 +64,7 @@ const Category = () => {
           :
           <h3 className="no-content">No matching recipes at current.</h3>
         }
-      </div>
+      </>
     </div>
   );
 };

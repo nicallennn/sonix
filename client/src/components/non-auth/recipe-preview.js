@@ -41,18 +41,17 @@ const RecipePreview = ({ recipe, category }) => {
   };
 
   const routeToRecipe = () => {
-    navigate('/recipe', { state: { recipeId: recipe._id } });
+    navigate('/recipe/', { state: { recipeId: recipe._id } });
   };
 
   const routeToUserProfile = () => {
-    navigate('/profile', { state: { userHandle: recipe.creatorHandle } });
+    navigate(`/profile/${recipe.creatorHandle}`);
   };
 
   const handleLike = async (like) => {
     if (like) {
       const res = await likeRecipe(recipe._id);
       if (res.liked) {
-        console.log('liked');
         dispatch(setLikeRecipe(recipe._id));
         dispatch(likeDashboardRecipes(recipe._id, category));
       }

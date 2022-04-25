@@ -6,7 +6,6 @@ import styles from './styles/dashboard.scss';
 
 const Dashboard = () => {
   const dashboardRecipes = useSelector(state => state.dashboardRecipes);
-  console.log(dashboardRecipes);
   return (
     <div className="dashboard-wrapper">
       {Object.keys(dashboardRecipes).map(cat => (

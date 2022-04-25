@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { getUserProfile } from '../services/userAPI';
 import { getProfileRecipes } from '../services/recipeAPI';
@@ -7,15 +7,17 @@ import RecipeScrollContainer from '../components/non-auth/recipe-scroll-containe
 import './styles/profile.scss';
 
 const Profile = () => {
-  const { state } = useLocation();
+  const params = useParams();
   const [profile, setProfile] = useState(null);
   const [recipes, setRecipes] = useState(null);
 
   useEffect(() => {
+    const { userHandle } = params;
+    console.log(userHandle);
+
     window.scrollTo(0, 0);
-    if (!state.userHandle) return;
     //get the users profile info and recipe data
-    getUserProfile(state.userHandle).then(res => {
+    getUserProfile(userHandle).then(res => {
       if (res.fetched) {
         setProfile(res.data);
         // get user liked and own recipes
@@ -30,7 +32,6 @@ const Profile = () => {
             } else {
               console.log('Could not fetch recipes!');
             }
-
           })
           .catch(error => console.log(error));
       } else {
@@ -40,7 +41,7 @@ const Profile = () => {
 
     //get the users profile recipes
 
-  }, []);
+  }, [params]);
 
 
   return (

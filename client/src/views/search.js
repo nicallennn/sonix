@@ -11,12 +11,13 @@ const Search = () => {
   const handleSearch = async (e) => {
     const searchTerm = e.target.value;
 
+    //check the search term is not empty
     if (searchTerm === '') {
       setSearchRecipes([]);
       return;
     }
 
-    //check if awaiting search request
+    //check if already awaiting search request
     if (searching) return;
 
     //else make a search request to api
@@ -24,8 +25,7 @@ const Search = () => {
     const results = await searchAllRecipes(searchTerm);
     setSearching(false);
     if (results.fetched) setSearchRecipes(results.data);
-
-    console.log(results);
+    else console.log(results.error);
   };
 
   return (
@@ -33,7 +33,7 @@ const Search = () => {
       <h2 className="title">Search</h2>
       <input className='search-input' type="text" onKeyUp={handleSearch} placeholder="search" />
 
-      <div className="search-container">
+      <>
         {searchRecipes.length > 0 ?
           searchRecipes.map((recipe, i) => (
             <RecipePreview key={`${recipe._id}-${i}`} recipe={recipe} category={recipe.category} />
@@ -41,7 +41,7 @@ const Search = () => {
           :
           <h3 className="no-content">No matching recipes at current.</h3>
         }
-      </div>
+      </>
     </div>
   );
 };

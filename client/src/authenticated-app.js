@@ -59,7 +59,7 @@ const AuthenticatedApp = () => {
           <Route path="create" element={<CreateRecipe />} />
           <Route path="search" element={<Search />} />
           <Route path="category" element={<Category />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:userHandle" element={<Profile />} />
           <Route path="me" element={<MyProfile />} />
           <Route path="*" element={<NotFound />} />
         </Route>

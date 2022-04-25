@@ -11,6 +11,7 @@
   box-shadow: colors.$container-shadow;
   border-radius: colors.$general-border-radius;
   overflow: hidden;
+  background-color: colors.$primary-container-color;
 
   .player {
     min-width: 120px;

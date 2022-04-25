@@ -9,15 +9,6 @@
     font-size: 1.7em;
   }
 
-  .category-container {
-  padding: spacing.$desktop-general-padding;
-  box-shadow: colors.$container-shadow;
-  background-color: colors.$primary-container-color;
-  border-radius: colors.$general-border-radius;
-  // display: flex;
-  // flex-wrap: wrap;
-  }
-
   .search-input {
     width: 30%;
         margin-top: spacing.$desktop-medium-margin;
