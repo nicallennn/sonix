@@ -105,19 +105,33 @@
       }
     }
 
+    .icon-detail-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .recipe-details-icon {
+      width: 15px;
+      margin-right: 3px;
+    }
+
+    .recipe-details-icon-bigger {
+      width: 16px;
+      margin-right: 3px;
+    }
+
     .synth-name {
       font-size: 0.8em;
-      margin-bottom: spacing.$desktop-small-margin;
     }
 
     .likes {
       font-size: 0.7em;
-      margin-bottom: spacing.$desktop-small-margin;
+      // margin-bottom: spacing.$desktop-small-margin;
     }
 
     .user {
       font-size: 0.7em;
-      margin-bottom: spacing.$desktop-small-margin;
       cursor: pointer;
       width: fit-content;
 

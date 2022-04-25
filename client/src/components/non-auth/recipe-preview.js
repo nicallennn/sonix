@@ -5,14 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
 import { setLikeRecipe, setUnlikeRecipe, likeDashboardRecipes, unlikeDashboardRecipes } from '../../state/actions';
 
-import Fav from '../../assests/icons/fav.svg';
-import Unfav from '../../assests/icons/unfav.svg';
-
-
 //! styles and assets
 import styles from './styles/recipe-preview.scss';
 import PlayIcon from './../../assests/icons/play.svg';
 import PauseIcon from './../../assests/icons/pause.svg';
+import Fav from '../../assests/icons/fav.svg';
+import Unfav from '../../assests/icons/unfav.svg';
+import Piano from '../../assests/icons/piano.svg';
+import User from '../../assests/icons/signup.svg';
+import Liked from '../../assests/icons/unfav-dark.svg';
 
 const RecipePreview = ({ recipe, category }) => {
   const { likedRecipes, handle } = useSelector(state => state.profile);
@@ -97,9 +98,18 @@ const RecipePreview = ({ recipe, category }) => {
           </>
         }
         <h3 className="title" onClick={routeToRecipe}>{recipe.title}</h3>
-        <p className="synth-name">{recipe.originalSynth}</p>
-        <p className="user" onClick={routeToUserProfile}>{recipe.creatorHandle}</p>
-        <p className="likes">Likes: {recipe.numberOfLikes}</p>
+        <div className="icon-detail-container">
+          <img src={Piano} alt="piano-icon" className='recipe-details-icon' />
+          <p className="synth-name">{recipe.originalSynth}</p>
+        </div>
+        <div className="icon-detail-container">
+          <img src={User} alt="profile-icon" className='recipe-details-icon' />
+          <p className="user" onClick={routeToUserProfile}>{recipe.creatorHandle}</p>
+        </div>
+        <div className="icon-detail-container">
+          <img src={Liked} alt="favourite-icon" className='recipe-details-icon' />
+          <p className="likes">{recipe.numberOfLikes}</p>
+        </div>
         <p className="description">{recipe.description.substring(0, 50)}...</p>
 
       </div>
