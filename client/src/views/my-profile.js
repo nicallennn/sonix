@@ -1,23 +1,42 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
 import './styles/profile.scss';
 
 const MyProfile = () => {
   const profile = useSelector(state => state.profile);
+  const [recipes, setRecipes] = useState(null);
 
-  console.log(profile);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-
-  }, []);
+    if (!profile.ownRecipes || !profile.likedRecipes) {
+      return;
+    }
+    // get user liked and own recipes
+    getProfileRecipes({
+      own: profile.ownRecipes,
+      liked: Object.keys(profile.likedRecipes)
+    })
+      .then(res => {
+        //store the results in state
+        if (res.fetched) {
+          setRecipes(res.data);
+        } else {
+          console.log('Could not fetch recipes!');
+        }
+      })
+      .catch(error => console.log(error));
+  }, [profile]);
   return (
     <>
       {profile &&
         <div className="profile-wrapper">
           <h2 className="title">{profile.handle}</h2>
           <p className="bio">{profile.bio}</p>
-          {/* 
+
           {recipes &&
             <>
               {recipes.ownRecipes.length > 0 ?
@@ -32,7 +51,7 @@ const MyProfile = () => {
               }
             </>
 
-          } */}
+          }
 
         </div>
       }

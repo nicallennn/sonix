@@ -4,7 +4,7 @@ const User = require('../models/user.model');
 const { categories } = require('../models/category.model');
 
 
-//! search all recipes
+// search all recipes
 const searchAllRecipes = async (req, res) => {
   // get the search term 
   const { searchTerm } = req.params;
@@ -32,7 +32,6 @@ const searchAllRecipes = async (req, res) => {
 // get a users recipes
 const getUserRecipes = async (req, res) => {
   const { own, liked } = req.body;
-
   try {
     //get own recipes
     const ownRecipes = await Recipe.find({

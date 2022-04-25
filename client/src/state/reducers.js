@@ -32,7 +32,7 @@ const profile = (userProfile = {}, action) => {
   //unlike recipe
   if (action.type === 'UNLIKE_RECIPE') {
     const newProfile = JSON.parse(JSON.stringify(userProfile));
-    newProfile.likedRecipes[action.recipeId] = false;
+    delete newProfile.likedRecipes[action.recipeId];
     return newProfile;
   }
 
