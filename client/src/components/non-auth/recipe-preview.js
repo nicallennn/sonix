@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
 import { setLikeRecipe, setUnlikeRecipe, likeDashboardRecipes, unlikeDashboardRecipes } from '../../state/actions';
 
+import Fav from '../../assests/icons/fav.svg';
+import Unfav from '../../assests/icons/unfav.svg';
+
+
 //! styles and assets
 import styles from './styles/recipe-preview.scss';
 import PlayIcon from './../../assests/icons/play.svg';
@@ -82,9 +86,13 @@ const RecipePreview = ({ recipe, category }) => {
         {(authenticated && likedRecipes && recipe.creatorHandle !== handle) &&
           <>
             {likedRecipes[recipe._id] ?
-              <button onClick={() => handleLike(false)} className='like-button'>unlike</button>
+              <button onClick={() => handleLike(false)} className='like-button'>
+                <img className="like-icon" src={Fav} alt="un-favourite" />
+              </button>
               :
-              <button onClick={() => handleLike(true)} className='like-button'>like</button>
+              <button onClick={() => handleLike(true)} className='like-button'>
+                <img className="like-icon" src={Unfav} alt="favourite" />
+              </button>
             }
           </>
         }

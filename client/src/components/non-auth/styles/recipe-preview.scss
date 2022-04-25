@@ -76,9 +76,21 @@
     position: relative;
 
     .like-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: absolute;
-      right: 10px;
+      right: 2px;
+      top: 2px;
       cursor: pointer;
+      border: none;
+      background-color: colors.$primary-container-color;;
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .like-icon {
+      width: 16px;
     }
 
     .title {
