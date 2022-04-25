@@ -1,5 +1,8 @@
 import styles from './styles/navbar.scss';
 import { Link } from 'react-router-dom';
+import Login from '../../assests/icons/login.svg';
+import Signup from '../../assests/icons/signup.svg';
+import Search from '../../assests/icons/search.svg';
 
 const Navbar = () => {
   return (
@@ -11,15 +14,25 @@ const Navbar = () => {
 
         <ul className="nav-links">
           <li className='nav-link' >
-            <Link to="/login" className='link' >Login</Link>
+
+            <Link to="/login" className='link' >
+              <img className="nav-icon" src={Login} alt="login" />
+              Login
+            </Link>
           </li>
 
           <li className='nav-link' >
-            <Link to="/signup" className='link' >Signup</Link>
+            <Link to="/signup" className='link' >
+              <img className="nav-icon" src={Signup} alt="signup" />
+              Signup
+            </Link>
           </li>
 
           <li className='nav-link'>
-            <Link to="/search" className='link' >Search</Link>
+            <Link to="/search" className='link' >
+              <img className="nav-icon" src={Search} alt="search" />
+              Search
+            </Link>
           </li>
 
         </ul>

@@ -2,6 +2,10 @@ import styles from '../non-auth/styles/navbar.scss';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../state/actions';
+import Search from '../../assests/icons/search.svg';
+import Create from '../../assests/icons/create.svg';
+import Logout from '../../assests/icons/logout.svg';
+import Profile from '../../assests/icons/profile.svg';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -19,19 +23,28 @@ const Navbar = () => {
 
         <ul className="nav-links">
           <li className='nav-link' >
-            <Link to="/create" className='link' >Create</Link>
+
+            <Link to="/create" className='link' >
+              <img className="nav-icon" src={Create} alt="login" />
+              Create</Link>
           </li>
 
           <li className='nav-link' >
-            <Link to="/search" className='link' >Search</Link>
+            <Link to="/search" className='link' >
+              <img className="nav-icon" src={Search} alt="login" />
+              Search</Link>
           </li>
 
           <li className='nav-link'>
-            <Link to="/me" className='link' >My Profile</Link>
+            <Link to="/me" className='link' >
+              <img className="nav-icon" src={Profile} alt="login" />
+              Profile</Link>
           </li>
 
           <li className='nav-link' onClick={handleLogout}>
-            <Link to="/dashboard" className='link' >Logout</Link>
+            <Link to="/dashboard" className='link' >
+              <img className="nav-icon" src={Logout} alt="login" />
+              Logout</Link>
           </li>
 
         </ul>

@@ -17,23 +17,33 @@
   }
 
   .nav-links{
-
+    display: flex;
+    align-items: flex-end;
   }
 
   .nav-link {
     text-decoration: none;
     display: inline;
     margin-left: 40px;
+
+    .nav-icon {
+      width: 20px;
+      margin-right: 5px;
+    }
   }
   
   .link {
     text-decoration: none;
     color: colors.$text-primary-color;
-    border: 1px solid white;
-    border-radius: 3px;
+    display: flex;
+    align-items: flex-end;
     
     &:hover {
-      color: colors.$text-secondary-color;
+      // color: colors.$text-secondary-color;
+      text-underline-offset: 1px;
+      text-decoration-thickness: 1px !important;
+      text-decoration-color: colors.$text-secondary-color !important;
+      text-decoration: underline;
     }
   }
 
