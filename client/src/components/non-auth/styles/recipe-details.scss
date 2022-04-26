@@ -4,10 +4,10 @@
 
   .preview-container {
     width: spacing.$desktop-container-width - 20;
-    margin-bottom: spacing.$desktop-general-margin + 10;
-    border-radius: colors.$general-border-radius;
-    box-shadow: colors.$container-shadow;
-    overflow: hidden;
+    margin-bottom: spacing.$desktop-general-margin;
+    // border-radius: colors.$general-border-radius;
+    // box-shadow: colors.$container-shadow;
+    // overflow: hidden;
     display: flex;
     min-height: 120px;
     background-color: colors.$primary-container-color;
@@ -17,6 +17,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        border-bottom-right-radius: colors.$general-border-radius;
+
 
         .player-button {
           display: flex;
@@ -38,8 +40,9 @@
   
     .recipe-information {
       flex: 1;
-      border: colors.$general-border;
+      // border: colors.$general-border;
       padding: spacing.$desktop-inner-padding;
+      padding-left: spacing.$desktop-inner-padding;
     
       .title {
         font-size: 1.4em;
