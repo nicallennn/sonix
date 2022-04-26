@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateMyProfile } from '../services/userAPI';
 import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
+import { updateMyBio } from '../state/actions';
+
+
 import './styles/profile.scss';
 
 const MyProfile = () => {
+  const dispatch = useDispatch();
   const profile = useSelector(state => state.profile);
   const [recipes, setRecipes] = useState(null);
-
+  const [updatingBio, setUpdatingBio] = useState(false);
+  const [updateError, setUpdateError] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!profile.ownRecipes || !profile.likedRecipes) {
       return;
     }
+    console.log(profile);
     // get user liked and own recipes
     getProfileRecipes({
       own: profile.ownRecipes,
@@ -31,18 +37,31 @@ const MyProfile = () => {
       .catch(error => console.log(error));
   }, [profile]);
 
+  const showUpdateBio = async () => {
+    setUpdatingBio(!updatingBio);
+  };
+
 
   const handleUpdate = async () => {
-    console.log(('update user bio'));
-    const bio = document.getElementById('update-bio').value;
+    const bio = document.getElementById('update-bio');
 
     if (bio.value === '') return;
 
-    const result = await updateMyProfile({
-      bio: bio
+    const res = await updateMyProfile({
+      bio: bio.value
     });
-    console.log(result);
-    // bio.value = '';
+
+    if (res.updated) {
+      //update in store profile
+      dispatch(updateMyBio(bio.value));
+      //clear the input and hide it
+      bio.value = '';
+      setUpdatingBio(false);
+
+    } else {
+      //display error message
+      setUpdateError('Error updating bio!');
+    }
   };
 
   return (
@@ -50,12 +69,17 @@ const MyProfile = () => {
       {profile &&
         <div className="profile-wrapper">
           <h2 className="title">{profile.handle}</h2>
-          <p className="bio">{profile.bio}</p>
+          <p className="my-bio" onClick={showUpdateBio}>{profile.bio}</p>
+          {updateError &&
+            <p className="error">{updateError}</p>
+          }
 
-          <>
-            <textarea id="update-bio" name="bio" cols="30" rows="3" placeholder='bio' />
-            <input onClick={handleUpdate} className="submit-btn" type="submit" value="Update" />
-          </>
+          {updatingBio &&
+            <>
+              <textarea id="update-bio" name="bio" rows="3" placeholder='bio' />
+              <input onClick={handleUpdate} className="submit-btn" type="submit" value="Update" />
+            </>
+          }
           {recipes &&
             <>
               {recipes.ownRecipes.length > 0 ?

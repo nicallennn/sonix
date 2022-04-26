@@ -1,6 +1,6 @@
 @use '../../sass-variables/colors.scss' as colors;
 @use '../../sass-variables/widths-spacing.scss' as spacing;
-
+@use '../../sass-variables/fonts.scss' as fonts;
 
 .profile-wrapper {
   width: spacing.$desktop-container-width;
@@ -12,6 +12,48 @@
     margin-bottom: spacing.$desktop-general-margin;
     color: colors.$text-secondary-color;
   }
+
+  textarea, input {
+    width: 30%;
+    display: block;
+      margin-bottom: spacing.$desktop-medium-margin;
+      border-radius: colors.$general-border-radius;
+      box-shadow: colors.$container-shadow;
+      border: none ;
+      padding: spacing.$desktop-inner-padding;
+      -webkit-box-sizing: content-box; 
+      -moz-box-sizing: content-box;  
+      box-sizing: content-box; 
+      font-family: fonts.$primary-font;
+  }
+
+  .submit-btn {
+    background-color: colors.$primary-container-color;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 10px;
+    margin-bottom: spacing.$desktop-general-margin;
+  
+    &:hover {
+      box-shadow: colors.$input-shadow;
+    }
+  }
+
+  .my-bio {
+    margin-bottom: spacing.$desktop-general-margin;
+    color: colors.$text-secondary-color;
+    cursor: pointer;
+    width: fit-content;
+
+    &:hover {
+      text-underline-offset: 1px;
+      text-decoration: underline;
+      text-decoration-color: colors.$text-secondary-color !important;
+
+    }
+  }
+
+
 
   .no-content {
     margin-bottom: spacing.$desktop-general-margin;

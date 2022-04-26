@@ -12,6 +12,11 @@ export const setUserProfile = (profile) => ({
   profile
 });
 
+export const updateMyBio = (newBio) => ({
+  type: 'UPDATE_MY_BIO',
+  newBio
+});
+
 //! user recipe actions
 export const setLikeRecipe = (recipeId) => ({
   type: 'LIKE_RECIPE',

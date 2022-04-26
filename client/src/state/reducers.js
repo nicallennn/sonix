@@ -42,6 +42,13 @@ const profile = (userProfile = {}, action) => {
     return newProfile;
   }
 
+  if (action.type === 'UPDATE_MY_BIO') {
+    return {
+      ...userProfile,
+      bio: action.newBio
+    };
+  }
+
   return userProfile;
 };
 
