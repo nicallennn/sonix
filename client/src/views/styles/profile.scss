@@ -49,11 +49,14 @@
       text-underline-offset: 1px;
       text-decoration: underline;
       text-decoration-color: colors.$text-secondary-color !important;
-
     }
+
   }
-
-
+  
+  .error-bottom-margin {
+    margin-bottom: spacing.$desktop-medium-margin;
+  }
+    
 
   .no-content {
     margin-bottom: spacing.$desktop-general-margin;

@@ -82,15 +82,15 @@ const AuthForm = ({ title, type }) => {
       <h2 className="title">{title}</h2>
       {type === 'signup' &&
         <>
-          <input type="text" name="firstname" placeholder="first name" />
-          <input type="text" name="lastname" placeholder="last name" />
-          <input type="text" name="handle" placeholder="handle/username" />
+          <input type="text" name="firstname" placeholder="first name" required />
+          <input type="text" name="lastname" placeholder="last name" required />
+          <input type="text" name="handle" placeholder="handle/username" required />
         </>}
-      <input type="email" name="email" placeholder="email" />
-      <input type="password" name="password" placeholder="password" />
+      <input type="email" name="email" placeholder="email" required />
+      <input type="password" name="password" placeholder="password" required />
       {type === 'signup' &&
         <>
-          <textarea name="bio" cols="30" rows="3" placeholder='bio' />
+          <textarea name="bio" cols="30" rows="3" placeholder='bio' required />
         </>}
 
       <input className="submit-btn" type="submit" value={title} />

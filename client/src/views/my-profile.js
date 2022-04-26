@@ -45,7 +45,10 @@ const MyProfile = () => {
   const handleUpdate = async () => {
     const bio = document.getElementById('update-bio');
 
-    if (bio.value === '') return;
+    if (bio.value === '') {
+      setUpdateError('Bio can not be empty!');
+      return;
+    }
 
     const res = await updateMyProfile({
       bio: bio.value
@@ -56,6 +59,7 @@ const MyProfile = () => {
       dispatch(updateMyBio(bio.value));
       //clear the input and hide it
       bio.value = '';
+      setUpdateError(null);
       setUpdatingBio(false);
 
     } else {
@@ -71,12 +75,12 @@ const MyProfile = () => {
           <h2 className="title">{profile.handle}</h2>
           <p className="my-bio" onClick={showUpdateBio}>{profile.bio}</p>
           {updateError &&
-            <p className="error">{updateError}</p>
+            <p className="error-message error-bottom-margin">{updateError}</p>
           }
 
           {updatingBio &&
             <>
-              <textarea id="update-bio" name="bio" rows="3" placeholder='bio' />
+              <textarea id="update-bio" name="bio" rows="3" placeholder='new bio...' />
               <input onClick={handleUpdate} className="submit-btn" type="submit" value="Update" />
             </>
           }

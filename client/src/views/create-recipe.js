@@ -135,9 +135,9 @@ const CreateRecipe = () => {
         {/* details */}
         <div className="recipe-section recipe-details">
           <h2>Recipe Details</h2>
-          <input type="text" {...register('title')} placeholder="title" />
-          <input type="text" {...register('description')} placeholder="description" />
-          <input type="text" {...register('originalSynth')} placeholder="synth" />
+          <input type="text" {...register('title')} placeholder="title" required />
+          <input type="text" {...register('description')} placeholder="description" required />
+          <input type="text" {...register('originalSynth')} placeholder="synth" required />
 
           <select {...register('category')} defaultValue="Bass">
             {/* <option value="" disabled selected hidden>category</option> */}
@@ -168,7 +168,7 @@ const CreateRecipe = () => {
             +
           </button>
           <label className="file-upload">
-            <input type="file" {...register('sampleFile')} />
+            <input type="file" {...register('sampleFile')} required />
             Click to upload audio sample (wav or mp3)
           </label>
 
@@ -209,8 +209,8 @@ const CreateRecipe = () => {
             +
           </button>
           <input className="submit-btn" type="submit" />
-          {uploadMessage && <p className="recipe-upload-status">{uploadMessage}</p>}
-          {resultMessage && <p className="recipe-upload-status">{resultMessage}</p>}
+          {uploadMessage && <p className="error-message">{uploadMessage}</p>}
+          {resultMessage && <p className="error-message">{resultMessage}</p>}
         </div>
       </form>
     </div>
