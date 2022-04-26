@@ -31,9 +31,11 @@ const Recipe = () => {
     <div className="recipe-wrapper">
       {recipe &&
         <>
-          <RecipeDetails recipe={recipe} />
-          <Ingredients ingredients={recipe.ingredients} />
-          <Method steps={recipe.recipeMethod} />
+          <RecipeDetails recipe={recipe} setRecipe={setRecipe} />
+          <div className="recipe-info-container">
+            <Ingredients ingredients={recipe.ingredients} />
+            <Method steps={recipe.recipeMethod} />
+          </div>
         </>
       }
     </div>

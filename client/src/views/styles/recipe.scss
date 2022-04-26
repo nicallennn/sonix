@@ -8,6 +8,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
+}
+
+.recipe-info-container {
+  width: 100%;
   box-shadow: colors.$container-shadow;
   background-color: colors.$primary-container-color;
   border-radius: colors.$general-border-radius;
@@ -26,7 +31,7 @@
   align-items: center;
   padding: spacing.$desktop-inner-padding;
   background-color: colors.$primary-container-color;
-  width: 80%;
+  width: 100%;
   // border-radius: colors.$general-border-radius;
   
   // margin: 0 auto;

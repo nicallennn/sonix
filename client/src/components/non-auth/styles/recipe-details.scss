@@ -5,9 +5,9 @@
   .preview-container {
     width: spacing.$desktop-container-width - 20;
     margin-bottom: spacing.$desktop-general-margin;
-    // border-radius: colors.$general-border-radius;
-    // box-shadow: colors.$container-shadow;
-    // overflow: hidden;
+    border-radius: colors.$general-border-radius;
+    box-shadow: colors.$container-shadow;
+    overflow: hidden;
     display: flex;
     min-height: 120px;
     background-color: colors.$primary-container-color;
@@ -17,8 +17,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom-right-radius: colors.$general-border-radius;
-
 
         .player-button {
           display: flex;
@@ -43,21 +41,52 @@
       // border: colors.$general-border;
       padding: spacing.$desktop-inner-padding;
       padding-left: spacing.$desktop-inner-padding;
+      position: relative;
+
+      .like-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        border: none;
+        background-color: colors.$primary-container-color;
+        padding: 5px;
+        border-radius: 50%;
+      }
+  
+      .like-icon {
+        width: 18px;
+      }
     
       .title {
         font-size: 1.4em;
+        margin-bottom: 5px;;
+      }
+
+      .icon-detail-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+      }
+  
+      .recipe-details-icon {
+        width: 15px;
+        margin-right: 3px;
       }
       
       .synth-name {
         font-size: 0.1.2em;
         
-        margin-bottom: spacing.$desktop-small-margin;
+        // margin-bottom: spacing.$desktop-small-margin;
         color: colors.$text-primary-color;
       }
 
       .tags {
         display: flex;
-        margin-bottom: spacing.$desktop-medium-margin;
+        margin-bottom: 5px;
       }
 
       .tag {
@@ -68,15 +97,21 @@
         border-radius: 3px;
       }
 
-      .creator {
+      .user {
         font-size: 0.9em;
-        margin-bottom: spacing.$desktop-medium-margin;
+        // margin-bottom: spacing.$desktop-medium-margin;
         color: colors.$text-primary-color;
+        cursor: pointer;
+
+        &:hover {
+          text-underline-offset: 1px;
+          text-decoration: underline;
+        }
       }
   
       .likes {
         font-size: 0.9em;
-        margin-bottom: spacing.$desktop-medium-margin;
+        // margin-bottom: spacing.$desktop-medium-margin;
         color: colors.$text-secondary-color;
       }
   
