@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import styles from './styles/recipe.scss';
+import './styles/recipe.scss';
 import RecipeDetails from '../components/non-auth/recipe-details';
 import Ingredients from '../components/non-auth/ingredients';
 import Method from '../components/non-auth/method';
