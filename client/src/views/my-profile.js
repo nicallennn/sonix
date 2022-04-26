@@ -20,7 +20,6 @@ const MyProfile = () => {
     if (!profile.ownRecipes || !profile.likedRecipes) {
       return;
     }
-    console.log(profile);
     // get user liked and own recipes
     getProfileRecipes({
       own: profile.ownRecipes,

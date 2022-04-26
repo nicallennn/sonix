@@ -87,7 +87,6 @@ const CreateRecipe = () => {
       await uploadBytes(storageRef, file);
       //get the download link to display on the page
       filepath = await getDownloadURL(ref(storage, `samples/${filename}`));
-      console.log('firebase filepath: ', filepath);
       setUploadMessage('Uploaded audio preview.');
     } catch (error) {
       setUploadMessage('Failed to upload audio!');

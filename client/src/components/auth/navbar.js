@@ -42,7 +42,7 @@ const Navbar = () => {
           </li>
 
           <li className='nav-link' onClick={handleLogout}>
-            <Link to="/dashboard" className='link' >
+            <Link to="/" className='link' >
               <img className="nav-icon" src={Logout} alt="login" />
               Logout</Link>
           </li>

@@ -10,7 +10,6 @@ import { setUserProfile, logout } from './state/actions';
 
 //! views/components/data
 import Layout from './views/auth-layout';
-import Landing from './views/landing';
 import Dashboard from './views/dashboard';
 import Recipe from './views/recipe';
 import CreateRecipe from './views/create-recipe';
@@ -42,7 +41,6 @@ const AuthenticatedApp = () => {
     getDashboardRecipes().then(
       res => {
         if (res.fetched) dispatch(setDashboardRecipes(res.data));
-        //todo - show error message to user
       }
     ).catch((error) => {
       console.log('Error:', error);
@@ -53,7 +51,6 @@ const AuthenticatedApp = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<Landing />} /> */}
           <Route index element={<Dashboard />} />
           <Route path="recipe" element={<Recipe />} />
           <Route path="create" element={<CreateRecipe />} />

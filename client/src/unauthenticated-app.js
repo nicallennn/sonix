@@ -8,7 +8,6 @@ import { getDashboardRecipes } from './services/recipeAPI';
 
 //! views/components/data
 import Layout from './views/non-auth-layout';
-import Landing from './views/landing';
 import Dashboard from './views/dashboard';
 import Recipe from './views/recipe';
 import Search from './views/search';
@@ -38,7 +37,6 @@ const UnauthenticatedApp = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<Landing />} /> */}
           <Route index element={<Dashboard />} />
           <Route path="recipe" element={<Recipe />} />
           <Route path="search" element={<Search />} />
