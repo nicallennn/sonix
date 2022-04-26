@@ -71,3 +71,11 @@
   background-color: colors.$primary-container-color;
   width: 100%;
 }
+
+
+@media only screen and (max-width: 786px) {
+  .recipe-wrapper {
+    width: spacing.$mobile-container-width; 
+  }
+
+}

@@ -11,20 +11,30 @@
 
   .search-input {
     width: 30%;
-        margin-top: spacing.$desktop-medium-margin;
-        margin-bottom: 30px;
-        border-radius: colors.$general-border-radius;
-        box-shadow: colors.$container-shadow;
-        border: 1px solid lightgrey;
-        padding: spacing.$desktop-inner-padding;
-        -webkit-box-sizing: content-box; 
-        -moz-box-sizing: content-box;  
-        box-sizing: content-box; 
-        font-family: fonts.$primary-font;
+    margin-top: spacing.$desktop-medium-margin;
+    margin-bottom: 30px;
+    border-radius: colors.$general-border-radius;
+    box-shadow: colors.$container-shadow;
+    border: 1px solid lightgrey;
+    padding: spacing.$desktop-inner-padding;
+    -webkit-box-sizing: content-box; 
+    -moz-box-sizing: content-box;  
+    box-sizing: content-box; 
+    font-family: fonts.$primary-font;
   }
 
   .no-content {
     margin-bottom: spacing.$desktop-general-margin;
     font-size: 1em;;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .category-wrapper {
+    width: spacing.$mobile-container-width;
+
+    .search-input {
+      width: 50%;
+    }
   }
 }

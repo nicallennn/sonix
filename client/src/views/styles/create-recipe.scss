@@ -4,7 +4,7 @@
 
 .create-recipe-wrapper {
   width: spacing.$desktop-container-width;
-  margin-bottom: spacing.$desktop-general-margin;
+  // margin-bottom: spacing.$desktop-general-margin;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,5 +88,26 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .create-recipe-wrapper {
+    width: spacing.$mobile-container-width;
+
+    .create-form {
+      width: 80%;
+
+      .recipe-section {
+        input, select, textarea {
+          width: 80%;
+        }  
+
+        .file-upload {
+          width: 80%;
+        }
+      }
+    }
+
   }
 }

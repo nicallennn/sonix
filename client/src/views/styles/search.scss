@@ -9,8 +9,6 @@
     font-size: 1.7em;
   }
 
-  
-
   .search-input {
     width: 30%;
         margin-top: spacing.$desktop-medium-margin;
@@ -28,5 +26,15 @@
   .no-content {
     margin-bottom: spacing.$desktop-general-margin;
     font-size: 1em;;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .search-wrapper {
+    width: spacing.$mobile-container-width;
+
+    .search-input {
+      width: 50%;
+    }
   }
 }

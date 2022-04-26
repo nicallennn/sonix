@@ -3,3 +3,10 @@
 .dashboard-wrapper {
   width: spacing.$desktop-container-width;
 }
+
+
+@media only screen and (max-width: 786px) {
+  .dashboard-wrapper {
+    width: spacing.$mobile-container-width;
+  }
+}

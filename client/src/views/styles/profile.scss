@@ -63,3 +63,13 @@
     font-size: 1em;;
   }
 }
+
+@media only screen and (max-width: 786px) {
+  .profile-wrapper {
+    width: spacing.$mobile-container-width;
+
+    textarea, input {
+      width: 60%;
+     }
+  }
+}

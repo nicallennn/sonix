@@ -61,7 +61,6 @@ const getUserProfile = async (userHandle) => {
 };
 
 const updateMyProfile = (updated) => {
-  console.log(JSON.stringify(updated));
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/profile/edit`, {
     method: 'PATCH',

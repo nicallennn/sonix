@@ -143,3 +143,45 @@
     }
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .recipe-preview-container {
+    min-width: 48%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .recipe-preview-container {
+    display: flex;
+    min-width: 100%;
+    height: 100px;
+    margin-right: spacing.$desktop-general-margin;
+    margin-bottom: spacing.$desktop-general-margin;
+    box-shadow: colors.$container-shadow;
+    border-radius: colors.$general-border-radius;
+    overflow: hidden;
+    background-color: colors.$primary-container-color;
+    
+    .player {
+      min-width:100px;
+    }
+    .description {
+      display: none;
+    }
+  
+    .recipe-details { 
+      .title {
+        font-size: 1em;
+      }
+
+      .synth-name {
+        font-size: 0.7em;
+         
+        
+      }
+    }
+  }
+
+
+
+}

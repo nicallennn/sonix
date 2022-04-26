@@ -156,3 +156,12 @@
 }
 
 }
+
+@media only screen and (max-width: 786px) {
+  .preview-container {
+    width: spacing.$mobile-container-width;
+    .player {
+      min-width: 150px;
+    }
+  }
+}
