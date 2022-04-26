@@ -4,7 +4,7 @@
 
   .preview-container {
     width: spacing.$desktop-container-width - 20;
-    margin-bottom: spacing.$desktop-general-margin;
+    margin-bottom: spacing.$desktop-general-margin+10;
     border-radius: colors.$general-border-radius;
     box-shadow: colors.$container-shadow;
     overflow: hidden;

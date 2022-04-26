@@ -12,6 +12,7 @@
 }
 
 .recipe-info-container {
+  padding: 20px 0;
   width: 100%;
   box-shadow: colors.$container-shadow;
   background-color: colors.$primary-container-color;
@@ -22,7 +23,6 @@
 .ingredients-container {
   border-radius: colors.$general-border-radius;
   display: flex;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +33,7 @@
 
 
   .title {
-    margin-top: spacing.$desktop-medium-margin;
+    // margin-top: spacing.$desktop-medium-margin;
     margin-bottom: spacing.$desktop-medium-margin;
   }
 
@@ -61,9 +61,13 @@
 
 .method-container {
   border-radius: colors.$general-border-radius;
-  box-shadow: colors.$container-shadow;
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: spacing.$desktop-general-margin;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: spacing.$desktop-inner-padding;
   background-color: colors.$primary-container-color;
+  width: 100%;
 }
