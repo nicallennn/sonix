@@ -1,4 +1,4 @@
-import styles from './styles/recipe-scroll-container.scss';
+import './styles/recipe-scroll-container.scss';
 import RecipePreview from './recipe-preview';
 import { useNavigate } from 'react-router-dom';
 

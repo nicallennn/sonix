@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 //! import components/views/styles
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
-import styles from './styles/dashboard.scss';
+import './styles/dashboard.scss';
 
 const Dashboard = () => {
   const dashboardRecipes = useSelector(state => state.dashboardRecipes);

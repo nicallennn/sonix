@@ -5,7 +5,6 @@ import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
 import { updateMyBio } from '../state/actions';
 
-
 import './styles/profile.scss';
 
 const MyProfile = () => {

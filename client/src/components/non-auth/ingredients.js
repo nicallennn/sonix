@@ -1,5 +1,3 @@
-import RecipeScrollContainer from './recipe-scroll-container';
-
 const Ingredients = ({ ingredients }) => {
   return (
     <div className="ingredients-container">

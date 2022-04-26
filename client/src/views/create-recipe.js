@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { createRecipe } from '../services/recipeAPI';
 import { storeRecipe } from '../state/actions';
 import { storeRecipeProfile } from '../state/actions';
-import styles from './styles/create-recipe.scss';
+import './styles/create-recipe.scss';
 
 
 const CreateRecipe = () => {
@@ -20,7 +20,7 @@ const CreateRecipe = () => {
   const [resultMessage, setResultMessage] = useState(null);
 
   // react hook forms
-  const { register, control, handleSubmit, reset } = useForm({
+  const { register, control, handleSubmit } = useForm({
     defaultValues: {
       tags: [{ value: '' }],
       ingredients: [{ value: '' }],

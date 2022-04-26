@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import RecipePreview from '../components/non-auth/recipe-preview';
 import { searchAllRecipes } from '../services/recipeAPI';
 

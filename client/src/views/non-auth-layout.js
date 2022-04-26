@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/non-auth/navbar';
 import Footer from '../components/non-auth/footer';
-import styles from './styles/layout.scss';
+import './styles/layout.scss';
 import BgImage from '../assests/backgrounds/form-rot.svg';
 
 const Layout = () => {

@@ -1,4 +1,4 @@
-import styles from './styles/navbar.scss';
+import './styles/navbar.scss';
 import { Link } from 'react-router-dom';
 import Login from '../../assests/icons/login.svg';
 import Signup from '../../assests/icons/signup.svg';
