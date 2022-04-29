@@ -9,7 +9,7 @@ import { getMyProfile } from './services/userAPI';
 import { setUserProfile, logout } from './state/actions';
 
 //! views/components/data
-import Layout from './views/auth-layout';
+import Layout from './views/auth-layout.tsx';
 import Dashboard from './views/dashboard';
 import Recipe from './views/recipe';
 import CreateRecipe from './views/create-recipe';
@@ -20,13 +20,12 @@ import MyProfile from './views/my-profile';
 import NotFound from './views/not-found';
 
 const AuthenticatedApp = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     //! check user token is valid and fetch profile
     getMyProfile()
-      .then(res => {
+      .then((res) => {
         if (res.fetched) {
           //store my profile in store
           dispatch(setUserProfile(res.data));
@@ -35,16 +34,16 @@ const AuthenticatedApp = () => {
           dispatch(logout());
         }
       })
-      .catch(error => console.error('Failed to get user profile: ', error));
+      .catch((error) => console.error('Failed to get user profile: ', error));
 
     //! get the dashboard recipes
-    getDashboardRecipes().then(
-      res => {
+    getDashboardRecipes()
+      .then((res) => {
         if (res.fetched) dispatch(setDashboardRecipes(res.data));
-      }
-    ).catch((error) => {
-      console.log('Error:', error);
-    });
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
   }, []);
 
   return (

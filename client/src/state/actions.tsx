@@ -1,67 +1,65 @@
+import { AnyAction } from 'redux';
+
 //! user actions
-export const login = () => ({
-  type: 'LOGIN'
+export const login = (): any => ({
+  type: 'LOGIN',
 });
 
 export const logout = () => ({
-  type: 'LOGOUT'
+  type: 'LOGOUT',
 });
 
 export const setUserProfile = (profile) => ({
   type: 'SET_USER_PROFILE',
-  profile
+  profile,
 });
 
 export const updateMyBio = (newBio) => ({
   type: 'UPDATE_MY_BIO',
-  newBio
+  newBio,
 });
 
 //! user recipe actions
 export const setLikeRecipe = (recipeId) => ({
   type: 'LIKE_RECIPE',
-  recipeId
+  recipeId,
 });
 
 export const setUnlikeRecipe = (recipeId) => ({
   type: 'UNLIKE_RECIPE',
-  recipeId
+  recipeId,
 });
 
 export const storeRecipe = (newRecipe, category) => ({
   type: 'STORE_RECIPE',
   newRecipe,
-  category
+  category,
 });
 
 export const storeRecipeProfile = (recipeId) => ({
   type: 'STORE_PROFILE_RECIPE',
-  recipeId
+  recipeId,
 });
 
 export const deleteRecipe = (recipeId) => ({
   type: 'DELETE_RECIPE',
-  recipeId
+  recipeId,
 });
 
 //! recipe actions
 export const setDashboardRecipes = (recipes) => ({
   type: 'SET_DASHBOARD_RECIPES',
-  recipes
+  recipes,
 });
 
 export const likeDashboardRecipes = (recipeId, category) => ({
   type: 'LIKE_DASHBOARD_RECIPE',
   recipeId,
-  category
+  category,
 });
 
 export const unlikeDashboardRecipes = (recipeId, category) => ({
   type: 'UNLIKE_DASHBOARD_RECIPE',
   recipeId,
-  category
+  category,
 });
-
-
-
-

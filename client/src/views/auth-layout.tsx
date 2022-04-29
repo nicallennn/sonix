@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
+import * as React from 'react';
 import Navbar from '../components/auth/navbar';
 import Footer from '../components/non-auth/footer';
-import styles from './styles/layout.scss';
 import BgImage from '../assests/backgrounds/form-rot.svg';
 
 const Layout = () => {
@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <Navbar />
       <div className="main-container">
-        <img className='background-image' src={BgImage} alt="background" />
+        <img className="background-image" src={BgImage} alt="background" />
         <Outlet />
       </div>
       <Footer />
