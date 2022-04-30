@@ -45,7 +45,7 @@ const Search: React.FC = () => {
             <RecipePreview
               key={`${recipe._id}-${i}`}
               recipe={recipe}
-              category={recipe.category}
+              // category={recipe.category}
             />
           ))
         ) : (

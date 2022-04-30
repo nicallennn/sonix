@@ -1,5 +1,5 @@
 import './styles/footer.scss';
-import React from 'react';
+// import React from 'react';
 const scrollToTop = () => {
   window.scrollTo(0, 0);
 };

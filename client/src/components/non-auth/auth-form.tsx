@@ -5,6 +5,7 @@ import { useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 //interfaces
 interface Props {
   title: string;

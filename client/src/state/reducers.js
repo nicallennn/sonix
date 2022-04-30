@@ -70,7 +70,7 @@ const dashboardRecipes = (recipes = {}, action) => {
     //handle category
     newDashboardRecipes[action.category].map(recipe => {
       if (recipe._id === action.recipeId) {
-        recipe.numberOfLikes++;
+        recipe.numberOfLikes++; 
       }
     }
     );
