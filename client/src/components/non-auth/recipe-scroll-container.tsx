@@ -1,4 +1,5 @@
 import './styles/recipe-scroll-container.scss';
+import React from 'react';
 import RecipePreview from './recipe-preview';
 import { useNavigate } from 'react-router-dom';
 import { RecipeInterface } from '../../interfaces/RecipeInterface';

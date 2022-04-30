@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import React from 'react';
 import { getUserProfile } from '../services/userAPI';
 import { getProfileRecipes } from '../services/recipeAPI';
 import RecipeScrollContainer from '../components/non-auth/recipe-scroll-container';
