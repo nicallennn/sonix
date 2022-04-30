@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
-import { setLikeRecipe, setUnlikeRecipe, likeDashboardRecipes, unlikeDashboardRecipes } from '../../state/actions';
+import {
+  setLikeRecipe,
+  setUnlikeRecipe,
+  likeDashboardRecipes,
+  unlikeDashboardRecipes,
+} from '../../state/actions';
 
 import styles from './styles/recipe-details.scss';
 import PlayIcon from '../../assests/icons/play.svg';
@@ -15,27 +20,31 @@ import User from '../../assests/icons/signup.svg';
 import Liked from '../../assests/icons/unfav-dark.svg';
 
 const RecipeDetails = ({ recipe, setRecipe }) => {
-  const { likedRecipes, handle } = useSelector(state => state.profile);
-  const authenticated = useSelector(state => state.authenticated);
+  const { likedRecipes, handle } = useSelector((state) => state.profile);
+  const authenticated = useSelector((state) => state.authenticated);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [playing, setPlaying] = useState(false);
-  const [player, setPlayer] = useState(null);
+  const [player, setPlayer] = useState<HTMLMediaElement | null>();
 
   useEffect(() => {
-    setPlayer(document.getElementById(`${recipe._id}-player`));
+    setPlayer(
+      document.getElementById(`${recipe._id}-player`) as HTMLMediaElement
+    );
   });
 
   const handlePlayAudio = () => {
-    if (playing) {
-      // pause the player
-      player.pause();
-      setPlaying(false);
-    } else {
-      //play the player
-      player.play();
-      setPlaying(true);
+    if (player) {
+      if (playing) {
+        // pause the player
+        player.pause();
+        setPlaying(false);
+      } else {
+        //play the player
+        player.play();
+        setPlaying(true);
+      }
     }
   };
 
@@ -73,53 +82,69 @@ const RecipeDetails = ({ recipe, setRecipe }) => {
     <div className="preview-container">
       <div className={recipe.category + ' player'}>
         <button className="player-button" onClick={handlePlayAudio}>
-          <img className="playing-icon" src={playing ? PauseIcon : PlayIcon}></img>
+          <img
+            className="playing-icon"
+            src={playing ? PauseIcon : PlayIcon}
+          ></img>
         </button>
-        <audio crossOrigin="anonymous" id={`${recipe._id}-player`} src={recipe.preview} onEnded={trackEnded}>
+        <audio
+          crossOrigin="anonymous"
+          id={`${recipe._id}-player`}
+          src={recipe.preview}
+          onEnded={trackEnded}
+        >
           Your browser does not support the audio element.
         </audio>
       </div>
       <div className="recipe-information">
-        {(authenticated && likedRecipes && recipe.creatorHandle !== handle) &&
+        {authenticated && likedRecipes && recipe.creatorHandle !== handle && (
           <>
-            {likedRecipes[recipe._id] ?
-              <button onClick={() => handleLike(false)} className='like-button'>
+            {likedRecipes[recipe._id] ? (
+              <button onClick={() => handleLike(false)} className="like-button">
                 <img className="like-icon" src={Fav} alt="un-favourite" />
               </button>
-              :
-              <button onClick={() => handleLike(true)} className='like-button'>
+            ) : (
+              <button onClick={() => handleLike(true)} className="like-button">
                 <img className="like-icon" src={Unfav} alt="favourite" />
               </button>
-            }
+            )}
           </>
-        }
-
+        )}
 
         <h3 className="title">{recipe.title}</h3>
         <div className="tags">
-          {recipe && recipe.tags.map(tag => <p key={tag} className="tag">{tag}</p>)}
+          {recipe &&
+            recipe.tags.map((tag) => (
+              <p key={tag} className="tag">
+                {tag}
+              </p>
+            ))}
         </div>
 
         <div className="icon-detail-container">
-          <img src={Piano} alt="piano-icon" className='recipe-details-icon' />
+          <img src={Piano} alt="piano-icon" className="recipe-details-icon" />
           <p className="synth-name">{recipe.originalSynth}</p>
         </div>
 
-
         <div className="icon-detail-container">
-          <img src={User} alt="profile-icon" className='recipe-details-icon' />
-          <p className="user" onClick={routeToUserProfile}>{recipe.creatorHandle}</p>
+          <img src={User} alt="profile-icon" className="recipe-details-icon" />
+          <p className="user" onClick={routeToUserProfile}>
+            {recipe.creatorHandle}
+          </p>
         </div>
 
         <div className="icon-detail-container">
-          <img src={Liked} alt="favourite-icon" className='recipe-details-icon' />
+          <img
+            src={Liked}
+            alt="favourite-icon"
+            className="recipe-details-icon"
+          />
           <p className="likes">{recipe.numberOfLikes}</p>
         </div>
 
         <p className="description">{recipe.description}</p>
       </div>
     </div>
-
   );
 };
 

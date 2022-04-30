@@ -2,33 +2,18 @@ import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const rootUrl = 'http://localhost:3001';
 
-//! get requests
 const getDashboardRecipes = () => {
-  return fetch(`${rootUrl}/dashboard`, {
-    method: 'GET',
-  })
-    .then(async (res) => {
-      const data = await res.json();
-      if (res.status === 200) return { fetched: true, data };
-      else return { fetched: false, error: data };
-    })
-    .catch((error) => {
-      console.error('Failed to fetch dashboard recipes: ', error);
-    });
+  return fetch(`${rootUrl}/dashboard`)
+    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => res.json());
 };
 
-const getCategoryRecipes = async (category: string) => {
+const getCategoryRecipes = (category: string) => {
   return fetch(`${rootUrl}/category/${category}`, {
     method: 'GET',
   })
-    .then(async (res) => {
-      const data = await res.json();
-      if (res.status === 200) return { fetched: true, data };
-      else return { fetched: false, error: data };
-    })
-    .catch((error) => {
-      console.error('Failed to fetch category recipes: ', error);
-    });
+    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => res.json());
 };
 
 const searchAllRecipes = (searchTerm: string) => {

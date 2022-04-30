@@ -20,13 +20,14 @@ const Category = () => {
     //get the category
     const category = state.category;
 
-    getCategoryRecipes(category).then(
-      (res: { fetched: boolean; data: CategoryInterface[] }) => {
-        if (res.fetched) setCategoryRecipes(res.data);
-
-        setFilteredRecipes(res.data);
-      }
-    );
+    getCategoryRecipes(category)
+      .then((res) => {
+        setCategoryRecipes(res);
+        setFilteredRecipes(res);
+      })
+      .catch((error) =>
+        console.error('Failed to fetch category recipes: ', error)
+      );
   }, []);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {

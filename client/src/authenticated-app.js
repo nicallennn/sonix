@@ -37,13 +37,12 @@ const AuthenticatedApp = () => {
       .catch((error) => console.error('Failed to get user profile: ', error));
 
     //! get the dashboard recipes
+
     getDashboardRecipes()
-      .then((res) => {
-        if (res.fetched) dispatch(setDashboardRecipes(res.data));
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
+      .then((res) => dispatch(setDashboardRecipes(res)))
+      .catch((error) =>
+        console.log('Failed to fetch dashboard recipes: ', error.statusText)
+      );
   }, []);
 
   return (
