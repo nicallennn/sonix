@@ -31,12 +31,14 @@ const RecipePreview = ({ recipe }: RecipePreviewProps): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [playing, setPlaying] = useState(false);
-  const [player, setPlayer] = useState<HTMLElement | null>();
+  const [player, setPlayer] = useState<HTMLMediaElement | null>(null);
 
   useEffect(() => {
     //set the player
     setPlayer(
-      document.getElementById(`${recipe.category}-${recipe._id}-player`)
+      document.getElementById(
+        `${recipe.category}-${recipe._id}-player`
+      ) as HTMLMediaElement
     );
   }, []);
 

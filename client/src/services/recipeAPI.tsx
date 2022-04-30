@@ -1,4 +1,3 @@
-
 import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const rootUrl = 'http://localhost:3001';
@@ -18,7 +17,7 @@ const getDashboardRecipes = () => {
     });
 };
 
-const getCategoryRecipes = async (category) => {
+const getCategoryRecipes = async (category: string) => {
   return fetch(`${rootUrl}/category/${category}`, {
     method: 'GET',
   })
@@ -32,7 +31,7 @@ const getCategoryRecipes = async (category) => {
     });
 };
 
-const searchAllRecipes = (searchTerm:string) => {
+const searchAllRecipes = (searchTerm: string) => {
   return fetch(`${rootUrl}/searchAll/${searchTerm}`, {
     method: 'GET',
   })
@@ -52,7 +51,7 @@ const getRecipe = (id: string) => {
     });
 };
 
-const likeRecipe = (recipeId) => {
+const likeRecipe = (recipeId: string) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/like/${recipeId}`, {
     method: 'PATCH',
@@ -62,16 +61,17 @@ const likeRecipe = (recipeId) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(async (res) => {
+    .then((res) => {
       if (res.status === 200) return { liked: true };
       else return { liked: false };
     })
     .catch((error) => {
       console.error('Failed to like recipe: ', error);
+      return error;
     });
 };
 
-const unlikeRecipe = (recipeId) => {
+const unlikeRecipe = (recipeId: string) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/unlike/${recipeId}`, {
     method: 'PATCH',
@@ -81,12 +81,13 @@ const unlikeRecipe = (recipeId) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(async (res) => {
+    .then((res) => {
       if (res.status === 200) return { unliked: true };
       else return { unliked: false };
     })
     .catch((error) => {
       console.error('Failed to unlike recipe: ', error);
+      return error;
     });
 };
 
@@ -103,12 +104,15 @@ const createRecipe = (recipe: RecipeInterface) => {
     },
     body: JSON.stringify(recipe),
   })
-    .then(async (res) => {
-      const data = await res.json();
+    .then((res) => {
+      const data = res.json();
       if (res.status === 201) return { created: true, data };
       else return { created: false, error: data };
     })
-    .catch((error) => console.error('Failed to create recipe: ', error));
+    .catch((error) => {
+      console.error('Failed to create recipe: ', error);
+      return error;
+    });
 };
 
 const getProfileRecipes = (recipeIds: { own: string[]; liked: string[] }) => {
