@@ -1,7 +1,5 @@
-import { AnyAction } from 'redux';
-
 //! user actions
-export const login = (): any => ({
+export const login = () => ({
   type: 'LOGIN',
 });
 
@@ -9,23 +7,23 @@ export const logout = () => ({
   type: 'LOGOUT',
 });
 
-export const setUserProfile = (profile) => ({
+export const setUserProfile = (profile: string) => ({
   type: 'SET_USER_PROFILE',
   profile,
 });
 
-export const updateMyBio = (newBio) => ({
+export const updateMyBio = (newBio: string) => ({
   type: 'UPDATE_MY_BIO',
   newBio,
 });
 
 //! user recipe actions
-export const setLikeRecipe = (recipeId) => ({
+export const setLikeRecipe = (recipeId: string) => ({
   type: 'LIKE_RECIPE',
   recipeId,
 });
 
-export const setUnlikeRecipe = (recipeId) => ({
+export const setUnlikeRecipe = (recipeId: string) => ({
   type: 'UNLIKE_RECIPE',
   recipeId,
 });
@@ -36,18 +34,18 @@ export const storeRecipe = (newRecipe, category) => ({
   category,
 });
 
-export const storeRecipeProfile = (recipeId) => ({
+export const storeRecipeProfile = (recipeId: string) => ({
   type: 'STORE_PROFILE_RECIPE',
   recipeId,
 });
 
-export const deleteRecipe = (recipeId) => ({
+export const deleteRecipe = (recipeId: string) => ({
   type: 'DELETE_RECIPE',
   recipeId,
 });
 
 //! recipe actions
-export const setDashboardRecipes = (recipes) => ({
+export const setDashboardRecipes = (recipes: string) => ({
   type: 'SET_DASHBOARD_RECIPES',
   recipes,
 });

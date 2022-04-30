@@ -1,7 +1,7 @@
 import { loginUser, createUser } from '../../services/userAPI.js';
 import { login } from '../../state/actions';
 import { useDispatch } from 'react-redux';
-import {useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
   const navigate = useNavigate();
 
   const [loginMessage, setLoginMessage] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -83,7 +84,7 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
   };
 
   return (
-    <form onSubmit={() => handleSubmit} className="auth-form">
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2 className="title">{title}</h2>
       {type === 'signup' && (
         <>
