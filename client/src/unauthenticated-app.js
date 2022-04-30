@@ -24,13 +24,13 @@ const UnauthenticatedApp = () => {
     //todo - display error message to the user
 
     //! get the dashboard recipes
-    getDashboardRecipes().then(
-      res => {
-        if (res.fetched) dispatch(setDashboardRecipes(res.data));
-      }
-    ).catch((error) => {
-      console.log('Error:', error);
-    });
+    getDashboardRecipes()
+      .then((res) => {
+        dispatch(setDashboardRecipes(res));
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
   }, []);
 
   return (
