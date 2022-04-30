@@ -1,4 +1,3 @@
-import { UserInterface } from '../interfaces/UserInterface';
 import { UserSignInInterface } from '../interfaces/UserSignInInterface';
 
 const rootUrl = 'http://localhost:3001';
@@ -18,8 +17,8 @@ const createUser = async (newUser: UserSignInInterface) => {
     .then((res) => {
       const data = res.json();
       return data;
-    })
-    .catch((error) => console.error(error));
+    });
+  // .catch((error) => console.error(error));
 };
 
 const loginUser = async (user: { email: string; password: string }) => {
@@ -34,8 +33,8 @@ const loginUser = async (user: { email: string; password: string }) => {
     .then((res) => {
       const data = res.json();
       return data;
-    })
-    .catch((error) => console.error(error));
+    });
+  // .catch((error) => console.error(error));
 };
 
 const getMyProfile = async () => {
@@ -49,15 +48,15 @@ const getMyProfile = async () => {
     },
   })
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json())
-    .catch((error) => console.error('Failed to create recipe: ', error));
+    .then((res) => res.json());
+  // .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
 const getUserProfile = (userHandle: string) => {
   return fetch(`${rootUrl}/user/${userHandle}`)
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json())
-    .catch((error) => console.error('Failed to create recipe: ', error));
+    .then((res) => res.json());
+  // .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
 const updateMyProfile = (updated: { bio: string }) => {
@@ -74,10 +73,10 @@ const updateMyProfile = (updated: { bio: string }) => {
     body: JSON.stringify(updated),
   })
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json())
-    .catch((error) => {
-      console.error('Failed to like recipe: ', error);
-    });
+    .then((res) => res.json());
+  // .catch((error) => {
+  //   console.error('Failed to like recipe: ', error);
+  // });
 };
 
 export { createUser, loginUser, getMyProfile, getUserProfile, updateMyProfile };
