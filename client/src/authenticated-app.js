@@ -26,9 +26,9 @@ const AuthenticatedApp = () => {
     //! check user token is valid and fetch profile
     getMyProfile()
       .then((res) => {
-        if (res.fetched) {
+        if (res) {
           //store my profile in store
-          dispatch(setUserProfile(res.data));
+          dispatch(setUserProfile(res));
         } else {
           //logout user
           dispatch(logout());
