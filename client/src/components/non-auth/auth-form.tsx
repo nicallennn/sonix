@@ -1,10 +1,10 @@
-import { loginUser, createUser } from '../../services/userAPI.js';
+import { loginUser, createUser } from '../../services/userAPI';
 import { login } from '../../state/actions';
 import { useDispatch } from 'react-redux';
 import {useState } from 'react';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+//interfaces
 interface Props {
   title: string;
   type: string;
@@ -18,32 +18,33 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //! handle login
+    // handle login
     if (type === 'login') {
       handleLogin(e);
     } else if (type === 'signup') {
       handleSignup(e);
     }
   };
-
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     const user = {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
     };
 
+
     if (user.email && user.password) {
       // log user in
       const loggedIn = await loginUser(user);
-      if (loggedIn.fetched) {
+      console.log('LOGGED IN',loggedIn);
+      if (loggedIn) {
         //store the token in localstorage
-        localStorage.setItem('accessToken', loggedIn.data.token);
+        localStorage.setItem('accessToken', loggedIn.token);
         //set state in store
         dispatch(login());
         navigate('/');
       } else {
         //display error message
-        setLoginMessage(loggedIn.error.message);
+        setLoginMessage('loggedIn.error.message');
         e.currentTarget.email.value = '';
       }
     }
@@ -69,7 +70,7 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
 
     // send request to server to create new user
     const userCreated = await createUser(user);
-    if (userCreated.fetched) {
+    if (userCreated) {
       //store the token in localstorage
       localStorage.setItem('accessToken', userCreated.data.token);
       //set state in store
@@ -83,7 +84,7 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
   };
 
   return (
-    <form onSubmit={() => handleSubmit} className="auth-form">
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2 className="title">{title}</h2>
       {type === 'signup' && (
         <>
