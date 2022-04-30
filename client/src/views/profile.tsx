@@ -9,12 +9,16 @@ import { useSelector } from 'react-redux';
 
 //interfaces
 import { UserInterface } from '../interfaces/UserInterface';
+import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const Profile: React.FC = () => {
   const params = useParams<{ userHandle: string }>();
   const myProfile = useSelector((state) => state.profile);
   const [profile, setProfile] = useState<UserInterface | null>(null);
-  const [recipes, setRecipes] = useState<UserInterface | null>(null);
+  const [recipes, setRecipes] = useState<{
+    ownRecipes: RecipeInterface[];
+    likedRecipes: RecipeInterface[];
+  } | null>(null);
 
   useEffect(() => {
     const { userHandle } = params;

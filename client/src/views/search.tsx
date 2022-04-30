@@ -24,7 +24,6 @@ const Search: React.FC = () => {
     //else make a search request to api
     setSearching(true);
     const results = await searchAllRecipes(searchTerm);
-    console.log('RESULTS',results);
     setSearching(false);
     if (results) setSearchRecipes(results);
     else console.log('error');

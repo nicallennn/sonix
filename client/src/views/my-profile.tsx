@@ -39,7 +39,7 @@ const MyProfile: React.FC = () => {
   };
 
   const handleUpdate = async () => {
-    const bio = document.getElementById('update-bio');
+    const bio= document.getElementById('update-bio') as HTMLInputElement;
     console.log('BIO', bio);
 
     if (bio.value === '') {

@@ -22,7 +22,7 @@ const Recipe: React.FC = () => {
       (res:RecipeInterface) => setRecipe(res)
       //todo - show error message to user
     );
-  }, []);
+  }, []); 
 
   return (
     <div className="recipe-wrapper">
