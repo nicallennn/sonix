@@ -1,7 +1,8 @@
 import { loginUser, createUser } from '../../services/userAPI';
 import { login } from '../../state/actions';
 import { useDispatch } from 'react-redux';
-import {useState } from 'react';
+import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
@@ -16,6 +17,7 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
   const navigate = useNavigate();
 
   const [loginMessage, setLoginMessage] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -32,11 +34,10 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
       password: e.currentTarget.password.value,
     };
 
-
     if (user.email && user.password) {
       // log user in
       const loggedIn = await loginUser(user);
-      console.log('LOGGED IN',loggedIn);
+      console.log('LOGGED IN', loggedIn);
       if (loggedIn) {
         //store the token in localstorage
         localStorage.setItem('accessToken', loggedIn.token);
