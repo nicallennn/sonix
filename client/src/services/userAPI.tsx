@@ -33,8 +33,6 @@ const loginUser = async (user: { email: string; password: string }) => {
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => {
       const data = res.json();
-      // return { fetched: true, data };
-      // else return { fetched: false, error: data };
       return data;
     })
     .catch((error) => console.error(error));
