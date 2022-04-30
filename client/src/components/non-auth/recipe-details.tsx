@@ -57,7 +57,7 @@ const RecipeDetails = ({ recipe, setRecipe }) => {
     else navigate(`/profile/${recipe.creatorHandle}`);
   };
 
-  const handleLike = async (like) => {
+  const handleLike = async (like: boolean) => {
     if (like) {
       const res = await likeRecipe(recipe._id);
       if (res.liked) {
