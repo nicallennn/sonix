@@ -5,10 +5,10 @@ import { searchAllRecipes } from '../services/recipeAPI';
 import './styles/search.scss';
 
 // interfaces
-import { Recipe } from '../interfaces/RecipeInterface';
+import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const Search: React.FC = () => {
-  const [searchRecipes, setSearchRecipes] = useState<Recipe[]>([]); //TODO: CHANGE TO TYPE RECIPE
+  const [searchRecipes, setSearchRecipes] = useState<RecipeInterface[]>([]);
   const [searching, setSearching] = useState(false);
 
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -19,16 +19,14 @@ const Search: React.FC = () => {
       setSearchRecipes([]);
       return;
     }
-
     //check if already awaiting search request
     if (searching) return;
-
     //else make a search request to api
     setSearching(true);
     const results = await searchAllRecipes(searchTerm);
     setSearching(false);
-    if (results.fetched) setSearchRecipes(results.data);
-    else console.log(results.error);
+    if (results) setSearchRecipes(results);
+    else console.log('error');
   };
 
   return (

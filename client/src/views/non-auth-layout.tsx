@@ -4,7 +4,7 @@ import Footer from '../components/non-auth/footer';
 import './styles/layout.scss';
 import BgImage from '../assests/backgrounds/form-rot.svg';
 
-const Layout = () => {
+const Layout: React.FC= () => {
   return (
     <>
       <Navbar />

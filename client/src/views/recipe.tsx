@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import './styles/recipe.scss';
@@ -9,27 +9,20 @@ import Method from '../components/non-auth/method';
 import { getRecipe } from '../services/recipeAPI';
 
 //interfaces
-import { Recipe } from '../interfaces/RecipeInterface';
+import { RecipeInterface } from '../interfaces/RecipeInterface';
 
-const Recipe = () => {
-  const { state } = useLocation();
-  const [recipe, setRecipe] = useState(null);
+const Recipe: React.FC = () => {
+  const state = useLocation().state as { recipeId: string };
+  const [recipe, setRecipe] = useState<RecipeInterface | null>();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     //get the recipe details from the server
-    getRecipe(state.recipeId)
-      .then((res) => {
-        if (res.fetched) {
-          setRecipe(res.data);
-        }
-
-        //todo - show error message to user
-      })
-      .catch((error:Error) => {
-        console.error(error);
-      });
-  }, []);
+    getRecipe(state.recipeId).then(
+      (res:RecipeInterface) => setRecipe(res)
+      //todo - show error message to user
+    );
+  }, []); 
 
   return (
     <div className="recipe-wrapper">

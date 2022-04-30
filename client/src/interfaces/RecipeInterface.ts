@@ -1,4 +1,4 @@
-export interface Recipe {
+export interface RecipeInterface {
     _id:string;
     creatorHandle: string;
     creatorId: string;
@@ -14,3 +14,4 @@ export interface Recipe {
     recipeMethod: string[];
     fetched?:boolean;
 }
+// TODO checked liked by

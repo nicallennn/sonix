@@ -1,28 +1,46 @@
+
+import { RecipeInterface } from '../interfaces/RecipeInterface';
+
 const rootUrl = 'http://localhost:3001';
 
 //! get requests
-
 const getDashboardRecipes = () => {
-  return fetch(`${rootUrl}/dashboard`)
-    .then((res) => {
-      res.status > 400 ? Promise.reject(res) : res;
+  return fetch(`${rootUrl}/dashboard`, {
+    method: 'GET',
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      if (res.status === 200) return { fetched: true, data };
+      else return { fetched: false, error: data };
     })
-    .then((res) => res.json())
-    .catch((err) => console.log('Failed to fetch category recipes', err));
+    .catch((error) => {
+      console.error('Failed to fetch dashboard recipes: ', error);
+    });
 };
 
-const getCategoryRecipes = (category: string) => {
-  return fetch(`${rootUrl}/category/${category}`)
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
-    .then((res) => res.json())
-    .catch((err) => console.log('Failed to fetch category recipes', err));
+const getCategoryRecipes = async (category) => {
+  return fetch(`${rootUrl}/category/${category}`, {
+    method: 'GET',
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      if (res.status === 200) return { fetched: true, data };
+      else return { fetched: false, error: data };
+    })
+    .catch((error) => {
+      console.error('Failed to fetch category recipes: ', error);
+    });
 };
 
-const searchAllRecipes = (searchTerm: string) => {
-  return fetch(`${rootUrl}/searchAll/${searchTerm}`)
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+const searchAllRecipes = (searchTerm:string) => {
+  return fetch(`${rootUrl}/searchAll/${searchTerm}`, {
+    method: 'GET',
+  })
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => res.json())
-    .catch((err) => console.error('Failed to fetch category recipes: ', err));
+    .catch((error) => {
+      console.error('Failed to fetch category recipes: ', error);
+    });
 };
 
 const getRecipe = (id: string) => {
@@ -34,7 +52,7 @@ const getRecipe = (id: string) => {
     });
 };
 
-const likeRecipe = (recipeId: string) => {
+const likeRecipe = (recipeId) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/like/${recipeId}`, {
     method: 'PATCH',
@@ -44,17 +62,16 @@ const likeRecipe = (recipeId: string) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((res) => {
+    .then(async (res) => {
       if (res.status === 200) return { liked: true };
       else return { liked: false };
     })
     .catch((error) => {
       console.error('Failed to like recipe: ', error);
-      return error;
     });
 };
 
-const unlikeRecipe = (recipeId: string) => {
+const unlikeRecipe = (recipeId) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/unlike/${recipeId}`, {
     method: 'PATCH',
@@ -70,12 +87,11 @@ const unlikeRecipe = (recipeId: string) => {
     })
     .catch((error) => {
       console.error('Failed to unlike recipe: ', error);
-      return error;
     });
 };
 
 //! post requests
-const createRecipe = (recipe: string) => {
+const createRecipe = (recipe: RecipeInterface) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/create`, {
     method: 'POST',
@@ -87,17 +103,15 @@ const createRecipe = (recipe: string) => {
     },
     body: JSON.stringify(recipe),
   })
-    .then((res) => {
-      const data = res.json();
+    .then(async (res) => {
+      const data = await res.json();
       if (res.status === 201) return { created: true, data };
+      else return { created: false, error: data };
     })
-    .catch((error) => {
-      console.error('Failed to create recipe: ', error);
-      return error;
-    });
+    .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
-const getProfileRecipes = (recipeIds: string) => {
+const getProfileRecipes = (recipeIds: { own: string[]; liked: string[] }) => {
   return fetch(`${rootUrl}/recipe/user`, {
     method: 'POST',
     headers: {
@@ -105,14 +119,11 @@ const getProfileRecipes = (recipeIds: string) => {
     },
     body: JSON.stringify(recipeIds),
   })
+    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
     .then((res) => {
-      const data = res.json();
-      if (res.status === 200) return { fetched: true, data };
+      return res.json();
     })
-    .catch((error) => {
-      console.error('Failed to create recipe: ', error);
-      return error;
-    });
+    .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
 export {
