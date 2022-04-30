@@ -17,8 +17,6 @@ const createUser = async (newUser: UserSignInInterface) => {
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => {
       const data = res.json();
-      // if (res.status === 201) return { fetched: true, data };
-      // else return { fetched: false, error: data };
       return data;
     })
     .catch((error) => console.error(error));
@@ -52,11 +50,8 @@ const getMyProfile = async () => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(async (res) => {
-      const data = await res.json();
-      if (res.status === 200) return { fetched: true, data };
-      else return { fetched: false, error: data };
-    })
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
+    .then((res) => res.json())
     .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
@@ -67,29 +62,24 @@ const getUserProfile = (userHandle: string) => {
     .catch((error) => console.error('Failed to create recipe: ', error));
 };
 
-const updateMyProfile = (updated:{bio:string}) => { //! what are we passing?
+const updateMyProfile = (updated: { bio: string }) => {
+  //! what are we passing?
   const token = localStorage.getItem('accessToken');
-  return (
-    fetch(`${rootUrl}/profile/edit`, {
-      method: 'PATCH',
-      credentials: 'include',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updated),
-    })
-      .then((res) => {
-        if (res.status === 200) return { updated: true };
-        else return { updated: false };
-      })
-      // .then((res)=>res.status>400?Promise.reject(res):res)
-      .catch((error) => {
-        console.error('Failed to like recipe: ', error);
-        return { updated: false };
-      })
-  );
+  return fetch(`${rootUrl}/profile/edit`, {
+    method: 'PATCH',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(updated),
+  })
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error('Failed to like recipe: ', error);
+    });
 };
 
 export { createUser, loginUser, getMyProfile, getUserProfile, updateMyProfile };

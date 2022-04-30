@@ -9,11 +9,15 @@ import './styles/profile.scss';
 
 //interfaces
 import { UserInterface } from '../interfaces/UserInterface';
+import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const MyProfile: React.FC = () => {
   const dispatch = useDispatch();
   const profile: UserInterface = useSelector((state) => state.profile);
-  const [recipes, setRecipes] = useState<UserInterface | null>();
+  const [recipes, setRecipes] = useState<{
+    ownRecipes: RecipeInterface[];
+    likedRecipes: RecipeInterface[];
+  } | null>();
   const [updatingBio, setUpdatingBio] = useState(false);
   const [updateError, setUpdateError] = useState<string | null>('');
 
