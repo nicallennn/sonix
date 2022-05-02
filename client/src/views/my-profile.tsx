@@ -13,6 +13,7 @@ import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const MyProfile: React.FC = () => {
   const dispatch = useDispatch();
+  //@ts-ignore:next-line
   const profile: UserInterface = useSelector((state) => state.profile);
   const [recipes, setRecipes] = useState<{
     ownRecipes: RecipeInterface[];
@@ -43,7 +44,7 @@ const MyProfile: React.FC = () => {
   };
 
   const handleUpdate = async () => {
-    const bio= document.getElementById('update-bio') as HTMLInputElement;
+    const bio = document.getElementById('update-bio') as HTMLInputElement;
     console.log('BIO', bio);
 
     if (bio.value === '') {
@@ -98,7 +99,6 @@ const MyProfile: React.FC = () => {
           )}
           {recipes && (
             <>
-              
               {recipes.ownRecipes.length > 0 ? (
                 <RecipeScrollContainer
                   title="Recipes"

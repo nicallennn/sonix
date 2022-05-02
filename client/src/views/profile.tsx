@@ -13,6 +13,7 @@ import { RecipeInterface } from '../interfaces/RecipeInterface';
 
 const Profile: React.FC = () => {
   const params = useParams<{ userHandle: string }>();
+  //@ts-ignore:next-line
   const myProfile = useSelector((state) => state.profile);
   const [profile, setProfile] = useState<UserInterface | null>(null);
   const [recipes, setRecipes] = useState<{

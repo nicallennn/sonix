@@ -13,7 +13,7 @@ const getCategoryRecipes = (category: string) => {
   return fetch(`${rootUrl}/category/${category}`, {
     method: 'GET',
   })
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => res.json());
 };
 
@@ -30,7 +30,7 @@ const searchAllRecipes = (searchTerm: string) => {
 
 const getRecipe = (id: string) => {
   return fetch(`${rootUrl}/recipe/${id}`)
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => res.json())
     .catch((error) => {
       console.error('Failed to fetch recipe: ', error);
@@ -90,11 +90,14 @@ const createRecipe = (recipe: FormRecipeInterface) => {
     },
     body: JSON.stringify(recipe),
   })
-    .then((res) => {
-      const data = res.json();
-      if (res.status === 201) return { created: true, data };
-      else return { created: false, error: data };
-    })
+    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => res.json())
+    // .then((res) => {
+    //   console.log('RES DATA IN API', res);
+    //   return { created: true, data: res }
+    //   // if (res.status === 201) return { created: true, data: res };
+    //   // else return { created: false, error: res };
+    // })
     .catch((error) => {
       console.error('Failed to create recipe: ', error);
       return error;
