@@ -20,12 +20,15 @@ import User from '../../assests/icons/signup.svg';
 import Liked from '../../assests/icons/unfav-dark.svg';
 import { CategoryInterface } from '../../interfaces/CategoryInterface';
 
+
 type RecipePreviewProps = {
   recipe: CategoryInterface;
 };
 
-const RecipePreview = ({ recipe }: RecipePreviewProps): JSX.Element => {
+const RecipePreview = ({ recipe }: RecipePreviewProps) => {
+  //@ts-ignore:next-line
   const { likedRecipes, handle } = useSelector((state) => state.profile);
+  //@ts-ignore:next-line
   const authenticated = useSelector((state) => state.authenticated);
 
   const dispatch = useDispatch();

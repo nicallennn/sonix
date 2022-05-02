@@ -14,16 +14,6 @@ import { FormConstructorRecipeInterface } from '../interfaces/FormRecipeInterfac
 
 import './styles/create-recipe.scss';
 
-type FormValues = {
-  title: string;
-  description: string;
-  originalSynth: string;
-};
-
-type Option = {
-  value: string;
-};
-
 const CreateRecipe = () => {
   //store / state / navigation
   const dispatch = useDispatch();
@@ -130,27 +120,44 @@ const CreateRecipe = () => {
       recipeMethod: data.steps.map((step: any) => step.step),
     };
 
-    let result;
+    createRecipe(recipe)
+      .then((res) => {
+        console.log('RES', res);
+        if (res) {
+          console.log('RES IN CREATE REC', res);
+          setResultMessage('Uploaded recipe to database.');
+          return res;
+        } else throw new Error(res.error.message);
+      })
+      .then((res) => {
+        dispatch(storeRecipe(res, data.category));
+        dispatch(storeRecipeProfile(res._id));
+        navigate('/recipe', { state: { recipeId: res._id } });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setResultMessage('Failed to upload recipe to database!');
+      });
     // add to recipe to the database
-    try {
-      result = await createRecipe(recipe);
-
-      //if added to db - add to local storage
-      if (result.created) setResultMessage('Uploaded recipe to database.');
-      else throw new Error(result.error.message);
-      // navigate to new recipe / reset form
-    } catch (error: unknown) {
-      setResultMessage('Failed to upload recipe to database!');
-    }
+    // try {
+    //   const result = await createRecipe(recipe);
+    //   console.log('RECIPE',recipe);
+    //   console.log('RESULT',result);
+    //   //if added to db - add to local storage
+    //   if (result.created) setResultMessage('Uploaded recipe to database.');
+    //   else throw new Error(result.error.message);
+    //   // navigate to new recipe / reset form
+    // } catch (error: unknown) {
+    //   setResultMessage('Failed to upload recipe to database!');
+    // }
     // add the recipe to the local store
-    try {
-      dispatch(storeRecipe(result.data, data.category));
-
-      dispatch(storeRecipeProfile(result.data._id));
-      navigate('/recipe', { state: { recipeId: result.data._id } });
-    } catch (error) {
-      setResultMessage('Failed to store recipe in local store!');
-    }
+    // try {
+    //   dispatch(storeRecipe(result.data, data.category));
+    //   dispatch(storeRecipeProfile(result.data._id));
+    //   navigate('/recipe', { state: { recipeId: result.data._id } });
+    // } catch (error) {
+    //   setResultMessage('Failed to store recipe in local store!');
+    // }
   };
 
   return (

@@ -2,6 +2,7 @@
 const Recipe = require('../models/recipe.model');
 const User = require('../models/user.model');
 const { categories } = require('../models/category.model');
+const { Console } = require('console');
 
 // search all recipes
 const searchAllRecipes = async (req, res) => {
@@ -153,6 +154,7 @@ const getRecipe = async (req, res) => {
 // create a new recipe
 const createRecipe = async (req, res) => {
   // get the recipe from the request body, creator details from req.user
+  console.log('REQUEST CONTROLLERS',req.body);
   const user = req.user;
   const recipe = req.body;
 
@@ -180,6 +182,7 @@ const createRecipe = async (req, res) => {
       originalSynth,
       preview,
     } = result;
+    console.log('Result in controller',result);
     const returnRecipe = {
       _id,
       creatorHandle,
@@ -193,12 +196,13 @@ const createRecipe = async (req, res) => {
 
     // add the recipe to the user profile
     const recipeCreator = await User.findById(recipe.creatorId);
-    if (!recipeCreator) console.error('could not find user to store');
+    if (!recipeCreator) throw Error('could not find user to store');
     recipeCreator.ownRecipes.push(result._id);
     await recipeCreator.save();
 
     res.status(201).send(returnRecipe);
   } catch (error) {
+    console.log(error);
     res.status(500).send({ error, message: 'Failed to create recipe!' });
   }
 };

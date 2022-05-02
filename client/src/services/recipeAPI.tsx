@@ -13,7 +13,7 @@ const getCategoryRecipes = (category: string) => {
   return fetch(`${rootUrl}/category/${category}`, {
     method: 'GET',
   })
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => res.json());
 };
 
@@ -30,7 +30,7 @@ const searchAllRecipes = (searchTerm: string) => {
 
 const getRecipe = (id: string) => {
   return fetch(`${rootUrl}/recipe/${id}`)
-    .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
     .then((res) => res.json())
     .catch((error) => {
       console.error('Failed to fetch recipe: ', error);
@@ -81,28 +81,31 @@ const unlikeRecipe = (recipeId: string) => {
 const createRecipe = (recipe: FormRecipeInterface) => {
   const token = localStorage.getItem('accessToken');
   console.log('recipe', recipe);
-  return fetch(`${rootUrl}/recipe/create`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(recipe),
-  })
-    .then((res) => {
-      console.log('>>>>>', res);
-      const data = res.json();
-      console.log(data, 'dataaaaaa');
-      if (res.status === 201) return { created: true, data };
-      else return { created: false, error: data };
+  return (
+    fetch(`${rootUrl}/recipe/create`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(recipe),
     })
-    .catch((error) => {
-      console.log('error caught');
-      console.error('Failed to create recipe: ', error);
-      return error;
-    });
+      .then((res) => (res.status > 400 ? Promise.reject(res) : res))
+      .then((res) => res.json())
+      // .then((res) => {
+      //   console.log('RES DATA IN API', res);
+      //   return { created: true, data: res }
+      //   // if (res.status === 201) return { created: true, data: res };
+      //   // else return { created: false, error: res };
+      // })
+      .catch((error) => {
+        console.log('error caught');
+        console.error('Failed to create recipe: ', error);
+        return error;
+      })
+  );
 };
 
 const getProfileRecipes = (recipeIds: { own: string[]; liked: string[] }) => {
