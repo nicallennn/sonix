@@ -26,8 +26,11 @@ type RecipeDetailsProps = {
 };
 
 const RecipeDetails = ({ recipe, setRecipe }: RecipeDetailsProps) => {
-  const { likedRecipes, handle } = useSelector((state) => state.profile);
-  const authenticated = useSelector((state) => state.authenticated);
+  // @ts-ignore:next-line
+  const likedRecipes = useSelector((state) => state.profile).likedRecipes;
+  //@ts-ignore:next-line
+  const handle  = useSelector((state) => state.profile).handle;
+  const authenticated = useSelector<{authenticated:boolean}>((state) => state.authenticated);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -1,3 +1,5 @@
+import { FormRecipeInterface } from '../interfaces/FormRecipeInterface';
+
 //! user actions
 export const login = () => ({
   type: 'LOGIN',
@@ -28,7 +30,7 @@ export const setUnlikeRecipe = (recipeId: string) => ({
   recipeId,
 });
 
-export const storeRecipe = (newRecipe, category) => ({
+export const storeRecipe = (newRecipe:FormRecipeInterface, category:string) => ({
   type: 'STORE_RECIPE',
   newRecipe,
   category,
@@ -50,13 +52,13 @@ export const setDashboardRecipes = (recipes: string) => ({
   recipes,
 });
 
-export const likeDashboardRecipes = (recipeId, category) => ({
+export const likeDashboardRecipes = (recipeId:string, category:string) => ({
   type: 'LIKE_DASHBOARD_RECIPE',
   recipeId,
   category,
 });
 
-export const unlikeDashboardRecipes = (recipeId, category) => ({
+export const unlikeDashboardRecipes = (recipeId:string, category:string) => ({
   type: 'UNLIKE_DASHBOARD_RECIPE',
   recipeId,
   category,

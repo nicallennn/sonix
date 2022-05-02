@@ -5,6 +5,7 @@ import RecipeScrollContainer from '../components/non-auth/recipe-scroll-containe
 import './styles/dashboard.scss';
 
 const Dashboard = () => {
+  //@ts-ignore:next-line
   const dashboardRecipes = useSelector((state) => state.dashboardRecipes);
 
   return (
