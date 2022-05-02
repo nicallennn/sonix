@@ -10,7 +10,7 @@ import {
   unlikeDashboardRecipes,
 } from '../../state/actions';
 
-import styles from './styles/recipe-details.scss';
+import './styles/recipe-details.scss';
 import PlayIcon from '../../assests/icons/play.svg';
 import PauseIcon from '../../assests/icons/pause.svg';
 import Fav from '../../assests/icons/fav.svg';
@@ -18,8 +18,14 @@ import Unfav from '../../assests/icons/unfav.svg';
 import Piano from '../../assests/icons/piano.svg';
 import User from '../../assests/icons/signup.svg';
 import Liked from '../../assests/icons/unfav-dark.svg';
+import { RecipeInterface } from '../../interfaces/RecipeInterface';
 
-const RecipeDetails = ({ recipe, setRecipe }) => {
+type RecipeDetailsProps = {
+  recipe: RecipeInterface;
+  setRecipe: (recipe: RecipeInterface) => void;
+};
+
+const RecipeDetails = ({ recipe, setRecipe }: RecipeDetailsProps) => {
   const { likedRecipes, handle } = useSelector((state) => state.profile);
   const authenticated = useSelector((state) => state.authenticated);
 
