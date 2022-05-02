@@ -77,6 +77,8 @@ const CreateRecipe = () => {
   //! submit the form to firebase/server
   const onSubmit = async (data: FormConstructorRecipeInterface) => {
     //make the document to store
+
+    console.log('data', data);
     const file: any = data.sampleFile[0];
 
     // check the file is type mp3 or wav
@@ -132,6 +134,7 @@ const CreateRecipe = () => {
     // add to recipe to the database
     try {
       result = await createRecipe(recipe);
+
       //if added to db - add to local storage
       if (result.created) setResultMessage('Uploaded recipe to database.');
       else throw new Error(result.error.message);
@@ -142,6 +145,7 @@ const CreateRecipe = () => {
     // add the recipe to the local store
     try {
       dispatch(storeRecipe(result.data, data.category));
+
       dispatch(storeRecipeProfile(result.data._id));
       navigate('/recipe', { state: { recipeId: result.data._id } });
     } catch (error) {

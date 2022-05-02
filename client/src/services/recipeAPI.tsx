@@ -80,6 +80,7 @@ const unlikeRecipe = (recipeId: string) => {
 //! post requests
 const createRecipe = (recipe: FormRecipeInterface) => {
   const token = localStorage.getItem('accessToken');
+  console.log('recipe', recipe);
   return fetch(`${rootUrl}/recipe/create`, {
     method: 'POST',
     credentials: 'include',
@@ -91,11 +92,14 @@ const createRecipe = (recipe: FormRecipeInterface) => {
     body: JSON.stringify(recipe),
   })
     .then((res) => {
+      console.log('>>>>>', res);
       const data = res.json();
+      console.log(data, 'dataaaaaa');
       if (res.status === 201) return { created: true, data };
       else return { created: false, error: data };
     })
     .catch((error) => {
+      console.log('error caught');
       console.error('Failed to create recipe: ', error);
       return error;
     });
