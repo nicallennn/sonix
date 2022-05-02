@@ -9,23 +9,33 @@ import { v4 as uuidv4 } from 'uuid';
 import { createRecipe } from '../services/recipeAPI';
 import { storeRecipe } from '../state/actions';
 import { storeRecipeProfile } from '../state/actions';
+
 import './styles/create-recipe.scss';
 
+type FormValues = {
+  title: string;
+  description: string;
+  originalSynth: string;
+};
+
+type Option = {
+  value: string;
+};
 
 const CreateRecipe = () => {
   //store / state / navigation
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [uploadMessage, setUploadMessage] = useState(null);
-  const [resultMessage, setResultMessage] = useState(null);
+  const [uploadMessage, setUploadMessage] = useState<string>('');
+  const [resultMessage, setResultMessage] = useState<string>('');
 
   // react hook forms
   const { register, control, handleSubmit } = useForm({
     defaultValues: {
       tags: [{ value: '' }],
       ingredients: [{ value: '' }],
-      steps: [{ step: '' }]
-    }
+      steps: [{ step: '' }],
+    },
   });
 
   //ingredients field array
@@ -35,7 +45,7 @@ const CreateRecipe = () => {
     // remove: ingredientsRemove,
   } = useFieldArray({
     control,
-    name: 'ingredients'
+    name: 'ingredients',
   });
 
   //method field array
@@ -45,7 +55,7 @@ const CreateRecipe = () => {
     // remove: stepsRemove,
   } = useFieldArray({
     control,
-    name: 'steps'
+    name: 'steps',
   });
 
   const {
@@ -54,12 +64,11 @@ const CreateRecipe = () => {
     // remove: tagsRemove,
   } = useFieldArray({
     control,
-    name: 'tags'
+    name: 'tags',
   });
 
-
   //! submit the form to firebase/server
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     //make the document to store
     const file = data.sampleFile[0];
 
@@ -101,9 +110,9 @@ const CreateRecipe = () => {
       category: data.category,
       originalSynth: data.originalSynth,
       preview: filepath,
-      tags: data.tags.map(tag => tag.value),
-      ingredients: data.ingredients.map(ing => ing.value),
-      recipeMethod: data.steps.map(step => step.step)
+      tags: data.tags.map((tag) => tag.value),
+      ingredients: data.ingredients.map((ing) => ing.value),
+      recipeMethod: data.steps.map((step) => step.step),
     };
 
     let result;
@@ -130,13 +139,27 @@ const CreateRecipe = () => {
   return (
     <div className="create-recipe-wrapper">
       <form className="create-form" onSubmit={handleSubmit(onSubmit)}>
-
         {/* details */}
         <div className="recipe-section recipe-details">
           <h2>Recipe Details</h2>
-          <input type="text" {...register('title')} placeholder="title" required />
-          <input type="text" {...register('description')} placeholder="description" required />
-          <input type="text" {...register('originalSynth')} placeholder="synth" required />
+          <input
+            type="text"
+            {...register('title')}
+            placeholder="title"
+            required
+          />
+          <input
+            type="text"
+            {...register('description')}
+            placeholder="description"
+            required
+          />
+          <input
+            type="text"
+            {...register('originalSynth')}
+            placeholder="synth"
+            required
+          />
 
           <select {...register('category')} defaultValue="Bass">
             {/* <option value="" disabled selected hidden>category</option> */}
@@ -170,7 +193,6 @@ const CreateRecipe = () => {
             <input type="file" {...register('sampleFile')} required />
             Click to upload audio sample (wav or mp3)
           </label>
-
         </div>
 
         {/* ingredients */}
@@ -196,7 +218,11 @@ const CreateRecipe = () => {
         <div className="recipe-section recipe-method">
           <h2>Method</h2>
           {steps.map((field, index) => (
-            <textarea rows="3" key={field.id} {...register(`steps.${index}.step`)} ></textarea>
+            <textarea
+              rows={3}
+              key={field.id}
+              {...register(`steps.${index}.step`)}
+            ></textarea>
           ))}
           <button
             className="add-btn"
