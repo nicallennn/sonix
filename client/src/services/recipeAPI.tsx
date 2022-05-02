@@ -1,4 +1,5 @@
 import { RecipeInterface } from '../interfaces/RecipeInterface';
+import { FormRecipeInterface } from '../interfaces/FormRecipeInterface';
 
 const rootUrl = 'http://localhost:3001';
 
@@ -77,7 +78,7 @@ const unlikeRecipe = (recipeId: string) => {
 };
 
 //! post requests
-const createRecipe = (recipe: RecipeInterface) => {
+const createRecipe = (recipe: FormRecipeInterface) => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/recipe/create`, {
     method: 'POST',
