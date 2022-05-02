@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { createRecipe } from '../services/recipeAPI';
 import { storeRecipe } from '../state/actions';
 import { storeRecipeProfile } from '../state/actions';
+import { FormRecipeInterface } from '../interfaces/FormRecipeInterface';
+import { FormConstructorRecipeInterface } from '../interfaces/FormRecipeInterface';
 
 import './styles/create-recipe.scss';
 
@@ -32,6 +34,11 @@ const CreateRecipe = () => {
   // react hook forms
   const { register, control, handleSubmit } = useForm({
     defaultValues: {
+      title: '',
+      description: '',
+      originalSynth: '',
+      category: '',
+      sampleFile: '',
       tags: [{ value: '' }],
       ingredients: [{ value: '' }],
       steps: [{ step: '' }],
@@ -68,22 +75,27 @@ const CreateRecipe = () => {
   });
 
   //! submit the form to firebase/server
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: FormConstructorRecipeInterface) => {
     //make the document to store
-    const file = data.sampleFile[0];
+    const file: any = data.sampleFile[0];
 
     // check the file is type mp3 or wav
     if (file.type !== 'audio/wav' && file.type !== 'audio/mpeg') {
       setUploadMessage('Audio preview must be of type wav or mp3!');
       return;
+      // throw an error
     }
 
+    let filename;
     //get the filename
-    let filename = data.sampleFile[0].name;
-    //create a unique filename
-    const fileId = uuidv4();
-    filename += fileId;
-    filename += new Date().toLocaleTimeString();
+    if (typeof data.sampleFile[0] !== 'string') {
+      filename = data.sampleFile[0].name;
+
+      //create a unique filename
+      const fileId = uuidv4();
+      filename += fileId;
+      filename += new Date().toLocaleTimeString();
+    }
 
     //todo - check if the file exists already or create unique filename for each file?
     //todo - could hash the filename + date???
@@ -96,6 +108,7 @@ const CreateRecipe = () => {
       await uploadBytes(storageRef, file);
       //get the download link to display on the page
       filepath = await getDownloadURL(ref(storage, `samples/${filename}`));
+      // check for error
       setUploadMessage('Uploaded audio preview.');
     } catch (error) {
       setUploadMessage('Failed to upload audio!');
@@ -103,16 +116,16 @@ const CreateRecipe = () => {
     }
 
     //build the recipe object
-    const recipe = {
+    const recipe: FormRecipeInterface = {
       //get creator handle and id on server from token middleware
       title: data.title,
       description: data.description,
       category: data.category,
       originalSynth: data.originalSynth,
       preview: filepath,
-      tags: data.tags.map((tag) => tag.value),
-      ingredients: data.ingredients.map((ing) => ing.value),
-      recipeMethod: data.steps.map((step) => step.step),
+      tags: data.tags.map((tag: { value: string }) => tag.value),
+      ingredients: data.ingredients.map((ing: { value: string }) => ing.value),
+      recipeMethod: data.steps.map((step: any) => step.step),
     };
 
     let result;
@@ -123,8 +136,8 @@ const CreateRecipe = () => {
       if (result.created) setResultMessage('Uploaded recipe to database.');
       else throw new Error(result.error.message);
       // navigate to new recipe / reset form
-    } catch (error) {
-      setResultMessage('Failed to upload recipe to database!', error);
+    } catch (error: unknown) {
+      setResultMessage('Failed to upload recipe to database!');
     }
     // add the recipe to the local store
     try {
