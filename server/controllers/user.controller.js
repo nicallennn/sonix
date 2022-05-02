@@ -12,7 +12,7 @@ const SECRET = process.env.SECRET;
 const createUser = async (req, res) => {
   // get the info from the request body
   const { firstName, lastName, password, email, handle, bio } = req.body;
-
+  console.log('REQ BODY', req.body);
   try {
     // check the password is not empty
     if (password === '') throw new Error('password is empty');

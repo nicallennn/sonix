@@ -12,13 +12,17 @@ const createUser = async (newUser: UserSignInInterface) => {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser),
-  })
-    .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => {
-      const data = res.json();
-      return data;
-    });
-  // .catch((error) => console.error(error));
+  }).then((res) => {
+    const data = res.json();
+    if (res.status >= 400) {
+      return Promise.reject(data); //ERROR
+    }
+    return data;
+  });
+  // .catch((error) => {
+  //   console.error(error);
+  //   return error;
+  // });
 };
 
 const loginUser = async (user: { email: string; password: string }) => {
@@ -33,8 +37,11 @@ const loginUser = async (user: { email: string; password: string }) => {
     .then((res) => {
       const data = res.json();
       return data;
+    })
+    .catch((error) => {
+      console.error(error);
+      return error;
     });
-  // .catch((error) => console.error(error));
 };
 
 const getMyProfile = async () => {
@@ -48,15 +55,21 @@ const getMyProfile = async () => {
     },
   })
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json());
-  // .catch((error) => console.error('Failed to create recipe: ', error));
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error('Failed to create recipe: ', error);
+      return error;
+    });
 };
 
 const getUserProfile = (userHandle: string) => {
   return fetch(`${rootUrl}/user/${userHandle}`)
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json());
-  // .catch((error) => console.error('Failed to create recipe: ', error));
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error('Failed to create recipe: ', error);
+      return error;
+    });
 };
 
 const updateMyProfile = (updated: { bio: string }) => {
@@ -73,10 +86,11 @@ const updateMyProfile = (updated: { bio: string }) => {
     body: JSON.stringify(updated),
   })
     .then((res) => (res.status >= 400 ? Promise.reject(res) : res))
-    .then((res) => res.json());
-  // .catch((error) => {
-  //   console.error('Failed to like recipe: ', error);
-  // });
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error('Failed to like recipe: ', error);
+      return error;
+    });
 };
 
 export { createUser, loginUser, getMyProfile, getUserProfile, updateMyProfile };

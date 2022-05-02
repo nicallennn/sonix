@@ -2,9 +2,7 @@ import { loginUser, createUser } from '../../services/userAPI';
 import { login } from '../../state/actions';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 
 //interfaces
 interface Props {
@@ -37,7 +35,6 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
     if (user.email && user.password) {
       // log user in
       const loggedIn = await loginUser(user);
-      console.log('LOGGED IN', loggedIn);
       if (loggedIn) {
         //store the token in localstorage
         localStorage.setItem('accessToken', loggedIn.token);
@@ -56,10 +53,10 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
     const user = {
       firstName: e.currentTarget.firstname.value,
       lastName: e.currentTarget.lastname.value,
-      handle: e.currentTarget.value,
-      bio: e.currentTarget.value,
-      email: e.currentTarget.value,
-      password: e.currentTarget.value,
+      handle: e.currentTarget.handle.value,
+      bio: e.currentTarget.bio.value,
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value,
     };
 
     // check all the user properties have a value
@@ -69,19 +66,18 @@ const AuthForm: React.FC<Props> = ({ title, type }) => {
         return;
       }
     }
-
     // send request to server to create new user
-    const userCreated = await createUser(user);
-    if (userCreated) {
+    try {
+      const userCreated = await createUser(user);
+
       //store the token in localstorage
-      localStorage.setItem('accessToken', userCreated.data.token);
+      console.log('UserCreated', userCreated);
+      localStorage.setItem('accessToken', userCreated.token);
       //set state in store
       dispatch(login());
       navigate('/');
-    } else {
-      //display error message
-      setLoginMessage(userCreated.error.message);
-      e.currentTarget.reset();
+    } catch (error) {
+      console.log(error);
     }
   };
 
