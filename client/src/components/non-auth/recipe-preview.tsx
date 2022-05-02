@@ -84,11 +84,6 @@ const RecipePreview = ({ recipe }: RecipePreviewProps): JSX.Element => {
       }
     }
   };
-<<<<<<< HEAD
-
-=======
-  // hello
->>>>>>> development
   return (
     <div className="recipe-preview-container">
       <div className="player-outer">
