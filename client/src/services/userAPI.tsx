@@ -19,10 +19,7 @@ const createUser = async (newUser: UserSignInInterface) => {
     }
     return data;
   });
-  // .catch((error) => {
-  //   console.error(error);
-  //   return error;
-  // });
+
 };
 
 const loginUser = async (user: { email: string; password: string }) => {
@@ -73,7 +70,6 @@ const getUserProfile = (userHandle: string) => {
 };
 
 const updateMyProfile = (updated: { bio: string }) => {
-  //! what are we passing?
   const token = localStorage.getItem('accessToken');
   return fetch(`${rootUrl}/profile/edit`, {
     method: 'PATCH',
