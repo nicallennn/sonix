@@ -1,4 +1,3 @@
-import { RecipeInterface } from '../interfaces/RecipeInterface';
 import { FormRecipeInterface } from '../interfaces/FormRecipeInterface';
 
 const rootUrl = 'http://localhost:3001';

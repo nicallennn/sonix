@@ -167,6 +167,7 @@ const CreateRecipe = () => {
         <div className="recipe-section recipe-details">
           <h2>Recipe Details</h2>
           <input
+          data-input=
             type="text"
             {...register('title')}
             placeholder="title"
