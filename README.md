@@ -11,6 +11,8 @@ The application allows users to create/browse/like sound design recipes, which c
 ## Getting started
 
 * Clone the git repo and run npm install in both the client and server directories.
+* Create a firebase account and setup a storage bucket. Instructions can be found on the firebase website [Firebase Storage Setup](https://firebase.google.com/docs/storage/web/start).
+* Create a new .env file in the root of the client directory. Use the .env_TEMPLATE to understand the format of this file. add your firebase storage config details to the new .env file.
 * You must have mongodb running on your machine, the project uses a database called sonix and has two collections, users and recipes.
 * There is a script ‘mock-data-script.js’ to produce mock data for the application. The json file created by this script can be added to mongodb using mongodb compass.
 * Run the server first using npm start inside the server directory, the server will start running on port 3001.
