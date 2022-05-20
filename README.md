@@ -62,5 +62,5 @@ The application allows users to create/browse/like sound design recipes, which c
 * [Figma](https://www.figma.com/)
 
 
-## Developers
+### Developers
 * [Nick Allen](https://github.com/nicallennn)
