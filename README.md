@@ -59,7 +59,7 @@ The application allows users to create/browse/like sound design recipes, which c
 
 ### Design
 * [Excalidraw](https://excalidraw.com/)
-* [Figma](https://www.figma.com/)
+* [Sketch](https://www.sketch.com/)
 
 
 ### Developers
