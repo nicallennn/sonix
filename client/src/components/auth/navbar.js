@@ -1,4 +1,4 @@
-import styles from '../non-auth/styles/navbar.scss';
+import '../non-auth/styles/navbar.scss';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../state/actions';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { likeRecipe, unlikeRecipe } from '../../services/recipeAPI';
 import { setLikeRecipe, setUnlikeRecipe, likeDashboardRecipes, unlikeDashboardRecipes } from '../../state/actions';
 
-import styles from './styles/recipe-details.scss';
+import './styles/recipe-details.scss';
 import PlayIcon from '../../assests/icons/play.svg';
 import PauseIcon from '../../assests/icons/pause.svg';
 import Fav from '../../assests/icons/fav.svg';
