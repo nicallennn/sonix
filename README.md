@@ -1,4 +1,4 @@
-# Sonix
+# Sonix - Sound Design Recipe Cookbook
 
 
 ## Overview
