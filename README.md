@@ -1,4 +1,4 @@
-# sonix readme
+# Sonix
 
 ---
 
