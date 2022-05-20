@@ -6,6 +6,8 @@
 Sonix is a sound design recipe cookbook aimed at audio engineers or hobbyists looking to improve their sound design skills.
 The application allows users to create/browse/like sound design recipes, which consist of an audio preview, ingredients, and the method to create the sound.
 
+* [Demonstraion Video](https://www.youtube.com/watch?v=QWG9yLuA7Do)
+
 ## Getting started
 
 * Clone the git repo and run npm install in both the client and server directories.
@@ -60,6 +62,3 @@ The application allows users to create/browse/like sound design recipes, which c
 
 ## Developers
 * [Nick Allen](https://github.com/nicallennn)
-
-
-
